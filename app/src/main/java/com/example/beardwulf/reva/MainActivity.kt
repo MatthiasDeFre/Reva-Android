@@ -29,13 +29,14 @@ class MainActivity : AppCompatActivity() {
         val tekst: String
         if(txtCode.text.toString().equals("1234")) {
             tekst = "Welcome, Jens"
+            Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
+            val intent: Intent
+            intent = Intent(this, GroupPhoto::class.java)
+            startActivity(intent)
         }
         else {
             tekst = "Code niet correct"
-        }
-        Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
-        val intent: Intent
-        intent = Intent(this, GroupPhoto::class.java)
-        startActivity(intent)
+            Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
+        } 
     }
 }
