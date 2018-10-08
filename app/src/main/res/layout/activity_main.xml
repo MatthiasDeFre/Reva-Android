@@ -24,7 +24,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="#239"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:background="@drawable/buttonlayout"
         android:text="Login"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,6 +44,7 @@
         android:gravity="center"
         android:hint="Groepscode..."
         android:padding="10dp"
+        android:inputType="number|phone"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:maxLines="1"
         android:singleLine="true"
@@ -50,5 +53,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="#DDD" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="158dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Welkom bij \nREVA"
+        android:textColor="#FFF"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

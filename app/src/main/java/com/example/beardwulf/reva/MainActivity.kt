@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -33,5 +34,8 @@ class MainActivity : AppCompatActivity() {
             tekst = "Code niet correct"
         }
         Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
+        val intent: Intent
+        intent = Intent(this, GroupPhoto::class.java)
+        startActivity(intent)
     }
 }
