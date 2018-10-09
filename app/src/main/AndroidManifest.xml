@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.beardwulf.reva">
 
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,13 +25,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:name=".GroupPhoto"
             android:label="@string/activity2_name"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.beardwulf.reva.MainActivity">                >
+                android:value="com.example.beardwulf.reva.MainActivity">>
 
             </meta-data>
         </activity>
@@ -39,5 +46,4 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
     </application>
-
 </manifest>

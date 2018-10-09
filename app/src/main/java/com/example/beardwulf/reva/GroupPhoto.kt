@@ -1,6 +1,8 @@
 package com.example.beardwulf.reva
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -11,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.annotation.NonNull
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -38,8 +41,6 @@ class GroupPhoto : AppCompatActivity() {
     private lateinit var mImageBitmap: Bitmap
     private lateinit var mCurrentPhotoPath: String
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group_photo)
@@ -47,93 +48,13 @@ class GroupPhoto : AppCompatActivity() {
         imageView = findViewById(R.id.photoView);
         photoButton = findViewById(R.id.cmdPhoto);
         nextButton = findViewById(R.id.cmdNext);
-        photoButton.setOnClickListener {
-            var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if(cameraIntent.resolveActivity(packageManager) != null)  {
-                var photoFile: File? = null
-                try {
-                    photoFile = createImageFile()
-                } catch (ex: IOException) {
 
-                }
-
-                if(photoFile != null) {
-                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-                }
-            }
-            //startActivityForResult(cameraIntent, CAMERA_REQUEST);
-        }
 
         nextButton.setOnClickListener {
-
+            var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
         }
     }
-
-    fun createImageFile() : File {
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName = "JPEG_" + timeStamp + "_"
-        val storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES)
-        val image = File.createTempFile(
-                imageFileName, // prefix
-                ".jpg", // suffix
-                storageDir      // directory
-        )
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = "file:" + image.absolutePath
-        return image
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            try {
-                mImageBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, Uri.parse(mCurrentPhotoPath))
-                imageView.setImageBitmap(mImageBitmap)
-            } catch(e: IOException) {
-                Toast.makeText(this, "Er ist iets misgegaan", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    /*photoButton.setOnClickListener {
-        var intent = Intent("android.media.action.IMAGE_CAPTURE");
-        var photo = File(Environment.getExternalStorageDirectory(), "foto");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-        imageUri = Uri.fromFile(photo);
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
-    }
-
-    fun activeTakePhoto() {
-        var intent = Intent("android.media.action.IMAGE_CAPTURE");
-        var photo = File(Environment.getExternalStorageDirectory(), "foto");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-        imageUri = Uri.fromFile(photo);
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
-    }
-
-
-    @Override
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            try {
-                selectedImage = imageUri;
-                imageView.setImageURI(imageUri);
-            } catch (e: Exception) {
-                Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
-                        .show();
-
-            }
-
-        }
-    }
-}
-
-
 
 
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
@@ -142,12 +63,10 @@ class GroupPhoto : AppCompatActivity() {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             } else {
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }
-
         }
     }
 
@@ -156,25 +75,92 @@ class GroupPhoto : AppCompatActivity() {
             //var options = BitmapFactory.Options();
             //options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             //var photo = BitmapFactory.decodeFile(capturedImageUri.toString(), options)
+            var photo: Bitmap
+            photo = data?.extras?.get("data") as Bitmap
+            imageView.setImageBitmap(photo)
+        }
+    }
 
 
-            var photo:  Uri
-            photo = data?.
-            imageView.setImageURI(photo)
+        fun arrangeButtons() {
+            nextButton.visibility = View.VISIBLE
+
+            val param = photoButton.layoutParams as LinearLayout.LayoutParams
+            param.setMargins(28, 0, 28, 76)
+            photoButton.layoutParams = param
+
+            val layout = photoButton.layout
+            photoButton.text = "Neem nieuwe foto"
 
         }
-*/
-
-
-    fun arrangeButtons() {
-        nextButton.visibility = View.VISIBLE
-
-        val param = photoButton.layoutParams as LinearLayout.LayoutParams
-        param.setMargins(28, 0, 28, 76)
-        photoButton.layoutParams = param
-
-        val layout = photoButton.layout
-        photoButton.text = "Neem nieuwe foto"
-
     }
-}
+
+
+/*
+
+photoButton.setOnClickListener {
+            var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (cameraIntent.resolveActivity(packageManager) != null) {
+                var photoFile: File? = null
+                try {
+                    photoFile = createImageFile()
+                } catch (ex: IOException) {
+                    //Toast.makeText(this, ex.message, Toast.LENGTH_SHORT).show();
+                }
+
+                if (photoFile != null) {
+                    Toast.makeText(this, "Hier geraak ik", Toast.LENGTH_SHORT).show();
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                }
+                else {
+                    //Toast.makeText(this, "Er ist iets misgegaan", Toast.LENGTH_SHORT).show();
+                }
+            }
+            //startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
+
+
+fun createImageFile(): File {
+
+        var mContext: Context = this.applicationContext
+
+
+        var check = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (check == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Foto'tje maken", Toast.LENGTH_SHORT).show();
+        } else {
+            val x: Array<String> = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            ActivityCompat.requestPermissions(mContext as Activity, x, 1888)
+            requestPermissions( x,1024);
+            Toast.makeText(this, "Rip", Toast.LENGTH_SHORT).show();
+
+        }
+
+        val imageFileName = "JPEG_" + "_"
+        val storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES)
+
+        val image = File.createTempFile(
+                imageFileName, // prefix
+                ".jpg", // suffix
+                storageDir      // directory
+        )
+        Toast.makeText(this, "Foto'tje maken", Toast.LENGTH_SHORT).show();
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.absolutePath
+        return image
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            try {
+                mImageBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, Uri.parse(mCurrentPhotoPath))
+                imageView.setImageBitmap(mImageBitmap)
+            } catch (e: IOException) {
+                Toast.makeText(this, "Er ist iets misgegaan", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+ */
