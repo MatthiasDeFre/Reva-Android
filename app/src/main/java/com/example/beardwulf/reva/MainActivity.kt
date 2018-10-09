@@ -37,6 +37,6 @@ class MainActivity : AppCompatActivity() {
         else {
             tekst = "Code niet correct"
             Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
-        } 
+        }
     }
 }
