@@ -50,10 +50,11 @@ class GroupPhoto : AppCompatActivity() {
         nextButton = findViewById(R.id.cmdNext);
 
 
-        nextButton.setOnClickListener {
+        photoButton.setOnClickListener {
             var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
         }
+
     }
 
 
