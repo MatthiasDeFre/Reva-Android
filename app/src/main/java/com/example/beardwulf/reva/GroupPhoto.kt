@@ -55,6 +55,10 @@ class GroupPhoto : AppCompatActivity() {
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
         }
 
+        nextButton.setOnClickListener {
+            intent = Intent(this, InfoInvoer::class.java)
+            startActivity(intent)
+        }
     }
 
 
