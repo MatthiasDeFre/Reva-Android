@@ -12,7 +12,6 @@
         android:id="@+id/imageView"
         android:layout_width="432dp"
         android:layout_height="810dp"
-        android:layout_marginStart="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,10 +21,10 @@
         android:id="@+id/btnLogin"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="327dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
         android:background="@drawable/buttonlayout"
         android:fontFamily="@font/montserrat"
         android:text="Login"
@@ -40,11 +39,12 @@
     <EditText
         android:id="@+id/input"
         android:layout_width="327dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
         android:background="@drawable/edittextlayout"
+        android:backgroundTint="#FFF"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:hint="Groepscode..."
@@ -53,7 +53,7 @@
         android:padding="10dp"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textColor="#FFF"
+        android:textColor="@color/Grijs"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -71,5 +71,21 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="327dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Geef de code in om deel te kunnen nemen aan het spel"
+        android:textColor="#FFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
