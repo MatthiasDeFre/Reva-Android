@@ -83,6 +83,7 @@ class GroupPhoto : AppCompatActivity() {
             var photo: Bitmap
             photo = data?.extras?.get("data") as Bitmap
             imageView.setImageBitmap(photo)
+            nextButton.setEnabled(true);
         }
     }
 

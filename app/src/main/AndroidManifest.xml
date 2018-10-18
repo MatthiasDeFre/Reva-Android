@@ -53,9 +53,8 @@
 
         <activity
             android:name=".InfoInvoer"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name=".CategoryPreferences"></activity>
     </application>
 
 </manifest>
