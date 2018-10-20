@@ -53,8 +53,9 @@
 
         <activity
             android:name=".InfoInvoer"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".VoorkeurCategorieen"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".VoorkeurCategorieen" />
+        <activity android:name=".vragenOplossen.VragenOplossen"></activity>
     </application>
 
 </manifest>

@@ -11,5 +11,10 @@
     <string name="stap0">Geef de code in om deel te kunnen nemen aan het spel</string>
     <string name="welkom">Welcome, Jens</string>
     <string name="login">Login</string>
+    <string name="vraag">Vraag</string>
+    <string name="vulIn">Vul in</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
