@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupPhoto">
+    tools:context=".GroepsFoto">
 
     <ImageView
         android:id="@+id/imageView"
@@ -14,7 +14,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/download" />
+        app:srcCompat="@drawable/background1" />
 
     <TextView
         android:id="@+id/textView"
@@ -49,12 +49,13 @@
         android:id="@+id/cmdPhoto"
         android:layout_width="324dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/buttonlayout"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        android:background="@drawable/buttonlayoutclassicblue"
+        android:enabled="true"
         android:fontFamily="@font/montserrat"
-        android:text="Maak foto"
+        android:text="@string/maakfoto"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -69,10 +70,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
-        android:background="@drawable/buttonlayout"
-        android:enabled="false"
+        android:background="@drawable/buttonlayoutclassicblue"
         android:fontFamily="@font/montserrat"
-        android:text="Ga verder"
+        android:text="@string/gaverder"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -80,5 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+    <!-- android:enabled="false" -->
+
 
 </android.support.constraint.ConstraintLayout>

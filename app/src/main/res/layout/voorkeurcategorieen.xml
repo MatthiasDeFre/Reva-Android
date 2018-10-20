@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoryPreferences">
+    tools:context=".VoorkeurCategorieen">
 
     <ImageView
         android:id="@+id/imageView"
@@ -13,7 +13,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/download" />
+        app:srcCompat="@drawable/background1" />
 
     <TextView
         android:id="@+id/textView"
@@ -22,38 +22,34 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="Stap 3: selecteer 10 van jullie favoriete categorieën"
+        android:text="@string/stap3"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/photoView"
-        android:layout_width="306dp"
-        android:layout_height="306dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_marginTop="8dp"
+        android:background="#7827283b"
+        app:layout_constraintBottom_toTopOf="@+id/cmdNext"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/cmdNext"
         android:layout_width="324dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/buttonlayout"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        android:background="@drawable/buttonlayoutclassicblue"
         android:fontFamily="@font/montserrat"
-        android:text="Ga verder"
+        android:text="@string/gaverder"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"

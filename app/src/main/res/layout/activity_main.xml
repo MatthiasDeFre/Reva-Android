@@ -15,7 +15,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/download" />
+        app:srcCompat="@drawable/background1" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -25,9 +25,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
-        android:background="@drawable/buttonlayout"
+        android:background="@drawable/buttonlayoutclassicblue"
         android:fontFamily="@font/montserrat"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -65,7 +65,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat"
-        android:text="Welkom bij \nREVA"
+        android:text="@string/welkomtekst"
         android:textColor="#FFF"
         android:textSize="40dp"
         android:textStyle="bold"
@@ -80,7 +80,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
         android:fontFamily="@font/montserrat"
-        android:text="Geef de code in om deel te kunnen nemen aan het spel"
+        android:text="@string/stap0"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"

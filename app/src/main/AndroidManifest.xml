@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GroupPhoto"
+            android:name=".GroepsFoto"
             android:label="@string/activity2_name"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
@@ -54,7 +54,7 @@
         <activity
             android:name=".InfoInvoer"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".CategoryPreferences"></activity>
+        <activity android:name=".VoorkeurCategorieen"></activity>
     </application>
 
 </manifest>

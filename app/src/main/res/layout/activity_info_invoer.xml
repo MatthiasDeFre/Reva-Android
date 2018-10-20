@@ -13,9 +13,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
-        android:background="@drawable/buttonlayout"
+        android:background="@drawable/buttonlayoutclassicblue"
         android:fontFamily="@font/montserrat"
-        android:text="Ga verder"
+        android:text="@string/gaverder"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/download" />
+                app:srcCompat="@drawable/background1" />
 
             <TextView
                 android:id="@+id/textView"

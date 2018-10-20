@@ -1,8 +1,8 @@
 package com.example.beardwulf.reva
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 
 class InfoInvoer : AppCompatActivity() {
@@ -18,7 +18,7 @@ class InfoInvoer : AppCompatActivity() {
         nextButton = findViewById(R.id.cmdNext);
 
         nextButton.setOnClickListener {
-            intent = Intent(this, CategoryPreferences::class.java)
+            intent = Intent(this, VoorkeurCategorieen::class.java)
             startActivity(intent)
         }
     }
