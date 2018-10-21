@@ -1,4 +1,4 @@
-package com.example.beardwulf.reva.activities
+package com.example.beardwulf.reva.activities.registreren
 
 import android.app.Activity
 import android.content.Intent
@@ -8,18 +8,15 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.NonNull
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
+import com.example.beardwulf.reva.ImageHelper
 import com.example.beardwulf.reva.R
 import kotlinx.android.synthetic.main.groepsfoto.*
 
 class GroepsFoto : AppCompatActivity() {
 
-    val MY_CAMERA_PERMISSION_CODE = 100;
-    private final val CAMERA_REQUEST = 1888;
+    private val MY_CAMERA_PERMISSION_CODE = 100;
+    private val CAMERA_REQUEST = 1888;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +34,7 @@ class GroepsFoto : AppCompatActivity() {
         }
     }
 
-
+/*
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode.equals(MY_CAMERA_PERMISSION_CODE)) {
@@ -50,14 +47,12 @@ class GroepsFoto : AppCompatActivity() {
             }
         }
     }
-
+*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            //var options = BitmapFactory.Options();
-            //options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            //var photo = BitmapFactory.decodeFile(capturedImageUri.toString(), options)
             var photo: Bitmap
             photo = data?.extras?.get("data") as Bitmap
+            photo = ImageHelper.getRoundedCornerBitmap(photo, photoView.width/2)
             photoView.setImageBitmap(photo)
             cmdNext.setEnabled(true);
         }
