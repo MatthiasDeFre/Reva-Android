@@ -22,7 +22,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/stap1"
+        android:text="dit is een fragment"
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
