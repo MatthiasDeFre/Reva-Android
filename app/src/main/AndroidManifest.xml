@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.GroepsFoto"
+            android:name=".activities.registreren.GroepsFoto"
             android:label="@string/activity2_name"
             android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
@@ -52,10 +52,11 @@
         </provider>
 
         <activity
-            android:name=".activities.InfoInvoer"
+            android:name=".activities.registreren.InfoInvoer"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".activities.VoorkeurCategorieen" />
-        <activity android:name=".vragenOplossen.VragenOplossen"></activity>
+        <activity android:name=".vragenOplossen.VragenOplossen" />
+        <activity android:name=".activities.registreren.Registreren"></activity>
     </application>
 
 </manifest>

@@ -3,10 +3,10 @@ package com.example.beardwulf.reva.activities
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.activities.registreren.GroepsFoto
+import com.example.beardwulf.reva.activities.registreren.Registreren
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             tekst = getString(R.string.welkom)
             Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
             val intent: Intent
-            intent = Intent(this, GroepsFoto::class.java)
+            intent = Intent(this, Registreren::class.java)
             startActivity(intent)
         }
         else {

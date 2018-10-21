@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.registreren.GroepsFoto">
+    tools:context=".fragments.RegisterPhoto">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="432dp"
         android:layout_height="810dp"
-        android:layout_marginStart="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
