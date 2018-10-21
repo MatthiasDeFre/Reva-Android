@@ -8,99 +8,11 @@
     android:focusableInTouchMode="true"
     tools:context=".vragenOplossen.VragenOplossen">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="432dp"
-        android:layout_height="810dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background1" />
-
-    <Button
-        android:id="@+id/btnVulIn"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="327dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/buttonlayoutclassicblue"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/vulIn"
-        android:textColor="#FFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="31dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/montserrat"
-        android:text="1"
-        android:textColor="#FFF"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/input"
-        android:layout_width="327dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/edittextlayout"
-        android:backgroundTint="#FFF"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:hint="Antwoord"
-        android:inputType="number|phone"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:textColor="@color/Grijs"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="125dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/vraag"
-        android:textColor="#FFF"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="327dp"
-        android:layout_height="294dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="28dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)"
-        android:textColor="#FFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <fragment
+        android:id="@+id/vraagInvullenFragment"
+        android:name="com.example.beardwulf.reva.vragenOplossen.VraagInvullen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_vraag_invullen" />
 
 </android.support.constraint.ConstraintLayout>
