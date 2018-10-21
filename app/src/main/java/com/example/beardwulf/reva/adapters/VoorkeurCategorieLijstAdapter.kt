@@ -11,7 +11,10 @@ import com.example.beardwulf.reva.dtos.VoorkeurCategorie
 
 
 /**
- * Created by bett on 8/21/17.
+ * @author Bett
+ * Help class for creating a listview with images and text
+ * found on https://www.youtube.com/watch?v=KFo1bO05Jho&t=1s
+ * implemented by Karel Heyndrickx
  */
 class VoorkeurCategorieLijstAdapter(private var activity: Activity, private var items: ArrayList<VoorkeurCategorie>): BaseAdapter() {
 
