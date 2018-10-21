@@ -1,26 +1,25 @@
-package com.example.beardwulf.reva
+package com.example.beardwulf.reva.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
+import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.adapters.VoorkeurCategorieLijstAdapter
 import com.example.beardwulf.reva.dtos.VoorkeurCategorie
+import kotlinx.android.synthetic.main.voorkeurcategorieen.*
 
 class VoorkeurCategorieen : AppCompatActivity() {
 
     val IMAGES = arrayOf(R.drawable.medisch, R.drawable.sport);
-    var onderwerpen =arrayOf<String>("Sport","Technologie","Medica");
-    var lstCategories: ListView? = null
-
+    var onderwerpen = arrayOf<String>("Sport", "Technologie", "Medica");
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voorkeurcategorieen);
 
-        lstCategories = findViewById(R.id.listView)
-        var adapter = VoorkeurCategorieLijstAdapter(this,maakCategorieItems())
-        lstCategories?.adapter = adapter
+        var adapter = VoorkeurCategorieLijstAdapter(this, maakCategorieItems())
+        listView?.adapter = adapter
     }
 
     private fun maakCategorieItems(): ArrayList<VoorkeurCategorie> {
@@ -34,6 +33,4 @@ class VoorkeurCategorieen : AppCompatActivity() {
 
         return items
     }
-
-
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -37,7 +37,7 @@
         tools:text="Login" />
 
     <EditText
-        android:id="@+id/input"
+        android:id="@+id/txtInput"
         android:layout_width="327dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"

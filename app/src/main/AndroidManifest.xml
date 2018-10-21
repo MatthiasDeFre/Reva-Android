@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -29,14 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GroepsFoto"
+            android:name=".activities.GroepsFoto"
             android:label="@string/activity2_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.beardwulf.reva.MainActivity">
+                android:value="com.example.beardwulf.reva.activities.MainActivity">
                 >
             </meta-data>
         </activity>
@@ -52,9 +52,9 @@
         </provider>
 
         <activity
-            android:name=".InfoInvoer"
+            android:name=".activities.InfoInvoer"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".VoorkeurCategorieen" />
+        <activity android:name=".activities.VoorkeurCategorieen" />
         <activity android:name=".vragenOplossen.VragenOplossen"></activity>
     </application>
 

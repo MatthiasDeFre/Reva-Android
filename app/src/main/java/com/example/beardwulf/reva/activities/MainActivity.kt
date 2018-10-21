@@ -1,4 +1,4 @@
-package com.example.beardwulf.reva
+package com.example.beardwulf.reva.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,19 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.beardwulf.reva.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var txtCode: TextView
-    //   private val txtCode = findViewById<TextView>(R.id.input) as TextView
-    private lateinit var btnLogin: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        btnLogin = findViewById<Button>(R.id.btnLogin)
-        txtCode = findViewById<TextView>(R.id.input)
 
         btnLogin.setOnClickListener {
             login()
@@ -27,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     fun login() {
         val tekst: String
-        if(txtCode.text.toString().equals("1234")) {
+        if(txtInput.text.toString().equals("1234")) {
             tekst = getString(R.string.welkom)
             Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
             val intent: Intent
