@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RegisterPhoto">
+    tools:context=".fragments.registreren.RegisterPhoto">
 
     <ImageView
         android:id="@+id/imageView"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/photoView"
+        android:id="@+id/photoViewer"
         android:layout_width="306dp"
         android:layout_height="306dp"
         android:layout_marginStart="8dp"
@@ -45,7 +45,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/cmdPhoto"
+        android:id="@+id/cmdNeemFoto"
         android:layout_width="324dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -58,12 +58,12 @@
         android:textColor="#FFF"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cmdNext"
+        app:layout_constraintBottom_toTopOf="@+id/cmdVolgende"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/cmdNext"
+        android:id="@+id/cmdVolgende"
         android:layout_width="324dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
