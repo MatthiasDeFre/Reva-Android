@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".vragenOplossen.VragenOplossen">
+    tools:context=".activities.vragenOplossen.VragenOplossen">
 
     <ImageView
         android:id="@+id/imageView"

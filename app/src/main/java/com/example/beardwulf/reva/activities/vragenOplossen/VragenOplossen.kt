@@ -1,4 +1,4 @@
-package com.example.beardwulf.reva.vragenOplossen
+package com.example.beardwulf.reva.activities.vragenOplossen
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,6 @@ class VragenOplossen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_vragen_oplossen)
+        setContentView(R.layout.fragment_vraag_invullen)
     }
 }

@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".vragenOplossen.VragenOplossen">
+    tools:context=".activities.vragenOplossen.VragenOplossen">
 
-    <fragment
+<!--    <fragment
         android:id="@+id/vraagInvullenFragment"
-        android:name="com.example.beardwulf.reva.vragenOplossen.VraagInvullen"
+        android:name="com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_vraag_invullen" />
+        tools:layout="@layout/fragment_vraag_invullen" />-->
 
 </android.support.constraint.ConstraintLayout>

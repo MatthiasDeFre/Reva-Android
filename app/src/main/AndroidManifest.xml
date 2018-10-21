@@ -55,7 +55,7 @@
             android:name=".activities.registreren.InfoInvoer"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".activities.VoorkeurCategorieen" />
-        <activity android:name=".vragenOplossen.VragenOplossen" />
+        <activity android:name=".activities.vragenOplossen.VragenOplossen" />
         <activity android:name=".activities.registreren.Registreren"></activity>
     </application>
 
