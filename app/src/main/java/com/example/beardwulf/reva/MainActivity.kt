@@ -1,8 +1,8 @@
 package com.example.beardwulf.reva
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
     fun login() {
         val tekst: String
         if(txtCode.text.toString().equals("1234")) {
-            tekst = "Welcome, Jens"
+            tekst = getString(R.string.welkom)
             Toast.makeText(this@MainActivity, tekst , Toast.LENGTH_SHORT).show()
             val intent: Intent
-            intent = Intent(this, GroupPhoto::class.java)
+            intent = Intent(this, GroepsFoto::class.java)
             startActivity(intent)
         }
         else {

@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="Donkerblauw">#27283b</color>
+    <color name="Lichtblauw">#33c4dd</color>
+    <color name="Blauw">#5840ff</color>
+    <color name="Grijs">#9a9d9d</color>
 </resources>

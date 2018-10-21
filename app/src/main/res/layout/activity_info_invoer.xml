@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".InfoInvoer">
 
+    <Button
+        android:id="@+id/cmdNext"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        android:background="@drawable/buttonlayoutclassicblue"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/gaverder"
+        android:textColor="#FFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +43,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/download" />
+                app:srcCompat="@drawable/background1" />
 
             <TextView
                 android:id="@+id/textView"
