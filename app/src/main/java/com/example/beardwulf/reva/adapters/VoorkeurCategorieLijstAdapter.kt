@@ -20,10 +20,10 @@ class VoorkeurCategorieLijstAdapter(private var activity: Activity, private var 
 
 
     private class ViewHolder(row: View?) {
-        var txtNaam: TextView? = null
+        var txtCategorienaam: TextView? = null
 
         init {
-            this.txtNaam = row?.findViewById<TextView>(R.id.txtNaam)
+            this.txtCategorienaam = row?.findViewById<TextView>(R.id.txtCategorienaam)
         }
     }
 
@@ -41,7 +41,7 @@ class VoorkeurCategorieLijstAdapter(private var activity: Activity, private var 
         }
 
         var voorkeurCateogorie = items[position]
-        viewHolder.txtNaam?.text = voorkeurCateogorie.naam
+        viewHolder.txtCategorienaam?.text = voorkeurCateogorie.naam
 
         return view as View
     }

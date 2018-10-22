@@ -62,6 +62,7 @@
                 android:id="@+id/txtGroepsnaam"
                 android:layout_width="327dp"
                 android:layout_height="38dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/edittextlayout"
                 android:fontFamily="@font/montserrat"
@@ -71,6 +72,7 @@
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 android:textColor="#FFF"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -91,6 +93,7 @@
                 android:id="@+id/txtGroepsLeden"
                 android:layout_width="327dp"
                 android:layout_height="167dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:autoSizeTextType="uniform"
@@ -101,6 +104,7 @@
                 android:padding="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 android:textColor="#FFF"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -108,19 +112,19 @@
                 android:id="@+id/cmdNext"
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/buttonlayoutclassicblue"
                 android:fontFamily="@font/montserrat"
-                android:text="Ga verder"
+                android:text="@string/gaverder"
                 android:textColor="#FFF"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtGroepsLeden" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
