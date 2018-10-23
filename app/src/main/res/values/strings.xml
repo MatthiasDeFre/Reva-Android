@@ -13,7 +13,7 @@
     <string name="login">Login</string>
     <string name="vraag">Vraag</string>
     <string name="vulIn">Vul in</string>
-
+    <string name="geselecteerd">categoriën geselecteerd</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="goedZo">Goed zo!</string>

@@ -3,7 +3,6 @@ package com.example.beardwulf.reva.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
-import android.widget.Toast
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.adapters.VoorkeurCategorieLijstAdapter
 import com.example.beardwulf.reva.dtos.VoorkeurCategorie
@@ -12,37 +11,49 @@ import kotlinx.android.synthetic.main.voorkeurcategorieen.*
 class VoorkeurCategorieen : AppCompatActivity() {
 
     var selectedCategorieen: MutableList<VoorkeurCategorie> = ArrayList()
+    val categorieen = arrayOf<String>("hulpmiddelen ADL","aangepaste kledij","rolstoelen","rolstoelen sport","scooters","loophulpmiddelen en rampen","fietsen","hulpmiddelen voor kinderen","omgevingsbedineing, domotica, besturing","aangepaste auto's","tilhulpmiddelen","huisliften","vakantie, reizen sport","overheidsdiensten","belangenverenigingen,zelfhulpgroepen")
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voorkeurcategorieen);
 
+        //De listView met de categorieen krijgt een custom adapter om specifiekere rows te maken
         var adapter = VoorkeurCategorieLijstAdapter(this, maakCategorieItems())
         listView?.adapter = adapter
         listView?.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE)
+
+        //Bij klik, voeg item toe of verwijder item uit geselecteerdeCategorieen
         listView?.setOnItemClickListener { parent, view, position, id ->
 
             val item = listView?.getItemAtPosition(position) as VoorkeurCategorie;
-
             if (selectedCategorieen.contains(item)){
                 selectedCategorieen.remove(item);
             }else {
                 selectedCategorieen.add(item)
             }
-            selectedCategorieen.forEach { System.out.print(it) }
-            Toast.makeText(this, selectedCategorieen.size.toString(), Toast.LENGTH_SHORT).show()
+
+            //Verander gui op basis van selecties
+            if(selectedCategorieen.size >= 10) {
+                cmdNext.isEnabled = true
+                cmdNext.alpha = 1F
+            } else{
+                cmdNext.isEnabled = false
+                cmdNext.alpha = 0.4F
+            }
+            txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/10 " + getString(R.string.geselecteerd)
 
         }
 
     }
 
+    //Opvullen van de listview met alle categorieën
     private fun maakCategorieItems(): ArrayList<VoorkeurCategorie> {
         var items = ArrayList<VoorkeurCategorie>()
 
-        for (i in 0..9) {
-            var user: VoorkeurCategorie = VoorkeurCategorie("Medica")
-            items.add(user)
+        for (categorie in categorieen) {
+            var item: VoorkeurCategorie = VoorkeurCategorie(categorie)
+            items.add(item)
         }
 
         return items
