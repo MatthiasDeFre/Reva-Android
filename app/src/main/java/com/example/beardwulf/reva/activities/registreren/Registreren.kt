@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.NonNull
+import android.widget.Button
 import android.widget.Toast
 import com.example.beardwulf.reva.ImageHelper
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.activities.VoorkeurCategorieen
 import kotlinx.android.synthetic.main.fragment_register_photo.*
+import kotlinx.android.synthetic.main.fragment_registreer_groep.*
 
 class Registreren : AppCompatActivity() {
 
@@ -30,6 +33,8 @@ class Registreren : AppCompatActivity() {
         cmdVolgende.setOnClickListener {
             setContentView(R.layout.fragment_registreer_groep)
         }
+
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {

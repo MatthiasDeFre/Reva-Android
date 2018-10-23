@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.RegistreerGroep">
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="0dp"
@@ -17,109 +17,109 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+-->
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="432dp"
+        android:layout_height="810dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background1" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="432dp"
-                android:layout_height="810dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/background1" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="277dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="5dp"
+        android:text="@string/stap2"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="277dp"
-                android:layout_height="77dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/montserrat"
-                android:paddingLeft="5dp"
-                android:text="@string/stap2"
-                android:textColor="#FFF"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="280dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="5dp"
+        android:text="Dit is een fragment:"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="280dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingLeft="5dp"
-                android:text="Dit is een fragment:"
-                android:textColor="#FFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <EditText
+        android:id="@+id/txtGroepsnaam"
+        android:layout_width="327dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/edittextlayout"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="#FFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <EditText
-                android:id="@+id/txtGroepsnaam"
-                android:layout_width="327dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/edittextlayout"
-                android:fontFamily="@font/montserrat"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:textColor="#FFF"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="280dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:paddingLeft="5dp"
+        android:text="Groepsleden:"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtGroepsnaam" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="280dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:paddingLeft="5dp"
-                android:text="Groepsleden:"
-                android:textColor="#FFF"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtGroepsnaam" />
+    <EditText
+        android:id="@+id/txtGroepsLeden"
+        android:layout_width="327dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/edittextlayout"
+        android:fontFamily="@font/montserrat"
+        android:gravity="top"
+        android:maxLines="5"
+        android:padding="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="#FFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <EditText
-                android:id="@+id/txtGroepsLeden"
-                android:layout_width="327dp"
-                android:layout_height="167dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:autoSizeTextType="uniform"
-                android:background="@drawable/edittextlayout"
-                android:fontFamily="@font/montserrat"
-                android:gravity="top"
-                android:maxLines="5"
-                android:padding="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:textColor="#FFF"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <Button
-                android:id="@+id/cmdNext"
-                android:layout_width="324dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="28dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/buttonlayoutclassicblue"
-                android:fontFamily="@font/montserrat"
-                android:text="Ga verder"
-                android:textColor="#FFF"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/cmdNaarCategorie"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/buttonlayoutclassicblue"
+        android:fontFamily="@font/montserrat"
+        android:text="Ga verder"
+        android:textColor="#FFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>-->
 </android.support.constraint.ConstraintLayout>
