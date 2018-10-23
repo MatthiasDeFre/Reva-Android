@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.adapters.VoorkeurCategorieLijstAdapter
-import com.example.beardwulf.reva.dtos.VoorkeurCategorie
+import com.example.beardwulf.reva.domain.VoorkeurCategorie
 import kotlinx.android.synthetic.main.voorkeurcategorieen.*
 
 class VoorkeurCategorieen : AppCompatActivity() {

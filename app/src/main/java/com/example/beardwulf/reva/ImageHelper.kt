@@ -26,7 +26,7 @@ class ImageHelper {
 
             val color = -0xbdbdbe
             val paint = Paint()
-            val rect = Rect(0, 0, bitmap.width, bitmap.height)
+            val rect = Rect(0, 0, bitmap.width, bitmap.width)
             val rectF = RectF(rect)
             val roundPx = pixels.toFloat()
 
