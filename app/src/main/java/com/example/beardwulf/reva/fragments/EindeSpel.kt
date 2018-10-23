@@ -10,6 +10,7 @@ import android.view.ViewGroup
 
 import com.example.beardwulf.reva.R
 
+//Fragment die toont dat de vragenlijst afgerond is
 class EindeSpel : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

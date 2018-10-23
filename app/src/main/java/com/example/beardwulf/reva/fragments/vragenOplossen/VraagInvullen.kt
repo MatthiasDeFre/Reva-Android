@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
 
+//Fragment voor het tonen van een vraag en inlezen van een antwoord
 class VraagInvullen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,6 @@ class VraagInvullen : Fragment() {
             if (txtInput.text.toString().isNotEmpty()) {
                 val fragmentTransaction = fragmentManager?.beginTransaction()
                 fragmentTransaction?.replace(R.id.fragment, VraagIngevuld.newInstance())
-                //fragmentTransaction?.addToBackStack(null)
                 fragmentTransaction?.commit()
             } else {
                 //Toast.makeText(VragenOplossen.newInstance().applicationContext, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()

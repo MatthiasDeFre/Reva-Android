@@ -7,18 +7,16 @@ import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 
+//Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
 class VragenOplossen : AppCompatActivity() {
-
-/*    var vraagInvullen = VraagInvullen.newInstance()
-    var vraagIngevuld = VraagIngevuld.newInstance()*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vragen_oplossen)
 
-/*        var fragmentTransaction = supportFragmentManager.beginTransaction()
+        var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment, VraagInvullen.newInstance())
-        fragmentTransaction.commit()*/
+        fragmentTransaction.commit()
     }
 
     companion object {
