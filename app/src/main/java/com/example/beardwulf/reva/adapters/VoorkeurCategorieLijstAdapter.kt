@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.dtos.VoorkeurCategorie
+import com.example.beardwulf.reva.domain.VoorkeurCategorie
 
 
 /**

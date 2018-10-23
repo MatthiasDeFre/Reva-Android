@@ -1,4 +1,4 @@
-package com.example.beardwulf.reva.dtos
+package com.example.beardwulf.reva.domain
 
 class VoorkeurCategorie {
     var naam: String = ""
