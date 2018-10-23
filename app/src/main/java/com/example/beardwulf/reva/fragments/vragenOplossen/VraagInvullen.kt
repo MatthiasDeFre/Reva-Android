@@ -28,10 +28,10 @@ class VraagInvullen : Fragment() {
             if (txtInput.text.toString().isNotEmpty()) {
                 val fragmentTransaction = fragmentManager?.beginTransaction()
                 fragmentTransaction?.replace(R.id.fragment, VraagIngevuld.newInstance())
-                /*fragmentTransaction?.addToBackStack(null)*/
+                //fragmentTransaction?.addToBackStack(null)
                 fragmentTransaction?.commit()
             } else {
-/*                Toast.makeText(VragenOplossen.newInstance().applicationContext, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()*/
+                //Toast.makeText(VragenOplossen.newInstance().applicationContext, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }
         }
 

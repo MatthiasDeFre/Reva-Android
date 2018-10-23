@@ -18,5 +18,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="goedZo">Goed zo!</string>
     <string name="oke">Oke</string>
+    <string name="allesIngevuld">Alle vragen werden ingevuld.</string>
+    <string name="klaar">Jullie zijn klaar!</string>
 
 </resources>

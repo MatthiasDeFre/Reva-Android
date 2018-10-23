@@ -15,6 +15,10 @@ class VragenOplossen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vragen_oplossen)
+
+/*        var fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment, VraagInvullen.newInstance())
+        fragmentTransaction.commit()*/
     }
 
     companion object {

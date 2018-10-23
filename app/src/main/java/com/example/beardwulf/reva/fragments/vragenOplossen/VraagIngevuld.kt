@@ -20,7 +20,7 @@ class VraagIngevuld : Fragment() {
         view?.findViewById<Button>(R.id.btnOke)?.setOnClickListener {
             val fragmentTransaction = fragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragment, VraagInvullen.newInstance())
-            /*fragmentTransaction?.addToBackStack(null)*/
+            //fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
         return inflater.inflate(R.layout.fragment_vraag_ingevuld, container, false)
