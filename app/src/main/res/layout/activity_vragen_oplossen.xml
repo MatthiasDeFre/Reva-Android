@@ -8,11 +8,11 @@
     android:focusableInTouchMode="true"
     tools:context=".activities.vragenOplossen.VragenOplossen">
 
-<!--    <fragment
-        android:id="@+id/vraagInvullenFragment"
+    <fragment
+        android:id="@+id/fragment"
         android:name="com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_vraag_invullen" />-->
+        tools:layout="@layout/fragment_vraag_invullen" />
 
 </android.support.constraint.ConstraintLayout>
