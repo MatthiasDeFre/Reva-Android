@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/listview_selector">
+
 
     <ImageView
         android:id="@+id/imgMedisch"
@@ -18,14 +20,13 @@
         android:layout_toRightOf="@id/imgMedisch"
         android:orientation="vertical">
 
-        <CheckedTextView
+        <TextView
             android:id="@+id/txtCategorienaam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textSize="16dp"
+            android:textStyle="bold"
             android:textColor="#FFF"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:padding="5dp"/>
     </LinearLayout>
 
