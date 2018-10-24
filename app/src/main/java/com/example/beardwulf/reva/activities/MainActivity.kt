@@ -36,14 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        /**
-         * Generates an intent to create a [VoorkeurCategorieen]
-         */
-        fun newVoorkeurCategorieenIntent(context: Context): Intent {
-            val intent = Intent(context, VoorkeurCategorieen::class.java)
-            return intent
-        }
     }
 
 }

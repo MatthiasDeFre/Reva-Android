@@ -6,13 +6,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Button
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.activities.MainActivity
 import com.example.beardwulf.reva.activities.VoorkeurCategorieen
-import kotlinx.android.synthetic.main.activity_info_invoer.*
-import kotlinx.android.synthetic.main.fragment_register_photo.*
 import kotlinx.android.synthetic.main.fragment_registreer_groep.*
+import org.jetbrains.anko.find
 
 class RegistreerGroep : Fragment() {
 
@@ -25,15 +23,19 @@ class RegistreerGroep : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_registreer_groep, container, false)
+        var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
+
+        view.find<Button>(R.id.cmdNaarCategorie).setOnClickListener {
+            var intent = Intent(activity, VoorkeurCategorieen::class.java)
+            startActivity(intent)
+        }
+
+        return view
     }
 
     override fun onResume() {
         super.onResume()
-        cmdNaarCategorie.setOnClickListener {
-            var intent = Intent(activity, VoorkeurCategorieen::class.java)
-            startActivity(intent)
-        }
+
     }
 
     companion object {

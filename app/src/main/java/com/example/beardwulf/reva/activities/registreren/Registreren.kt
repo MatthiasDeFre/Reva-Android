@@ -13,51 +13,33 @@ import android.widget.Toast
 import com.example.beardwulf.reva.ImageHelper
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.VoorkeurCategorieen
+import com.example.beardwulf.reva.fragments.registreren.RegisterPhoto
+import com.example.beardwulf.reva.fragments.registreren.RegistreerGroep
+import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import kotlinx.android.synthetic.main.fragment_register_photo.*
 import kotlinx.android.synthetic.main.fragment_registreer_groep.*
 
 class Registreren : AppCompatActivity() {
 
-    private val MY_CAMERA_PERMISSION_CODE = 100;
-    private val CAMERA_REQUEST = 1888;
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_register_photo)
+        setContentView(R.layout.activity_registreren)
 
-        cmdNeemFoto.setOnClickListener {
-            var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent, CAMERA_REQUEST);
-        }
 
-        cmdVolgende.setOnClickListener {
-            setContentView(R.layout.fragment_registreer_groep)
-        }
+        var conf = Bitmap.Config.ARGB_8888
+        photo = Bitmap.createBitmap(306, 306, conf)
+
+
+        var fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.registreerlayout, RegisterPhoto.newInstance())
+        fragmentTransaction.commit()
 
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode.equals(MY_CAMERA_PERMISSION_CODE)) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            var photo: Bitmap
-            photo = data?.extras?.get("data") as Bitmap
-            photo = ImageHelper.getRoundedCornerBitmap(photo, photo.width/2)
-            photoViewer.setImageBitmap(photo)
-            cmdVolgende.setEnabled(true);
-        }
+    companion object {
+        lateinit var photo: Bitmap
     }
 
 

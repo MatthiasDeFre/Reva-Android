@@ -41,7 +41,11 @@
 
         <activity android:name=".activities.VoorkeurCategorieen" />
         <activity android:name=".activities.vragenOplossen.VragenOplossen" />
-        <activity android:name=".activities.registreren.Registreren"></activity>
+        <activity android:name=".activities.registreren.Registreren"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+
+            ></activity>
     </application>
 
 </manifest>
