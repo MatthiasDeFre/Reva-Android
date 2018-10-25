@@ -18,8 +18,11 @@ import org.jetbrains.anko.find
 //Fragment voor het tonen van een vraag en inlezen van een antwoord
 class VraagInvullen : Fragment() {
 
+    lateinit var vragenOplossen: VragenOplossen
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        vragenOplossen = (activity as VragenOplossen)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,12 +34,14 @@ class VraagInvullen : Fragment() {
                 fragmentTransaction?.replace(R.id.fragment, VraagIngevuld.newInstance())
                 fragmentTransaction?.commit()
             } else {
-                //Toast.makeText(VragenOplossen.newInstance().applicationContext, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }
         }
 
-        view.find<TextView>(R.id.textView2).setText("Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)")
-        view.find<TextView>(R.id.textView3).setText("1")
+        view.find<TextView>(R.id.textView2).setText(vragenOplossen.questions[vragenOplossen.questionNr])
+        view.find<TextView>(R.id.textView3).setText((vragenOplossen.questionNr + 1).toString())
+
+        vragenOplossen.questionNr++
 
         return view
     }

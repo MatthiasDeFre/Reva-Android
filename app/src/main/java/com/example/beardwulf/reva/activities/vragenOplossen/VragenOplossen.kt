@@ -7,8 +7,14 @@ import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 
-//Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
+/**
+ * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
+ */
+
 class VragenOplossen : AppCompatActivity() {
+
+    var questionNr = 0
+    var questions = arrayOf("TestVraag1?", "TestVraag2?")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

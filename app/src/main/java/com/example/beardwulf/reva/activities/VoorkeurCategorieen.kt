@@ -1,9 +1,11 @@
 package com.example.beardwulf.reva.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.adapters.VoorkeurCategorieLijstAdapter
 import com.example.beardwulf.reva.domain.VoorkeurCategorie
 import kotlinx.android.synthetic.main.voorkeurcategorieen.*
@@ -43,6 +45,10 @@ class VoorkeurCategorieen : AppCompatActivity() {
             }
             txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/10 " + getString(R.string.geselecteerd)
 
+        }
+
+        cmdNext.setOnClickListener{
+            startActivity(Intent(this, VragenOplossen::class.java))
         }
 
     }

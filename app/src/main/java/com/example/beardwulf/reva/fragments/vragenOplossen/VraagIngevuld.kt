@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import android.widget.Button
 
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.fragments.EindeSpel
 import org.jetbrains.anko.support.v4.find
 
 //Fragment ter bevestiging van een antwoord invullen en versturen
 class VraagIngevuld : Fragment() {
 
+    lateinit var vragenOplossen: VragenOplossen
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        vragenOplossen = (activity as VragenOplossen)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,7 +27,7 @@ class VraagIngevuld : Fragment() {
 
         view.findViewById<Button>(R.id.btnOke).setOnClickListener {
             val fragmentTransaction = fragmentManager?.beginTransaction()
-            if (true) {
+            if (vragenOplossen.questionNr != vragenOplossen.questions?.size) {
                 fragmentTransaction?.replace(R.id.fragment, VraagInvullen.newInstance())
             } else {
                 fragmentTransaction?.replace(R.id.fragment, EindeSpel.newInstance())
