@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.voorkeurcategorieen.*
 class VoorkeurCategorieen : AppCompatActivity() {
 
     var selectedCategorieen: MutableList<VoorkeurCategorie> = ArrayList()
-    val categorieen = arrayOf<String>("hulpmiddelen ADL","aangepaste kledij","rolstoelen","rolstoelen sport","scooters","loophulpmiddelen en rampen","fietsen","hulpmiddelen voor kinderen","omgevingsbedineing, domotica, besturing","aangepaste auto's","tilhulpmiddelen","huisliften","vakantie, reizen sport","overheidsdiensten","belangenverenigingen,zelfhulpgroepen")
+    val categorieen = arrayOf<String>("Hulpmiddelen ADL","Aangepaste kledij","Rolstoelen","Rolstoelen sport","Scooters","Loophulpmiddelen en rampen","Fietsen","Hulpmiddelen voor kinderen","Omgevingsbedineing, Domotica, Besturing","Aangepaste auto's","Tilhulpmiddelen","Huisliften","Vakantie, Reizen sport","Overheidsdiensten","Belangenverenigingen,Zelfhulpgroepen")
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -46,6 +46,8 @@ class VoorkeurCategorieen : AppCompatActivity() {
             txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/10 " + getString(R.string.geselecteerd)
 
         }
+
+        txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/10 " + getString(R.string.geselecteerd)
 
         cmdNext.setOnClickListener{
             startActivity(Intent(this, VragenOplossen::class.java))

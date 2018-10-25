@@ -6,24 +6,20 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".activities.vragenOplossen.VragenOplossen">
+    tools:context=".activities.vragenOplossen.VragenOplossen"
+    android:background="@color/Donkerblauw">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="432dp"
-        android:layout_height="810dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background1" />
+
+
 
     <Button
         android:id="@+id/btnVulIn"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="327dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
         android:background="@drawable/buttonlayoutclassicblue"
         android:fontFamily="@font/montserrat"
         android:text="@string/vulIn"
@@ -31,6 +27,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -50,13 +47,14 @@
         android:id="@+id/txtInput"
         android:layout_width="327dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
         android:layout_marginBottom="84dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
         android:background="@drawable/edittextlayout"
         android:backgroundTint="#FFF"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
-        android:hint="Antwoord"
+        android:hint="@string/antwoord"
         android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
@@ -64,6 +62,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@color/Grijs"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -84,7 +83,7 @@
         android:id="@+id/textView2"
         android:layout_width="327dp"
         android:layout_height="294dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="104dp"
         android:fontFamily="@font/montserrat"
         android:textColor="#FFF"

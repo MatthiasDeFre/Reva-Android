@@ -11,16 +11,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.beardwulf.reva.ImageHelper
-
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.registreren.Registreren
-import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import kotlinx.android.synthetic.main.fragment_register_photo.*
-import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
 
 class RegisterPhoto : Fragment() {
@@ -50,12 +46,12 @@ class RegisterPhoto : Fragment() {
         super.onResume()
 
         cmdNeemFoto.setOnClickListener {
-            txtStap2.text="Dit is nu veranderd"
+            //txtStap2.text="Dit is nu veranderd"
             var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
 
-            txtStap2.text="Dit is nog eens veranderd"
+            //txtStap2.text="Dit is nog eens veranderd"
         }
         cmdVolgende.setOnClickListener {
             val fragmentTransaction = fragmentManager?.beginTransaction()

@@ -27,7 +27,9 @@
             android:gravity="center_vertical"
             android:textStyle="bold"
             android:textColor="#FFF"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:textSize="14dp"
+            />
     </LinearLayout>
 
 
