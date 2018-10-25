@@ -37,6 +37,11 @@ class Registreren : AppCompatActivity() {
 
 
     companion object {
+
+        /**
+         * Variabele dat wordt gebruikt om de imageview voor de groepsfoto op te vullen
+         *
+         */
         lateinit var photo: Bitmap
     }
 

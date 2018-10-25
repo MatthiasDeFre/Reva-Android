@@ -13,6 +13,10 @@ import kotlinx.android.synthetic.main.fragment_registreer_groep.*
 import org.jetbrains.anko.find
 
 class RegistreerGroep : Fragment() {
+    /**
+     * Registreer de gegevens van de groep
+     * groepsnaam, groepsleden
+     */
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +24,7 @@ class RegistreerGroep : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
 

@@ -21,6 +21,7 @@ import org.jetbrains.anko.find
 
 class RegisterPhoto : Fragment() {
 
+
     private val MY_CAMERA_PERMISSION_CODE = 100;
     private val CAMERA_REQUEST = 1888;
 
@@ -32,8 +33,7 @@ class RegisterPhoto : Fragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
         view.find<ImageView>(R.id.photoViewer).setImageBitmap(Registreren.photo)
@@ -42,16 +42,18 @@ class RegisterPhoto : Fragment() {
     }
 
 
+    /**
+     * Aanmaken van de clicklisteners van de knoppen
+     * Als laatste wordt de imageview photoViewer opgevuld met het statische variable photo van de Regesteren activity
+     */
     override fun onResume() {
         super.onResume()
 
+
         cmdNeemFoto.setOnClickListener {
-            //txtStap2.text="Dit is nu veranderd"
             var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
-
-            //txtStap2.text="Dit is nog eens veranderd"
         }
         cmdVolgende.setOnClickListener {
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -62,7 +64,10 @@ class RegisterPhoto : Fragment() {
         photoViewer.setImageBitmap(Registreren.photo)
     }
 
-
+    /**
+     * methode is mogelijks vervangbaar. Zou moeten permissie vragen om de camera te gebruiken.
+     * Wordt erchter niet opgeroepen
+     */
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode.equals(MY_CAMERA_PERMISSION_CODE)) {
@@ -78,11 +83,14 @@ class RegisterPhoto : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            /**
+             * Bitmap uitpakken en in het statische fotovariabele steken,
+             * hierna wordt de knop om naar het volgende scherm te gaan aangezet
+             */
+
             var foto = data?.extras?.get("data") as Bitmap
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
-
             Registreren.photo = foto
-
             cmdVolgende.setEnabled(true);
         }
     }
