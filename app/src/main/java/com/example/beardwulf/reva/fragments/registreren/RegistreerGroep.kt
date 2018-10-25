@@ -33,11 +33,6 @@ class RegistreerGroep : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     companion object {
 
         fun newInstance(): RegistreerGroep {

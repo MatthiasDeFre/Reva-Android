@@ -15,7 +15,9 @@ import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
 
-//Fragment voor het tonen van een vraag en inlezen van een antwoord
+/**
+ * Fragment voor het tonen van een vraag en inlezen van een antwoord
+ */
 class VraagInvullen : Fragment() {
 
     lateinit var vragenOplossen: VragenOplossen
@@ -25,6 +27,10 @@ class VraagInvullen : Fragment() {
         vragenOplossen = (activity as VragenOplossen)
     }
 
+    /**
+     * Toont de vraag en een veld om een antwoord in te vullen.
+     * Indien er een antwoord wordt inguvuld, opent het bevestigings fragment
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
 

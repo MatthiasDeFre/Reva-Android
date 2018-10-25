@@ -10,12 +10,14 @@ import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 /**
  * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
  */
-
 class VragenOplossen : AppCompatActivity() {
 
     var questionNr = 0
-    var questions = arrayOf("TestVraag1?", "TestVraag2?")
+    var questions = arrayOf("Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)", "Hoeveel kost de nieuwste kruk van VIGO?")
 
+    /**
+     * Opent de fragment voor het tonen en beantwoorden van een vraag
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vragen_oplossen)

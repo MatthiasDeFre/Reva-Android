@@ -33,8 +33,6 @@ class Registreren : AppCompatActivity() {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.registreerlayout, RegisterPhoto.newInstance())
         fragmentTransaction.commit()
-
-
     }
 
 
