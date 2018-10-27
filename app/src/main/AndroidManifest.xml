@@ -7,6 +7,9 @@
         android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--Internet Permission-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -41,7 +44,8 @@
 
         <activity android:name=".activities.VoorkeurCategorieen" />
         <activity android:name=".activities.vragenOplossen.VragenOplossen" />
-        <activity android:name=".activities.registreren.Registreren"
+        <activity
+            android:name=".activities.registreren.Registreren"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
 
