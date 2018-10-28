@@ -51,7 +51,7 @@ class VraagInvullen : Fragment() {
             }
         }
 
-        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(TestEndpoint::class.java!!)
+/*        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(TestEndpoint::class.java!!)
         val call = service.getAllQuestions()
         call.enqueue(object : Callback<List<Question>> {
             override fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
@@ -61,7 +61,7 @@ class VraagInvullen : Fragment() {
             override fun onFailure(call: Call<List<Question>>, t: Throwable) {
 
             }
-        })
+        })*/
 
         view.find<TextView>(R.id.textView2).setText(vragenOplossen.questions[vragenOplossen.questionNr])
         view.find<TextView>(R.id.textView3).setText((vragenOplossen.questionNr + 1).toString())

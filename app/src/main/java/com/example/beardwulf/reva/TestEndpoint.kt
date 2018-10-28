@@ -8,4 +8,7 @@ interface TestEndpoint {
 
     @GET("/questions")
     fun getAllQuestions(): Call<List<Question>>
+
+    @GET("/API/teachers/codes")
+    fun getAllCodes(): Call<List<Int>>
 }
