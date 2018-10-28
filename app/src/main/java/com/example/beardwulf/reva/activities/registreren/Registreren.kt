@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.NonNull
+import android.support.v4.app.Fragment
 import android.widget.Button
 import android.widget.Toast
 import com.example.beardwulf.reva.ImageHelper
@@ -25,16 +26,17 @@ class Registreren : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registreren)
 
-
         var conf = Bitmap.Config.ARGB_8888
         photo = Bitmap.createBitmap(306, 306, conf)
 
-
-        var fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.registreerlayout, RegisterPhoto.newInstance())
-        fragmentTransaction.commit()
+        setFragment(RegisterPhoto.newInstance())
     }
 
+    fun setFragment(fragment: Fragment) {
+        var fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.registreerlayout, fragment)
+        fragmentTransaction.commit()
+    }
 
     companion object {
 

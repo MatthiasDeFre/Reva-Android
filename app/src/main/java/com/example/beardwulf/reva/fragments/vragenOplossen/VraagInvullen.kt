@@ -13,13 +13,6 @@ import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
-import com.example.beardwulf.reva.RetrofitClientInstance
-import com.example.beardwulf.reva.TestEndpoint
-import com.example.beardwulf.reva.activities.MainActivity
-import com.example.beardwulf.reva.domain.Question
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 /**
@@ -27,11 +20,11 @@ import retrofit2.Response
  */
 class VraagInvullen : Fragment() {
 
-    lateinit var vragenOplossen: VragenOplossen
+    lateinit var parent: VragenOplossen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vragenOplossen = (activity as VragenOplossen)
+        parent = (activity as VragenOplossen)
     }
 
     /**
@@ -43,30 +36,16 @@ class VraagInvullen : Fragment() {
 
         view.find<Button>(R.id.btnVulIn).setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
-                val fragmentTransaction = fragmentManager?.beginTransaction()
-                fragmentTransaction?.replace(R.id.fragment, VraagIngevuld.newInstance())
-                fragmentTransaction?.commit()
+                parent.setFragment(VraagIngevuld.newInstance())
             } else {
                 Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }
         }
 
-/*        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(TestEndpoint::class.java!!)
-        val call = service.getAllQuestions()
-        call.enqueue(object : Callback<List<Question>> {
-            override fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
+        view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
+        view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
 
-            }
-
-            override fun onFailure(call: Call<List<Question>>, t: Throwable) {
-
-            }
-        })*/
-
-        view.find<TextView>(R.id.textView2).setText(vragenOplossen.questions[vragenOplossen.questionNr])
-        view.find<TextView>(R.id.textView3).setText((vragenOplossen.questionNr + 1).toString())
-
-        vragenOplossen.questionNr++
+        parent.questionNr++
 
         return view
     }

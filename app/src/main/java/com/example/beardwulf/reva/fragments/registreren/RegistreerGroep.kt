@@ -18,14 +18,12 @@ class RegistreerGroep : Fragment() {
      * groepsnaam, groepsleden
      */
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
 
         view.find<Button>(R.id.cmdNaarCategorie).setOnClickListener {
@@ -37,7 +35,6 @@ class RegistreerGroep : Fragment() {
     }
 
     companion object {
-
         fun newInstance(): RegistreerGroep {
             return RegistreerGroep()
         }

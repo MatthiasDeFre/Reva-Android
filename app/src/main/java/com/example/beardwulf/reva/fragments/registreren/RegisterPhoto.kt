@@ -16,31 +16,31 @@ import android.widget.Toast
 import com.example.beardwulf.reva.ImageHelper
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.registreren.Registreren
+import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import kotlinx.android.synthetic.main.fragment_register_photo.*
 import org.jetbrains.anko.find
 
 class RegisterPhoto : Fragment() {
 
-
     private val MY_CAMERA_PERMISSION_CODE = 100;
     private val CAMERA_REQUEST = 1888;
 
-
+    lateinit var parent: Registreren
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
         view.find<ImageView>(R.id.photoViewer).setImageBitmap(Registreren.photo)
         //photoViewer.setImageBitmap(Registreren.photo)
+
+        parent = (activity as Registreren)
+
         return view
     }
-
 
     /**
      * Aanmaken van de clicklisteners van de knoppen
@@ -49,17 +49,12 @@ class RegisterPhoto : Fragment() {
     override fun onResume() {
         super.onResume()
 
-
         cmdNeemFoto.setOnClickListener {
             var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
-
         }
         cmdVolgende.setOnClickListener {
-            val fragmentTransaction = fragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.registreerlayout, RegistreerGroep.newInstance())
-            fragmentTransaction?.commit()
-
+            parent.setFragment(RegistreerGroep.newInstance())
         }
         photoViewer.setImageBitmap(Registreren.photo)
     }
