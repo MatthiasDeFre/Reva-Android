@@ -5,5 +5,9 @@ import com.google.gson.annotations.SerializedName
 class Category {
 
     @SerializedName("name")
-    lateinit var name: String
+    var name: String
+
+    constructor(name: String) {
+        this.name= name
+    }
 }

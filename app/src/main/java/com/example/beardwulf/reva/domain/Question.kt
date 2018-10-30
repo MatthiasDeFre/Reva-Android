@@ -6,13 +6,23 @@ import java.util.*
 class Question {
 
     @SerializedName("body")
-    lateinit var body : String
+    var body : String
     @SerializedName("posted")
-    lateinit var posted: Date
+    var posted: Date
     @SerializedName("possibleAnswers")
-    lateinit var possibleAnswers: Array<String>
+    var possibleAnswers: Array<String>
     @SerializedName("exhibitor")
-    lateinit var exhibitor: Object
+    var exhibitor: Exhibitor
+
+    constructor(body: String, posted: Date, possibleAnswers: Array<String>, exhibitor: Exhibitor) {
+        this.body=body
+        this.posted=posted
+        this.possibleAnswers = possibleAnswers
+        this.exhibitor = exhibitor
+    }
+
+
+
 
 
 }

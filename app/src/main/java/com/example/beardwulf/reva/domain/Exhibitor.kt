@@ -5,9 +5,15 @@ import com.google.gson.annotations.SerializedName
 class Exhibitor {
 
     @SerializedName("name")
-    lateinit var name: String
+    var name: String
     @SerializedName("visits")
-    lateinit var visits: Number
+    var visits: Number
     @SerializedName("category")
-    lateinit var category: Category
+    var category: Category
+
+    constructor(name: String, visits: Number, category: Category) {
+        this.name = name
+        this.visits = visits
+        this.category = category
+    }
 }
