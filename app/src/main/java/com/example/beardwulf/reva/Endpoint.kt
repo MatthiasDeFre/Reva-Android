@@ -4,6 +4,7 @@ import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.domain.Question
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import java.util.*
 
 interface Endpoint {
@@ -12,8 +13,8 @@ interface Endpoint {
     fun getAllCodes(): Call<List<Int>>
 
     @GET("/API/student/exhibitor/:group")
-    fun getExhibitor(objects: Objects): Call<Exhibitor>
+    fun getExhibitor(int : Int): Call<Exhibitor>
 
-    @GET("/API/student/group/:code")
-    fun getGroup(int: Int): Call<Objects>
+    @GET("/API/student/group/{code}")
+    fun getGroup(@Path("code") user: String): Call<Objects>
 }

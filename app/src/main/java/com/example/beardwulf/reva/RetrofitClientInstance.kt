@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 
 class RetrofitClientInstance {
     private var retrofit: Retrofit? = null
-    private val BASE_URL = "http://projecten3studserver08.westeurope.cloudapp.azure.com/?fbclid=IwAR1kGWZ0BjoRpt51HTU_GlSdO_b4QdPi1hO_OzLM9DGNCW35Fk3MHXZJBTA"
+    private val BASE_URL = "http://projecten3studserver08.westeurope.cloudapp.azure.com"
 
     fun getRetrofitInstance(): Retrofit? {
         if (retrofit == null) {
