@@ -37,13 +37,11 @@ class VraagInvullen : Fragment() {
 
         view.find<Button>(R.id.btnVulIn).setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
-                parent.setFragment(VraagIngevuld.newInstance(), R.id.fragment2)
+                parent.setFragment(Kaart.newInstance(), R.id.fragment)
 
-                view.find<Button>(R.id.btnVulIn).isEnabled = false
-                view.find<Button>(R.id.btnVulIn).alpha = 0.4F
-
-                view.find<EditText>(R.id.txtInput).isEnabled = false;
-                view.find<EditText>(R.id.txtInput).alpha = 0.4F
+                val vraagIngevuld = VraagIngevuld.newInstance()
+                parent.setFragment(vraagIngevuld, R.id.fragment2)
+                parent.vraagIngevuld = vraagIngevuld
             } else {
                 Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }

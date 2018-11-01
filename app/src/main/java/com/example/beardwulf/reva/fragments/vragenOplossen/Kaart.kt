@@ -28,7 +28,13 @@ class Kaart : Fragment() {
         val view = inflater.inflate(R.layout.fragment_kaart, container, false)
 
         view.find<Button>(R.id.btnVraag).setOnClickListener {
+            if (parent.questionNr != 0)
+                parent.removeFragment(parent.vraagIngevuld)
             parent.setFragment(VraagInvullen.newInstance(), R.id.fragment)
+        }
+
+        if (parent.questionNr == parent.questions.size) {
+            view.find<Button>(R.id.btnVraag).isEnabled = false
         }
 
         return view

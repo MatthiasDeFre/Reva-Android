@@ -11,7 +11,9 @@ import android.widget.EditText
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.fragments.EindeSpel
+import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 import org.jetbrains.anko.find
+import org.jetbrains.anko.view
 
 /**
  * Fragment ter bevestiging van een antwoord invullen en versturen
@@ -31,14 +33,14 @@ class VraagIngevuld : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_vraag_ingevuld, container, false)
 
-        view.findViewById<Button>(R.id.btnOke).setOnClickListener {
-            if (parent.questionNr != parent.questions?.size) {
-                parent.setFragment(Kaart.newInstance(), R.id.fragment)
+        view.find<Button>(R.id.btnOke).setOnClickListener {
+            if (parent.questionNr != parent.questions.size) {
                 parent.removeFragment(this)
             } else {
                 parent.setFragment(EindeSpel.newInstance(), R.id.fragment2)
             }
         }
+
         return view
     }
 
