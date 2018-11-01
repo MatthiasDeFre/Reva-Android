@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.fragments.vragenOplossen.Kaart
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
@@ -22,13 +23,18 @@ class VragenOplossen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vragen_oplossen)
-
-        setFragment(VraagInvullen.newInstance())
+        setFragment(Kaart.newInstance(), R.id.fragment)
     }
 
-    fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment, int: Int) {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment, fragment)
+        fragmentTransaction.replace(int, fragment)
+        fragmentTransaction.commit()
+    }
+
+    fun removeFragment(fragment: Fragment) {
+        var fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.remove(fragment)
         fragmentTransaction.commit()
     }
 

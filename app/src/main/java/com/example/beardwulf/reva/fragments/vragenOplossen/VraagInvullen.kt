@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
@@ -36,7 +37,13 @@ class VraagInvullen : Fragment() {
 
         view.find<Button>(R.id.btnVulIn).setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
-                parent.setFragment(VraagIngevuld.newInstance())
+                parent.setFragment(VraagIngevuld.newInstance(), R.id.fragment2)
+
+                view.find<Button>(R.id.btnVulIn).isEnabled = false
+                view.find<Button>(R.id.btnVulIn).alpha = 0.4F
+
+                view.find<EditText>(R.id.txtInput).isEnabled = false;
+                view.find<EditText>(R.id.txtInput).alpha = 0.4F
             } else {
                 Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }
