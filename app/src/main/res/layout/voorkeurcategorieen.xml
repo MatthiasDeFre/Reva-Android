@@ -67,7 +67,6 @@
             android:textColor="#FFF"
             android:textSize="18dp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/cmdNext"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button

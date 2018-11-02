@@ -18,13 +18,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnVraag"
-        android:layout_width="125dp"
-        android:layout_height="69dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginBottom="16dp"
-        android:text="Vraag"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dark_shape"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingEnd="28dp"
+        android:paddingStart="28dp"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/txtStandnaam"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.65"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_vertical"
+            android:text="1. Standnaam"
+            android:textColor="#FFF"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnVraag"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="18dp"
+            android:layout_weight="0.35"
+            android:fontFamily="@font/montserrat"
+            android:background="@drawable/buttonlayoutlightblue"
+            android:text="@string/vraag"
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

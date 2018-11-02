@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.fragments.EindeSpel
 import com.example.beardwulf.reva.fragments.vragenOplossen.Kaart
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
@@ -19,6 +20,11 @@ class VragenOplossen : AppCompatActivity() {
             "Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)",
             "Hoeveel kost de nieuwste kruk van VIGO?"
     )
+
+    lateinit var kaart: Kaart
+    lateinit var vraagInvullen: VraagInvullen
+    lateinit var vraagIngevuld: VraagIngevuld
+    lateinit var eindeSpel: EindeSpel
 
     /**
      * Opent de fragment voor het tonen en beantwoorden van een vraag
