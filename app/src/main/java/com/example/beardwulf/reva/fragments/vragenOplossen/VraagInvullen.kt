@@ -35,15 +35,16 @@ class VraagInvullen : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
 
-        view.find<Button>(R.id.btnVulIn).setOnClickListener {
+        //btnVulIn
+        btnVulIn.setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
                 parent.setFragment(VraagIngevuld.newInstance(), R.id.fragment2)
 
-                view.find<Button>(R.id.btnVulIn).isEnabled = false
+                btnVulIn.isEnabled = false
                 view.find<Button>(R.id.btnVulIn).alpha = 0.4F
 
-                view.find<EditText>(R.id.txtInput).isEnabled = false;
-                view.find<EditText>(R.id.txtInput).alpha = 0.4F
+                txtInput.isEnabled = false;
+                txtInput.alpha = 0.4F
             } else {
                 Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }

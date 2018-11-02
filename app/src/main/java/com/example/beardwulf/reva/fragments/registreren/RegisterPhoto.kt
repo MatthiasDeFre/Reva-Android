@@ -22,7 +22,7 @@ import org.jetbrains.anko.find
 
 class RegisterPhoto : Fragment() {
 
-    private val MY_CAMERA_PERMISSION_CODE = 100;
+    //private val MY_CAMERA_PERMISSION_CODE = 100;
     private val CAMERA_REQUEST = 1888;
 
     lateinit var parent: Registreren
@@ -34,8 +34,8 @@ class RegisterPhoto : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
-        view.find<ImageView>(R.id.photoViewer).setImageBitmap(Registreren.photo)
-        //photoViewer.setImageBitmap(Registreren.photo)
+        //view.find<ImageView>(R.id.photoViewer)
+        photoViewer.setImageBitmap(Registreren.photo)
 
         parent = (activity as Registreren)
 

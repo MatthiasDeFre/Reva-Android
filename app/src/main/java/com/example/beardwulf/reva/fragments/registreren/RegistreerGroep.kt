@@ -26,7 +26,8 @@ class RegistreerGroep : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
 
-        view.find<Button>(R.id.cmdNaarCategorie).setOnClickListener {
+        //view.find<Button>(R.id.cmdNaarCategorie)
+        cmdNaarCategorie.setOnClickListener {
             var intent = Intent(activity, VoorkeurCategorieen::class.java)
             startActivity(intent)
         }

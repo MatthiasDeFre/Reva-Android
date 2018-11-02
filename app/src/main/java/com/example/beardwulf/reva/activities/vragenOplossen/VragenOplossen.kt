@@ -15,7 +15,10 @@ import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 class VragenOplossen : AppCompatActivity() {
 
     var questionNr = 0
-    var questions = arrayOf("Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)", "Hoeveel kost de nieuwste kruk van VIGO?")
+    var questions = arrayOf(
+            "Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)",
+            "Hoeveel kost de nieuwste kruk van VIGO?"
+    )
 
     /**
      * Opent de fragment voor het tonen en beantwoorden van een vraag

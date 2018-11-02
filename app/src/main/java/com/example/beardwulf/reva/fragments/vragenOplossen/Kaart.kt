@@ -12,6 +12,7 @@ import android.widget.Toast
 
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
+import kotlinx.android.synthetic.main.fragment_kaart.*
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
 
@@ -27,7 +28,8 @@ class Kaart : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_kaart, container, false)
 
-        view.find<Button>(R.id.btnVraag).setOnClickListener {
+        //view.find<Button>(R.id.btnVraag)
+        btnVraag.setOnClickListener {
             parent.setFragment(VraagInvullen.newInstance(), R.id.fragment)
         }
 
