@@ -29,6 +29,13 @@ class Kaart : Fragment() {
         val view = inflater.inflate(R.layout.fragment_kaart, container, false)
 
         //view.find<Button>(R.id.btnVraag)
+
+
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)
@@ -36,10 +43,8 @@ class Kaart : Fragment() {
         }
 
         if (parent.questionNr == parent.questions.size) {
-            view.find<Button>(R.id.btnVraag).isEnabled = false
+            btnVraag.isEnabled = false
         }
-
-        return view
     }
 
     companion object {

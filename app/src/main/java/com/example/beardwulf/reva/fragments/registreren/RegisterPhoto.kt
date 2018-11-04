@@ -31,7 +31,7 @@ class RegisterPhoto : Fragment() {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
         //view.find<ImageView>(R.id.photoViewer)
-        photoViewer.setImageBitmap(Registreren.photo)
+        //photoViewer.setImageBitmap(Registreren.photo)
 
         parent = (activity as Registreren)
 
@@ -45,6 +45,7 @@ class RegisterPhoto : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        photoViewer.setImageBitmap(Registreren.photo)
         cmdNeemFoto.setOnClickListener {
             var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);

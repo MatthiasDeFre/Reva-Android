@@ -27,12 +27,17 @@ class RegistreerGroep : Fragment() {
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
 
         //view.find<Button>(R.id.cmdNaarCategorie)
+
+
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
         cmdNaarCategorie.setOnClickListener {
             var intent = Intent(activity, VoorkeurCategorieen::class.java)
             startActivity(intent)
         }
-
-        return view
     }
 
     companion object {

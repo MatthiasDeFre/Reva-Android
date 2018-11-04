@@ -36,12 +36,24 @@ class VraagInvullen : Fragment() {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
 
         //btnVulIn
+
+
+        view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
+        view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
+
+        parent.questionNr++
+
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
         btnVulIn.setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
                 parent.setFragment(Kaart.newInstance(), R.id.fragment)
 
                 btnVulIn.isEnabled = false
-                view.find<Button>(R.id.btnVulIn).alpha = 0.4F
+                btnVulIn.alpha = 0.4F
 
                 txtInput.isEnabled = false;
                 txtInput.alpha = 0.4F
@@ -52,13 +64,6 @@ class VraagInvullen : Fragment() {
                 Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
             }
         }
-
-        view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
-        view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
-
-        parent.questionNr++
-
-        return view
     }
 
     companion object {
