@@ -58,12 +58,13 @@ class Kaart : Fragment() {
         var beacon = ImageView(parent)
         var xCo = exhibitor.coordinates.first
         var yCo = exhibitor.coordinates.second
-        System.out.println("" + xCo + " - " + yCo)
-        //var yPosition = (imageKaart.drawable.intrinsicHeight / 10 * yCo).toFloat()
         var xPosition = (imageKaart.drawable.intrinsicWidth  / 50 * xCo).toFloat()
-        var yPosition = xPosition
-        //yPosition = 110.toFloat()
-        //xPosition = 110.toFloat()
+
+        var coords = IntArray(2)
+        imageKaart.getLocationInWindow(coords)
+        var yPosition = xPosition + coords[1]
+        System.out.println(imageKaart.y)
+
         System.out.println("" + xPosition + " - " + yPosition)
         beacon.setImageDrawable(resources.getDrawable(R.drawable.beacon))
 

@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/KaartConstraintLayout"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.vragenOplossen.Kaart">
@@ -14,26 +14,39 @@
         android:layout_height="match_parent">
         -->
 
-        <ImageView
-            android:id="@+id/imageKaart"
+    <HorizontalScrollView
+        android:id="@+id/KaartScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/KaartConstraintLayout"
             android:layout_width="wrap_content"
-            android:layout_height="629dp"
-            android:src="@drawable/grondplan"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <!--    <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="124dp"
-                android:layout_marginBottom="220dp"
-                android:src="@drawable/beacon"
+            <ImageView
+                android:id="@+id/imageKaart"
+                android:layout_width="810dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/grondplan"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageKaart" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
+    </HorizontalScrollView>
+    <!--    <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="124dp"
+            android:layout_marginBottom="220dp"
+            android:src="@drawable/beacon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageKaart" />
+
+</LinearLayout>
 -->
     <LinearLayout
         android:layout_width="match_parent"
