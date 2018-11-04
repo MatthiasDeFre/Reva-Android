@@ -14,6 +14,7 @@ class VoorkeurCategorieen : AppCompatActivity() {
 
     var selectedCategorieen: MutableList<VoorkeurCategorie> = ArrayList()
     val categorieen = arrayOf<String>("Hulpmiddelen ADL","Aangepaste kledij","Rolstoelen","Rolstoelen sport","Scooters","Loophulpmiddelen en rampen","Fietsen","Hulpmiddelen voor kinderen","Omgevingsbedineing, Domotica, Besturing","Aangepaste auto's","Tilhulpmiddelen","Huisliften","Vakantie, Reizen sport","Overheidsdiensten","Belangenverenigingen,Zelfhulpgroepen")
+    val aantalCategorieen=1
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,18 +37,18 @@ class VoorkeurCategorieen : AppCompatActivity() {
             }
 
             //Verander gui op basis van selecties
-            if(selectedCategorieen.size >= 10) {
+            if(selectedCategorieen.size >= aantalCategorieen) {
                 cmdNext.isEnabled = true
                 cmdNext.alpha = 1F
             } else{
                 cmdNext.isEnabled = false
                 cmdNext.alpha = 0.4F
             }
-            txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/10 " + getString(R.string.geselecteerd)
+            txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/" + aantalCategorieen + " " + getString(R.string.geselecteerd)
 
         }
 
-        txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/10 " + getString(R.string.geselecteerd)
+        txtAantalGeselecteerd.text = selectedCategorieen.size.toString() + "/" + aantalCategorieen + " " + getString(R.string.geselecteerd)
 
         cmdNext.setOnClickListener{
             startActivity(Intent(this, VragenOplossen::class.java))

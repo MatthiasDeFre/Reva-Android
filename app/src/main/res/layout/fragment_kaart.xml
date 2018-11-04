@@ -2,31 +2,48 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout"
+    android:id="@+id/KaartConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.vragenOplossen.Kaart">
 
     <!-- TODO: Update blank fragment layout -->
+    <!--<LinearLayout
+        android:id="@+id/KaartLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        -->
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="629dp"
-        android:src="@drawable/kaart_voorbeeld"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageKaart"
+            android:layout_width="wrap_content"
+            android:layout_height="629dp"
+            android:src="@drawable/grondplan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!--    <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="124dp"
+                android:layout_marginBottom="220dp"
+                android:src="@drawable/beacon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageKaart" />
+
+    </LinearLayout>
+-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dark_shape"
         android:orientation="horizontal"
-        android:paddingBottom="16dp"
-        android:paddingEnd="28dp"
         android:paddingStart="28dp"
         android:paddingTop="16dp"
+        android:paddingEnd="28dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
@@ -48,11 +65,11 @@
             android:layout_height="50dp"
             android:layout_marginEnd="18dp"
             android:layout_weight="0.35"
-            android:fontFamily="@font/montserrat"
             android:background="@drawable/buttonlayoutlightblue"
+            android:fontFamily="@font/montserrat"
             android:text="@string/vraag"
-            android:textColor="#fff"
             android:textAllCaps="false"
+            android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
