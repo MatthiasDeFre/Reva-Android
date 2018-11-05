@@ -14,7 +14,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background1" />
+        app:srcCompat="@mipmap/background1" />
 
     <TextView
         android:id="@+id/textView"

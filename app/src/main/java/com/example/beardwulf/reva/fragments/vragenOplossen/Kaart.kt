@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -27,7 +28,7 @@ import kotlin.math.exp
 class Kaart : Fragment() {
 
     lateinit var parent: VragenOplossen
-    val beaconSize = 50
+    val beaconSize = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        var exhibitor = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(3, 3))
+        var exhibitor = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(10, 3))
         showNextExhibitor(exhibitor)
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
@@ -55,19 +56,27 @@ class Kaart : Fragment() {
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {
-        var beacon = ImageView(parent)
+        //var beacon = ImageView(parent)
+        if(KaartConstraintLayout.childCount ==2) {
+            KaartConstraintLayout.removeViewAt(1)
+        }
+        var beacon = WebView(parent)
         var xCo = exhibitor.coordinates.first
         var yCo = exhibitor.coordinates.second
-        var xPosition = (imageKaart.drawable.intrinsicWidth  / 50 * xCo).toFloat()
+        //var xPosition = (imageKaart.drawable.intrinsicWidth  / 10 * xCo).toFloat()
+        var xPosition = (imageKaart.layoutParams.width/20*xCo).toFloat()
+        var yPosition = (imageKaart.drawable.intrinsicHeight/8 * yCo).toFloat()
 
-        var coords = IntArray(2)
-        imageKaart.getLocationInWindow(coords)
-        var yPosition = xPosition + coords[1]
-        System.out.println(imageKaart.y)
+        //var coords = IntArray(2)
+        //imageKaart.getLocationInWindow(coords)
+
+        System.out.println(imageKaart.layoutParams.width)
 
         System.out.println("" + xPosition + " - " + yPosition)
-        beacon.setImageDrawable(resources.getDrawable(R.drawable.beacon))
-
+        //beacon.setImageDrawable(resources.getDrawable(R.drawable.beaconbak))
+        beacon.loadUrl("file:///android_asset/beacon.gif")
+        beacon.settings.loadWithOverviewMode=true
+        beacon.settings.useWideViewPort = true
 
         beacon.x = xPosition
         beacon.y = yPosition
