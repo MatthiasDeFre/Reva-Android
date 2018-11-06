@@ -56,23 +56,6 @@ class RegisterPhoto : Fragment() {
         photoViewer.setImageBitmap(Registreren.photo)
     }
 
-    /**
-     * methode is mogelijks vervangbaar. Zou moeten permissie vragen om de camera te gebruiken.
-     * Wordt erchter niet opgeroepen
-     */
-/*    override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode.equals(MY_CAMERA_PERMISSION_CODE)) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(activity, "camera permission granted", Toast.LENGTH_LONG).show();
-                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            } else {
-                Toast.makeText(activity, "camera permission denied", Toast.LENGTH_LONG).show();
-            }
-        }
-    }*/
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             /**

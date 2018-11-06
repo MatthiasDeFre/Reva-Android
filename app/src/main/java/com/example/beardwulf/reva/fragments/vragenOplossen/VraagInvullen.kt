@@ -2,6 +2,7 @@ package com.example.beardwulf.reva.fragments.vragenOplossen
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.beardwulf.reva.Endpoint
 
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.RetrofitClientInstance
+import com.example.beardwulf.reva.activities.MainActivity
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
+import com.example.beardwulf.reva.domain.Exhibitor
+import com.example.beardwulf.reva.domain.Group
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 /**
@@ -35,13 +44,25 @@ class VraagInvullen : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
 
-        //btnVulIn
+        if (MainActivity.group.code == null) {
+            view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
+            view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
+            parent.questionNr++
+        } else {
+            val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
+            val call = service.getExhibitor(MainActivity.group._id!!)
+            call.enqueue(object : Callback<Exhibitor> {
+                override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
+                    view.find<TextView>(R.id.textView2).setText(response.body()!!.question!!.body)
+                    view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
+                    parent.questionNr++
+                }
 
-
-        view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
-        view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
-
-        parent.questionNr++
+                override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
+                    Log.d("Error", t.message)
+                }
+            })
+        }
 
         return view
     }
@@ -50,18 +71,31 @@ class VraagInvullen : Fragment() {
         super.onResume()
         btnVulIn.setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
+                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
+                val call = service.getExhibitor(MainActivity.group._id!!)
+                call.enqueue(object : Callback<Exhibitor> {
+                    override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
+                        Log.d("lolz", response.code().toString())
+                    }
+
+                    override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
+                        Log.d("lolzzzz", t.message)
+                    }
+                })
+
                 parent.setFragment(Kaart.newInstance(), R.id.fragment)
 
-                btnVulIn.isEnabled = false
+/*                btnVulIn.isEnabled = false
                 btnVulIn.alpha = 0.4F
 
                 txtInput.isEnabled = false;
-                txtInput.alpha = 0.4F
+                txtInput.alpha = 0.4F*/
+
                 val vraagIngevuld = VraagIngevuld.newInstance()
                 parent.setFragment(vraagIngevuld, R.id.fragment2)
                 parent.vraagIngevuld = vraagIngevuld
             } else {
-                Toast.makeText(this.context, "Je moet een antwoord invullen!" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Je moet een antwoord invullen!", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,22 +10,21 @@ import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.RetrofitClientInstance
 import com.example.beardwulf.reva.activities.registreren.Registreren
+import com.example.beardwulf.reva.domain.Group
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.activityManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.ref.WeakReference
 import java.util.*
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
-    //lateinit var codes: List<Int>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //codes = listOf(1,2)
 
         btnLogin.setOnClickListener {
             login()
@@ -32,31 +32,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun login() {
-        val code = "qsdfd"
+        //"qsdfd"
+        //"5be19cecdf933a07fe06120c"
 
-        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
-        val call = service.getGroup(code)
-        call.enqueue(object : Callback<Objects> {
-            override fun onResponse(call: Call<Objects>, response: Response<Objects>) {
-                Log.d("lolz", response.code().toString())
-            }
-
-            override fun onFailure(call: Call<Objects>, t: Throwable) {
-                Log.d("lolzzzz", t.message)
-            }
-        })
-
-        val tekst: String
-        if (txtInput.text.toString().equals("1234")
-                /*codes.contains(txtInput.text.toString().toInt())*/) {
-            tekst = getString(R.string.welkom)
-            Toast.makeText(this@MainActivity, tekst, Toast.LENGTH_SHORT).show()
-            val intent: Intent
-            intent = Intent(this, Registreren::class.java)
-            startActivity(intent)
+        if (txtInput.text.toString().equals("1234")) {
+            group = Group("5be19cecdf933a07fe06120c", null,null,null,null,null,null)
+            Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(applicationContext, Registreren::class.java))
         } else {
-            tekst = "Code niet correct"
-            Toast.makeText(this@MainActivity, tekst, Toast.LENGTH_SHORT).show()
+            val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
+            val call = service.getGroup(txtInput.text.toString())
+            call.enqueue(object : Callback<Group> {
+                override fun onResponse(call: Call<Group>, response: Response<Group>) {
+                    if (response.code() == 200) {
+                        var body = response.body()
+                        group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
+                        Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(applicationContext, Registreren::class.java))
+                    } else {
+                        Toast.makeText(this@MainActivity, "Code niet correct", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Group>, t: Throwable) {
+                    Log.d("Error", t.message)
+                }
+            })
         }
+    }
+
+    companion object {
+        lateinit var group: Group
     }
 }

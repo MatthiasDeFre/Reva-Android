@@ -11,18 +11,10 @@ class Question {
     var posted: Date
     @SerializedName("possibleAnswers")
     var possibleAnswers: Array<String>
-    @SerializedName("exhibitor")
-    var exhibitor: Exhibitor
 
-    constructor(body: String, posted: Date, possibleAnswers: Array<String>, exhibitor: Exhibitor) {
+    constructor(body: String, posted: Date, possibleAnswers: Array<String>) {
         this.body=body
         this.posted=posted
         this.possibleAnswers = possibleAnswers
-        this.exhibitor = exhibitor
     }
-
-
-
-
-
 }

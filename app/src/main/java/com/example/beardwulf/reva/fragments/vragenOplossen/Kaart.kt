@@ -42,7 +42,7 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        var exhibitor = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(10, 3))
+        var exhibitor = Exhibitor("Test", "Exhibitor1",1, "Rolstoelen", Pair(10, 3))
         showNextExhibitor(exhibitor)
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
@@ -61,8 +61,8 @@ class Kaart : Fragment() {
             KaartConstraintLayout.removeViewAt(1)
         }
         var beacon = WebView(parent)
-        var xCo = exhibitor.coordinates.first
-        var yCo = exhibitor.coordinates.second
+        var xCo = exhibitor.coordinates!!.first
+        var yCo = exhibitor.coordinates!!.second
         //var xPosition = (imageKaart.drawable.intrinsicWidth  / 10 * xCo).toFloat()
         var xPosition = (imageKaart.layoutParams.width/20*xCo).toFloat()
         var yPosition = (imageKaart.drawable.intrinsicHeight/8 * yCo).toFloat()
