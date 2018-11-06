@@ -6,68 +6,76 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.vragenOplossen.VragenOplossen"
+    android:background="@color/Donkerblauw">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background1" />
+
+
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="500dp"
-        android:layout_height="75dp"
+        android:id="@+id/btnVulIn"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="327dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
-        android:background="@drawable/buttonlayoutclassicblue"
+        android:background="@drawable/buttonlayoutlightblue"
         android:fontFamily="@font/montserrat"
-        android:text="@string/login"
+        android:text="@string/vulIn"
         android:textColor="#FFF"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="#FFF"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtInput"
-        android:layout_width="500dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="327dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
         android:background="@drawable/edittextlayout"
         android:backgroundTint="#FFF"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
-        android:hint="@string/groepscode"
+        android:hint="@string/antwoord"
         android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
-        android:textSize="25sp"
         android:singleLine="true"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@color/Grijs"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintBottom_toTopOf="@+id/btnVulIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="270dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/welkomtekst"
+        android:text="@string/vraag"
         android:textColor="#FFF"
-        android:textSize="60dp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,15 +84,14 @@
         android:id="@+id/textView2"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
+        android:layout_marginTop="104dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/stap0"
         android:textColor="#FFF"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtInput"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>

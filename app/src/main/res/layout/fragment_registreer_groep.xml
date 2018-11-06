@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="280dp"
+        android:layout_width="327dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
@@ -41,6 +41,8 @@
         android:text="@string/groepsnaam"
         android:textColor="#FFF"
         android:textSize="20sp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -58,12 +60,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:backgroundTint="#FFF"
         android:textColor="@color/Grijs"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="280dp"
+        android:layout_width="327dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
@@ -71,16 +75,34 @@
         android:text="@string/groepsleden"
         android:textColor="#FFF"
         android:textSize="20sp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGroepsnaam" />
 
     <EditText
         android:id="@+id/txtGroepsLeden"
         android:layout_width="327dp"
-        android:layout_height="167dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="28dp"
+        android:background="@drawable/edittextlayout"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:backgroundTint="#FFF"
+        android:textSize="20sp"
+        android:textColor="@color/Grijs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    <!--<EditText
+        android:id="@+id/txtGroepsLeden"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:autoSizeTextType="uniform"
         android:background="@drawable/edittextlayout"
         android:fontFamily="@font/montserrat"
         android:gravity="top"
@@ -89,9 +111,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:backgroundTint="#FFF"
         android:textColor="@color/Grijs"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
+        -->
     <Button
         android:id="@+id/cmdNaarCategorie"
         android:layout_width="324dp"
@@ -103,8 +127,7 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/gaverder"
         android:textColor="#FFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         android:visibility="visible"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"

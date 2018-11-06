@@ -30,7 +30,6 @@
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -82,7 +81,6 @@
         android:text="@string/stap0"
         android:textColor="#FFF"
         android:textSize="10sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -2,6 +2,7 @@ package com.example.beardwulf.reva.fragments.vragenOplossen
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
@@ -77,6 +78,7 @@ class Kaart : Fragment() {
         beacon.loadUrl("file:///android_asset/beacon.gif")
         beacon.settings.loadWithOverviewMode=true
         beacon.settings.useWideViewPort = true
+        beacon.setBackgroundColor(Color.TRANSPARENT)
 
         beacon.x = xPosition
         beacon.y = yPosition
