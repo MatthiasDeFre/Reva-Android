@@ -29,7 +29,6 @@
         android:text="@string/login"
         android:textColor="#FFF"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +75,7 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="327dp"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
@@ -84,7 +83,6 @@
         android:text="@string/stap0"
         android:textColor="#FFF"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

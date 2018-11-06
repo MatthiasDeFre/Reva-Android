@@ -24,8 +24,7 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/vulIn"
         android:textColor="#FFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,22 +32,23 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="31dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="145dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat"
         android:textColor="#FFF"
-        android:textSize="40dp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtInput"
         android:layout_width="327dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
         android:background="@drawable/edittextlayout"
@@ -60,22 +60,23 @@
         android:maxLines="1"
         android:padding="10dp"
         android:singleLine="true"
+        android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@color/Grijs"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnVulIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="125dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/vraag"
         android:textColor="#FFF"
-        android:textSize="40dp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -83,14 +84,15 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="327dp"
-        android:layout_height="294dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginTop="104dp"
         android:fontFamily="@font/montserrat"
         android:textColor="#FFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
