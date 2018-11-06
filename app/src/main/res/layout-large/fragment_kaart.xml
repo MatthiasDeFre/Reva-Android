@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.vragenOplossen.Kaart">
 
-  
+
 
     <HorizontalScrollView
         android:id="@+id/KaartScrollView"

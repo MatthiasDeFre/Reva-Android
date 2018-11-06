@@ -93,6 +93,7 @@
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:backgroundTint="#FFF"
+        android:textSize="20sp"
         android:textColor="@color/Grijs"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
