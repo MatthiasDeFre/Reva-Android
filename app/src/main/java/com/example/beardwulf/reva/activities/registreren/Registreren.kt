@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -28,6 +29,7 @@ class Registreren : AppCompatActivity() {
 
         var conf = Bitmap.Config.ARGB_8888
         photo = Bitmap.createBitmap(306, 306, conf)
+        photoUri = Uri.EMPTY
 
         setFragment(RegisterPhoto.newInstance())
     }
@@ -45,6 +47,7 @@ class Registreren : AppCompatActivity() {
          *
          */
         lateinit var photo: Bitmap
+        lateinit var photoUri: Uri
     }
 
 

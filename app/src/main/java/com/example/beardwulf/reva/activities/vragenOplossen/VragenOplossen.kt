@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.domain.Category
+import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.fragments.EindeSpel
 import com.example.beardwulf.reva.fragments.vragenOplossen.Kaart
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
@@ -25,6 +27,7 @@ class VragenOplossen : AppCompatActivity() {
     lateinit var vraagInvullen: VraagInvullen
     lateinit var vraagIngevuld: VraagIngevuld
     lateinit var eindeSpel: EindeSpel
+    lateinit var exhibitors: ArrayList<Exhibitor>
 
     /**
      * Opent de fragment voor het tonen en beantwoorden van een vraag
@@ -33,6 +36,19 @@ class VragenOplossen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vragen_oplossen)
         setFragment(Kaart.newInstance(), R.id.fragment)
+
+        makeExhibitors()
+    }
+
+    private fun makeExhibitors() {
+        exhibitors= ArrayList(2)
+        var exhibitor2 = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(8,5))
+        var exhibitor1 = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(10, 3))
+        var exhibitor0 = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(5, 5))
+        exhibitors.add(exhibitor2)
+        exhibitors.add(exhibitor1)
+        exhibitors.add(exhibitor0)
+
     }
 
     fun setFragment(fragment: Fragment, int: Int) {
@@ -45,6 +61,10 @@ class VragenOplossen : AppCompatActivity() {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.remove(fragment)
         fragmentTransaction.commit()
+    }
+
+    fun currentExhibitor(): Exhibitor {
+        return exhibitors[questionNr]
     }
 
     companion object {

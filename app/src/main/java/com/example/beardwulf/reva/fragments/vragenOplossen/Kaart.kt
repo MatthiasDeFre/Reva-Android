@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.activities.registreren.Registreren
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Category
 import com.example.beardwulf.reva.domain.Exhibitor
@@ -43,8 +44,8 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        var exhibitor = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(10, 3))
-        showNextExhibitor(exhibitor)
+
+        showNextExhibitor(parent.currentExhibitor())
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)
