@@ -42,9 +42,9 @@ class VragenOplossen : AppCompatActivity() {
 
     private fun makeExhibitors() {
         exhibitors= ArrayList(2)
-        var exhibitor2 = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(8,5))
-        var exhibitor1 = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(10, 3))
-        var exhibitor0 = Exhibitor("Test", 0, Category("Rolstoelen"), Pair(5, 5))
+        var exhibitor2 = Exhibitor("1","Test", 0, "Rolstoelen", Pair(8,5))
+        var exhibitor1 = Exhibitor("2","Test", 0, "Rolstoelen", Pair(10, 3))
+        var exhibitor0 = Exhibitor("3","Test", 0, "Rolstoelen", Pair(5, 5))
         exhibitors.add(exhibitor2)
         exhibitors.add(exhibitor1)
         exhibitors.add(exhibitor0)
@@ -63,10 +63,10 @@ class VragenOplossen : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-<<<<<<< HEAD
     fun currentExhibitor(): Exhibitor {
         return exhibitors[questionNr]
-=======
+    }
+
     fun unfocusMap() {
        fragment.alpha = 0.1F
 
@@ -74,7 +74,6 @@ class VragenOplossen : AppCompatActivity() {
 
     fun focusMap(){
         fragment.alpha = 1.0F
->>>>>>> 7970aa4c140d28affdf6cd993e9e5dd569380cfa
     }
 
     companion object {
