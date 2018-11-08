@@ -42,8 +42,8 @@ class VragenOplossen : AppCompatActivity() {
 
     private fun makeExhibitors() {
         exhibitors= ArrayList(2)
-        var exhibitor2 = Exhibitor("1","Test", 0, "Rolstoelen", Pair(8,5))
-        var exhibitor1 = Exhibitor("2","Test", 0, "Rolstoelen", Pair(10, 3))
+        var exhibitor2 = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
+        var exhibitor1 = Exhibitor("Test", "Thuisbezorgwinkel Orona",2, "Rolstoelen Sport", Pair(5,3))
         var exhibitor0 = Exhibitor("3","Test", 0, "Rolstoelen", Pair(5, 5))
         exhibitors.add(exhibitor2)
         exhibitors.add(exhibitor1)

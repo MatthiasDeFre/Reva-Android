@@ -74,10 +74,6 @@ class RegisterPhoto : Fragment() {
         //photoViewer.setImageURI(Registreren.photoUri)
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7970aa4c140d28affdf6cd993e9e5dd569380cfa
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             /**

@@ -45,24 +45,20 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-<<<<<<< HEAD
 
         showNextExhibitor(parent.currentExhibitor())
-=======
-        var exhibitor = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
-        var exhibitor2 = Exhibitor("Test", "Thuisbezorgwinkel Orona",2, "Rolstoelen Sport", Pair(5,3))
 
-        if (parent.questionNr == 0){
-        showNextExhibitor(exhibitor)
+/*
+        if (parent.questionNr == 0) {
+            showNextExhibitor(exhibitor)
         }
 
         if (parent.questionNr > 0)
             showNextExhibitor(exhibitor2)
+*/
+    
 
 
-
-
->>>>>>> 7970aa4c140d28affdf6cd993e9e5dd569380cfa
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)
