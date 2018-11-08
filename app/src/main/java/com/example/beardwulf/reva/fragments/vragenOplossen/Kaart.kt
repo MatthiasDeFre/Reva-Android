@@ -43,8 +43,8 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        var exhibitor = Exhibitor("Test", "Exhibitor1",1, "Rolstoelen", Pair(10, 3))
-        showNextExhibitor(exhibitor)
+        //var exhibitor = Exhibitor("Test", "Exhibitor1",1, "Rolstoelen", Pair(10, 3))
+        showNextExhibitor(parent.exhibitor)
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)

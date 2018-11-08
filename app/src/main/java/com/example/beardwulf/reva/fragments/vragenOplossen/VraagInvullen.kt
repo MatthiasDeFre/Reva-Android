@@ -46,23 +46,11 @@ class VraagInvullen : Fragment() {
 
         if (MainActivity.group.code == null) {
             view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
-            view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
-            parent.questionNr++
         } else {
-            val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
-            val call = service.getExhibitor(MainActivity.group._id!!)
-            call.enqueue(object : Callback<Exhibitor> {
-                override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
-                    view.find<TextView>(R.id.textView2).setText(response.body()!!.question!!.body)
-                    view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
-                    parent.questionNr++
-                }
-
-                override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
-                    Log.d("Error", t.message)
-                }
-            })
+            view.find<TextView>(R.id.textView2).setText(parent.exhibitor.question!!.body)
         }
+        view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
+        parent.questionNr++
 
         return view
     }
@@ -71,7 +59,7 @@ class VraagInvullen : Fragment() {
         super.onResume()
         btnVulIn.setOnClickListener {
             if (txtInput.text.toString().isNotEmpty()) {
-                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
+/*                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
                 val call = service.getExhibitor(MainActivity.group._id!!)
                 call.enqueue(object : Callback<Exhibitor> {
                     override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
@@ -81,7 +69,7 @@ class VraagInvullen : Fragment() {
                     override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
                         Log.d("lolzzzz", t.message)
                     }
-                })
+                })*/
 
                 parent.setFragment(Kaart.newInstance(), R.id.fragment)
 
