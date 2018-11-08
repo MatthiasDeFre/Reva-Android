@@ -20,7 +20,7 @@ class RegisterCategories : Fragment(){
     lateinit var parent: Registreren
     var selectedCategories: MutableList<Category> = ArrayList()
     val categories = arrayOf<String>("Hulpmiddelen ADL","Aangepaste kledij","Rolstoelen","Rolstoelen sport","Scooters","Loophulpmiddelen en rampen","Fietsen","Hulpmiddelen voor kinderen","Omgevingsbedineing, Domotica, Besturing","Aangepaste auto's","Tilhulpmiddelen","Huisliften","Vakantie, Reizen sport","Overheidsdiensten","Belangenverenigingen,Zelfhulpgroepen")
-    val amountOfCategories=1
+    val amountOfCategories=10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

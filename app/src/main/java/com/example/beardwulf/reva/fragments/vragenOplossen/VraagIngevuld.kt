@@ -35,6 +35,7 @@ class VraagIngevuld : Fragment() {
         btnOke.setOnClickListener {
             if (parent.questionNr != parent.questions?.size) {
                 parent.removeFragment(this)
+                parent.focusMap()
             } else {
                 parent.setFragment(EindeSpel.newInstance(), R.id.fragment2)
             }

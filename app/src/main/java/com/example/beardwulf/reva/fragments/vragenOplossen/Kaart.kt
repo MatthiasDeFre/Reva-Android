@@ -31,6 +31,7 @@ class Kaart : Fragment() {
     lateinit var parent: VragenOplossen
     val beaconSize = 100
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as VragenOplossen)
@@ -43,8 +44,19 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        var exhibitor = Exhibitor("Test", "Exhibitor1",1, "Rolstoelen", Pair(10, 3))
+        var exhibitor = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
+        var exhibitor2 = Exhibitor("Test", "Thuisbezorgwinkel Orona",2, "Rolstoelen Sport", Pair(5,3))
+
+        if (parent.questionNr == 0){
         showNextExhibitor(exhibitor)
+        }
+
+        if (parent.questionNr > 0)
+            showNextExhibitor(exhibitor2)
+
+
+
+
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)
@@ -57,6 +69,10 @@ class Kaart : Fragment() {
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {
+
+        txtExhibitorName.setText((parent.questionNr +1).toString() + ". " + exhibitor.name)
+        txtCategoryName.setText(exhibitor.category)
+
         //var beacon = ImageView(parent)
         if(KaartConstraintLayout.childCount ==2) {
             KaartConstraintLayout.removeViewAt(1)

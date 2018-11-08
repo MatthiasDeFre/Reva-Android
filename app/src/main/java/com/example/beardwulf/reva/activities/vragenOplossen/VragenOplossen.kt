@@ -17,8 +17,8 @@ class VragenOplossen : AppCompatActivity() {
 
     var questionNr = 0
     var questions = arrayOf(
-            "Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)",
-            "Hoeveel kost de nieuwste kruk van VIGO?"
+            "Hoeveel kost de nieuwste kruk van VIGO?",
+            "Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)"
     )
 
     lateinit var kaart: Kaart
@@ -45,6 +45,15 @@ class VragenOplossen : AppCompatActivity() {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.remove(fragment)
         fragmentTransaction.commit()
+    }
+
+    fun unfocusMap() {
+       fragment.alpha = 0.1F
+
+    }
+
+    fun focusMap(){
+        fragment.alpha = 1.0F
     }
 
     companion object {
