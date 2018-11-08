@@ -45,8 +45,8 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //var exhibitor = Exhibitor("Test", "Exhibitor1",1, "Rolstoelen", Pair(10, 3))
-        showNextExhibitor(parent.exhibitor)
+        //showNextExhibitor(parent.exhibitor)
+        showNextExhibitor((parent.currentExhibitor()))
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)
@@ -59,6 +59,10 @@ class Kaart : Fragment() {
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {
+
+        txtExhibitorName.setText((parent.questionNr +1).toString() + ". " + exhibitor.name)
+        txtCategoryName.setText(exhibitor.category)
+
         //var beacon = ImageView(parent)
         if(KaartConstraintLayout.childCount ==2) {
             KaartConstraintLayout.removeViewAt(1)

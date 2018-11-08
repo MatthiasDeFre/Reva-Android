@@ -46,7 +46,7 @@ class VragenOplossen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         makeExhibitors()
 
-        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
+/*        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getExhibitor(MainActivity.group._id!!)
         call.enqueue(object : Callback<Exhibitor> {
             override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
@@ -59,7 +59,10 @@ class VragenOplossen : AppCompatActivity() {
             override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
                 Log.d("Error", t.message)
             }
-        })
+        })*/
+
+        setContentView(R.layout.activity_vragen_oplossen)
+        setFragment(Kaart.newInstance(), R.id.fragment)
     }
 
     fun makeExhibitors() {
@@ -91,7 +94,6 @@ class VragenOplossen : AppCompatActivity() {
 
     fun unfocusMap() {
        fragment.alpha = 0.1F
-
     }
 
     fun focusMap(){
