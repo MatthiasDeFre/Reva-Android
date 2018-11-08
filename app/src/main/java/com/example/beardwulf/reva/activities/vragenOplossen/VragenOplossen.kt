@@ -36,6 +36,7 @@ class VragenOplossen : AppCompatActivity() {
     lateinit var vraagIngevuld: VraagIngevuld
     lateinit var eindeSpel: EindeSpel
 
+    lateinit var exhibitors: ArrayList<Exhibitor>
     lateinit var exhibitor: Exhibitor
 
     /**
@@ -43,6 +44,7 @@ class VragenOplossen : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        makeExhibitors()
 
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getExhibitor(MainActivity.group._id!!)
@@ -60,6 +62,17 @@ class VragenOplossen : AppCompatActivity() {
         })
     }
 
+    fun makeExhibitors() {
+        exhibitors= ArrayList(2)
+        var exhibitor2 = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
+        var exhibitor1 = Exhibitor("Test", "Thuisbezorgwinkel Orona",2, "Rolstoelen Sport", Pair(5,3))
+        var exhibitor0 = Exhibitor("3","Test", 0, "Rolstoelen", Pair(5, 5))
+        exhibitors.add(exhibitor2)
+        exhibitors.add(exhibitor1)
+        exhibitors.add(exhibitor0)
+
+    }
+
     fun setFragment(fragment: Fragment, int: Int) {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(int, fragment)
@@ -70,6 +83,19 @@ class VragenOplossen : AppCompatActivity() {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.remove(fragment)
         fragmentTransaction.commit()
+    }
+
+    fun currentExhibitor(): Exhibitor {
+        return exhibitors[questionNr]
+    }
+
+    fun unfocusMap() {
+       fragment.alpha = 0.1F
+
+    }
+
+    fun focusMap(){
+        fragment.alpha = 1.0F
     }
 
     companion object {

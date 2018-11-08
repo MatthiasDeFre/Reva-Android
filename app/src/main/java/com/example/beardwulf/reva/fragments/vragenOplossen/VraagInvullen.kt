@@ -72,6 +72,7 @@ class VraagInvullen : Fragment() {
                 })*/
 
                 parent.setFragment(Kaart.newInstance(), R.id.fragment)
+                parent.unfocusMap()
 
 /*                btnVulIn.isEnabled = false
                 btnVulIn.alpha = 0.4F

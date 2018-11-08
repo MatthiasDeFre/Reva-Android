@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 
 import com.example.beardwulf.reva.R
+import com.example.beardwulf.reva.activities.registreren.Registreren
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Category
 import com.example.beardwulf.reva.domain.Exhibitor
@@ -30,6 +31,7 @@ class Kaart : Fragment() {
 
     lateinit var parent: VragenOplossen
     val beaconSize = 100
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

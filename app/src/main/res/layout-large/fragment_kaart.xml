@@ -37,24 +37,42 @@
         android:layout_height="wrap_content"
         android:background="@drawable/dark_shape"
         android:orientation="horizontal"
-        android:paddingStart="28dp"
+        android:paddingStart="48dp"
         android:paddingTop="32dp"
-        android:paddingEnd="28dp"
+        android:paddingEnd="48dp"
         android:paddingBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/txtStandnaam"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.65"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center_vertical"
-            android:text="1. Standnaam"
-            android:textColor="#FFF"
-            android:textSize="22sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.65">
+            <TextView
+                android:id="@+id/txtExhibitorName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center_vertical"
+                android:text="1. Standnaam"
+                android:textColor="#FFF"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/txtCategoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center_vertical"
+                android:text="@string/categorie"
+                android:textColor="@color/LightGray"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+
+
 
         <Button
             android:id="@+id/btnVraag"
