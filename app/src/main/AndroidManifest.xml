@@ -40,7 +40,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activities.VoorkeurCategorieen" />
         <activity android:name=".activities.vragenOplossen.VragenOplossen" />
         <activity
             android:name=".activities.registreren.Registreren"

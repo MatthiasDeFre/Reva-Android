@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.domain.VoorkeurCategorie
+import com.example.beardwulf.reva.domain.Category
 
 
 /**
@@ -16,14 +16,14 @@ import com.example.beardwulf.reva.domain.VoorkeurCategorie
  * found on https://www.youtube.com/watch?v=KFo1bO05Jho&t=1s
  * implemented by Karel Heyndrickx
  */
-class VoorkeurCategorieLijstAdapter(private var activity: Activity, private var items: ArrayList<VoorkeurCategorie>): BaseAdapter() {
+class CategoryListAdapter(private var activity: Activity, private var items: ArrayList<Category>): BaseAdapter() {
 
 
     private class ViewHolder(row: View?) {
-        var txtCategorienaam: TextView? = null
+        var txtCategoryName: TextView? = null
 
         init {
-            this.txtCategorienaam = row?.findViewById<TextView>(R.id.txtCategorienaam)
+            this.txtCategoryName = row?.findViewById<TextView>(R.id.txtCategoryName)
         }
     }
 
@@ -32,7 +32,7 @@ class VoorkeurCategorieLijstAdapter(private var activity: Activity, private var 
         val viewHolder: ViewHolder
         if (convertView == null) {
             val inflater = activity?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.voorkeurcategorie_rij, null)
+            view = inflater.inflate(R.layout.category_row, null)
             viewHolder = ViewHolder(view)
             view?.tag = viewHolder
         } else {
@@ -40,13 +40,13 @@ class VoorkeurCategorieLijstAdapter(private var activity: Activity, private var 
             viewHolder = view.tag as ViewHolder
         }
 
-        var voorkeurCateogorie = items[position]
-        viewHolder.txtCategorienaam?.text = voorkeurCateogorie.naam
+        var category = items[position]
+        viewHolder.txtCategoryName?.text = category.name
 
         return view as View
     }
 
-    override fun getItem(i: Int): VoorkeurCategorie {
+    override fun getItem(i: Int): Category {
         return items[i]
     }
 

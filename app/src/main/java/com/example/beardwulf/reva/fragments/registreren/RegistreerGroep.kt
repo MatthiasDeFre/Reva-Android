@@ -6,17 +6,17 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.activities.VoorkeurCategorieen
+import com.example.beardwulf.reva.activities.registreren.Registreren
 import kotlinx.android.synthetic.main.fragment_registreer_groep.*
-import org.jetbrains.anko.find
 
 class RegistreerGroep : Fragment() {
     /**
      * Registreer de gegevens van de groep
      * groepsnaam, groepsleden
      */
+    lateinit var parent: Registreren
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +26,7 @@ class RegistreerGroep : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
 
-        //view.find<Button>(R.id.cmdNaarCategorie)
-
+        parent = (activity as Registreren)
 
         return view
     }
@@ -35,8 +34,7 @@ class RegistreerGroep : Fragment() {
     override fun onResume() {
         super.onResume()
         cmdNaarCategorie.setOnClickListener {
-            var intent = Intent(activity, VoorkeurCategorieen::class.java)
-            startActivity(intent)
+            parent.setFragment(RegisterCategories.newInstance())
         }
     }
 

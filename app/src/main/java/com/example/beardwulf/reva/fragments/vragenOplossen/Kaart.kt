@@ -32,6 +32,7 @@ class Kaart : Fragment() {
     lateinit var parent: VragenOplossen
     val beaconSize = 100
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as VragenOplossen)
@@ -44,8 +45,24 @@ class Kaart : Fragment() {
 
     override fun onResume() {
         super.onResume()
+<<<<<<< HEAD
 
         showNextExhibitor(parent.currentExhibitor())
+=======
+        var exhibitor = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
+        var exhibitor2 = Exhibitor("Test", "Thuisbezorgwinkel Orona",2, "Rolstoelen Sport", Pair(5,3))
+
+        if (parent.questionNr == 0){
+        showNextExhibitor(exhibitor)
+        }
+
+        if (parent.questionNr > 0)
+            showNextExhibitor(exhibitor2)
+
+
+
+
+>>>>>>> 7970aa4c140d28affdf6cd993e9e5dd569380cfa
         btnVraag.setOnClickListener {
             if (parent.questionNr != 0)
                 parent.removeFragment(parent.vraagIngevuld)
@@ -58,13 +75,17 @@ class Kaart : Fragment() {
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {
+
+        txtExhibitorName.setText((parent.questionNr +1).toString() + ". " + exhibitor.name)
+        txtCategoryName.setText(exhibitor.category)
+
         //var beacon = ImageView(parent)
         if(KaartConstraintLayout.childCount ==2) {
             KaartConstraintLayout.removeViewAt(1)
         }
         var beacon = WebView(parent)
-        var xCo = exhibitor.coordinates.first
-        var yCo = exhibitor.coordinates.second
+        var xCo = exhibitor.coordinates!!.first
+        var yCo = exhibitor.coordinates!!.second
         //var xPosition = (imageKaart.drawable.intrinsicWidth  / 10 * xCo).toFloat()
         var xPosition = (imageKaart.layoutParams.width/20*xCo).toFloat()
         var yPosition = (imageKaart.drawable.intrinsicHeight/8 * yCo).toFloat()
