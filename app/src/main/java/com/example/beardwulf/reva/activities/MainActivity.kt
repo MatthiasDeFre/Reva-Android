@@ -1,5 +1,5 @@
 package com.example.beardwulf.reva.activities
-
+import com.example.beardwulf.reva.extensions.InputRegex
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -39,30 +39,34 @@ class MainActivity : AppCompatActivity() {
         //"qsdfd"
         //"5be19cecdf933a07fe06120c"
 
-        if (txtInput.text.toString().equals("1234")) {
-            group = Group("5be19cecdf933a07fe06120c", null,null,null,null,null,null)
-            Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext, Registreren::class.java))
-        } else {
-            val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
-            val call = service.getGroup(txtInput.text.toString())
-            call.enqueue(object : Callback<Group> {
-                override fun onResponse(call: Call<Group>, response: Response<Group>) {
-                    if (response.code() == 200) {
-                        var body = response.body()
-                        group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
-                        Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(applicationContext, Registreren::class.java))
-                    } else {
-                        Toast.makeText(this@MainActivity, "Code niet correct", Toast.LENGTH_SHORT).show()
+    if(InputRegex.controleerLettersCijfers(txtInput.text.toString())) {
+            if (txtInput.text.toString().equals("1234")) {
+                group = Group("5be19cecdf933a07fe06120c", null, null, null, null, null, null)
+                Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(applicationContext, Registreren::class.java))
+            } else {
+                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
+                val call = service.getGroup(txtInput.text.toString())
+                call.enqueue(object : Callback<Group> {
+                    override fun onResponse(call: Call<Group>, response: Response<Group>) {
+                        if (response.code() == 200) {
+                            var body = response.body()
+                            group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
+                            Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(applicationContext, Registreren::class.java))
+                        } else {
+                            Toast.makeText(this@MainActivity, "Code niet correct", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<Group>, t: Throwable) {
-                    Log.d("Error", t.message)
-                }
-            })
-        }
+                    override fun onFailure(call: Call<Group>, t: Throwable) {
+                        Log.d("Error", t.message)
+                    }
+                })
+            }
+        }else{
+        Toast.makeText(this@MainActivity, "Voer enkel cijfers en letters in aub", Toast.LENGTH_SHORT).show()
+    }
     }
 
     companion object {
