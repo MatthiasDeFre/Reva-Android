@@ -6,8 +6,8 @@ import retrofit2.Retrofit
 
 class RetrofitClientInstance {
     private var retrofit: Retrofit? = null
-    private val BASE_URL = "http://projecten3studserver08.westeurope.cloudapp.azure.com"
-
+   // private val BASE_URL = "http://projecten3studserver08.westeurope.cloudapp.azure.com"
+   private val BASE_URL = "http://10.0.2.2:3000"
     fun getRetrofitInstance(): Retrofit? {
         if (retrofit == null) {
             retrofit = retrofit2.Retrofit.Builder()

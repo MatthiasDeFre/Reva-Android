@@ -26,6 +26,7 @@ import android.content.ContentResolver
 import java.net.SocketOption
 import android.content.ContentValues
 import android.R.attr.thumbnail
+import com.example.beardwulf.reva.interfaces.RegisterCallbacks
 
 
 class RegisterPhoto : Fragment() {
@@ -36,8 +37,10 @@ class RegisterPhoto : Fragment() {
     lateinit var image: Uri
     lateinit var values: ContentValues
 
-    lateinit var parent: Registreren
+    lateinit var parent: RegisterCallbacks
 
+    lateinit var photo : Bitmap
+    lateinit var photoUri : Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,8 +50,9 @@ class RegisterPhoto : Fragment() {
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
         //view.find<ImageView>(R.id.photoViewer)
 //        photoViewer.setImageBitmap(Registreren.photo)
-
-        parent = (activity as Registreren)
+        var conf = Bitmap.Config.ARGB_8888
+        photo = Bitmap.createBitmap(306, 306, conf)
+        parent = (activity as RegisterCallbacks)
 
         return view
     }
@@ -60,18 +64,17 @@ class RegisterPhoto : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        photoViewer.setImageBitmap(Registreren.photo)
-        //photoViewer.setImageURI(Registreren.photoUri)
         cmdNeemFoto.setOnClickListener {
             var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
         }
         cmdVolgende.setOnClickListener {
-            parent.setFragment(RegistreerGroep.newInstance())
+           // parent.setFragment(RegistreerGroep.newInstance())
+            parent.setPhoto(photo = photo);
         }
-        photoViewer.setImageBitmap(Registreren.photo)
-        //photoViewer.setImageURI(Registreren.photoUri)
+       photoViewer.setImageBitmap(photo)
+        //photoViewer.setImageURI(photoUri)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -82,7 +85,7 @@ class RegisterPhoto : Fragment() {
              */
             var foto = data?.extras?.get("data") as Bitmap
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
-            Registreren.photo = foto
+            photo = foto
             cmdVolgende.setEnabled(true);
             cmdNeemFoto.setText(getString(R.string.fotowijzigen))
         }

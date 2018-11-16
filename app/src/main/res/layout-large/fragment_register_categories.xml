@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/background1" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/textView"

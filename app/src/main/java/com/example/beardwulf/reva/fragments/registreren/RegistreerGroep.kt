@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.registreren.Registreren
+import com.example.beardwulf.reva.interfaces.RegisterCallbacks
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_registreer_groep.*
 
@@ -18,7 +19,7 @@ class RegistreerGroep : Fragment() {
      * Registreer de gegevens van de groep
      * groepsnaam, groepsleden
      */
-    lateinit var parent: Registreren
+    lateinit var parent: RegisterCallbacks
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,7 @@ class RegistreerGroep : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
 
-        parent = (activity as Registreren)
+        parent = (activity as RegisterCallbacks)
 
         return view
     }
@@ -38,9 +39,10 @@ class RegistreerGroep : Fragment() {
         super.onResume()
             cmdNaarCategorie.setOnClickListener {
                 if (InputRegex.controleerLettersCijfers(txtGroepsnaam.text.toString())) {
-                        parent.setFragment(RegisterCategories.newInstance())
+                        parent.setNameAndDescription(name = txtGroepsnaam.text.toString(), description = txtGroepsLeden.text.toString())
+                        //parent.setFragment(RegisterCategories.newInstance())
                 } else {
-                    Toast.makeText(parent, "groepsnaam: enkel letters en cijfers aub", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(parent, "groepsnaam: enkel letters en cijfers aub", Toast.LENGTH_SHORT).show()
                 }
             }
     }
