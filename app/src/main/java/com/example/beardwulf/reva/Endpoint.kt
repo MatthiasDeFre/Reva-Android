@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva
 
+import android.graphics.Bitmap
 import com.example.beardwulf.reva.domain.Category
 import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.domain.Group
@@ -28,6 +29,9 @@ interface Endpoint {
 
     @POST("API/student/answer/{group}")
     @FormUrlEncoded
-    fun postAnwser(@Path("group") group: String, @Body answer : String): Call<Group>
+    fun postAnwser(@Path("group") group: String, @Field("answer") answer : String): Call<Group>
 
+    @POST("API/student/answerPhoto/{group}")
+    @Multipart
+    fun postAnwser(@Path("group") group : String, @Part photo : MultipartBody.Part): Call<Group>
 }

@@ -13,6 +13,7 @@ import com.example.beardwulf.reva.fragments.registreren.RegisterPhoto
 import com.example.beardwulf.reva.fragments.registreren.RegistreerGroep
 import com.example.beardwulf.reva.interfaces.RegisterCallbacks
 import android.content.Intent
+import android.provider.MediaStore
 import android.util.Log
 import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.RetrofitClientInstance
@@ -52,11 +53,10 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
     override fun setCategories(categories: List<Category>) {
         //SET CATEGORIES
         val group = (applicationContext as testApplicationClass).group
-        val f = File(cacheDir, "groupImage.jpeg")
-        f.createNewFile()
+        val f = File(cacheDir, "groupImage.png")
         val outputStream : FileOutputStream = FileOutputStream(f)
         val byteArrayOutputStream = ByteArrayOutputStream()
-        photo.compress(Bitmap.CompressFormat.JPEG, 30 /*ignored for PNG*/, byteArrayOutputStream);
+        photo.compress(Bitmap.CompressFormat.PNG, 30 /*ignored for PNG*/, byteArrayOutputStream);
         val bitmapdata = byteArrayOutputStream.toByteArray()
 
         outputStream.write(bitmapdata)
@@ -65,12 +65,11 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
        // val f = File(this.getCacheDir(), "groupFoto")
         val filePart = MultipartBody.Part.createFormData("groupImage", f.name, RequestBody.create(MediaType.parse("image/*"), f))
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
-        val call = service.registerGroup("5be6fc1db462e609c073e68d", filePart,group.description, group.name,ArrayList<Category>())
+        val call = service.registerGroup((application as testApplicationClass).group._id, filePart,group.description, group.name,ArrayList<Category>())
         println(filePart)
        call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
                // val group = Group(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
-
                 startActivity(Intent(applicationContext,VragenOplossen::class.java))
             }
 
@@ -87,8 +86,14 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
         (applicationContext as testApplicationClass).group.description = description
         setFragment(RegisterCategories.newInstance())
     }
-    override fun setPhoto(photo: Bitmap) {
+    override fun getPhoto(imageUri : Uri) : Bitmap {
+        print(imageUri)
+        return MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+    }
+
+    override fun setPhoto(photo: Bitmap, photoUri : Uri) {
         //SET PHOTO OF GROUP
+        this.photoUri = photoUri
         this.photo = photo
         setFragment(RegistreerGroep.newInstance())
     }

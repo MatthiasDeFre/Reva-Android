@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
+import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.fragments.EindeSpel
+import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.fragment_vraag_ingevuld.*
 
 /**
@@ -15,11 +17,11 @@ import kotlinx.android.synthetic.main.fragment_vraag_ingevuld.*
  */
 class VraagIngevuld : Fragment() {
 
-    lateinit var parent: VragenOplossen
+    lateinit var parent: QuestionCallbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as VragenOplossen)
+        parent = (activity as QuestionCallbacks)
     }
 
     /**
@@ -33,12 +35,7 @@ class VraagIngevuld : Fragment() {
     override fun onResume() {
         super.onResume()
         btnOke.setOnClickListener {
-            if (parent.questionNr != parent.questions?.size) {
-                parent.removeFragment(this)
-                parent.focusMap()
-            } else {
-                parent.setFragment(EindeSpel.newInstance(), R.id.fragment2)
-            }
+            parent.determineNextMove()
         }
     }
 

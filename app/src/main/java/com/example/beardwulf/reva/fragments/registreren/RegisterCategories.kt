@@ -34,10 +34,7 @@ class RegisterCategories : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_register_categories, container, false)
-
-
         parent = (activity as Registreren)
-
         return view
     }
     override fun onResume() {
