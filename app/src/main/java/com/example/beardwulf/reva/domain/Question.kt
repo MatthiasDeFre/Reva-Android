@@ -13,11 +13,14 @@ class Question {
     var possibleAnswers: Array<String>
     @SerializedName("counter")
     var counter : Int
+    @SerializedName("type")
+    var type : QuestionType
 
-    constructor(body: String, posted: Date, possibleAnswers: Array<String>, counter : Int) {
+    constructor(body: String, posted: Date, possibleAnswers: Array<String>, counter : Int, type : QuestionType) {
         this.body=body
         this.posted=posted
         this.possibleAnswers = possibleAnswers
         this.counter = counter
+        this.type = type
     }
 }

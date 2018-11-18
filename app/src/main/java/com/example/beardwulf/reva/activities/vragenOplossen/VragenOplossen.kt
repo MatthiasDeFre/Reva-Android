@@ -14,6 +14,7 @@ import com.example.beardwulf.reva.RetrofitClientInstance
 import com.example.beardwulf.reva.activities.MainActivity
 import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.domain.Group
+import com.example.beardwulf.reva.domain.QuestionType
 import com.example.beardwulf.reva.domain.testApplicationClass
 import com.example.beardwulf.reva.fragments.EindeSpel
 import com.example.beardwulf.reva.fragments.vragenOplossen.Kaart
@@ -33,6 +34,9 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import com.google.gson.Gson
+
+
 
 /**
  * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
@@ -40,7 +44,7 @@ import java.io.FileOutputStream
 class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
 
     var questionNr = 0
-    override var maxQuestion = 4
+    override var maxQuestion = 5
     var questions = arrayOf(
             "Hoeveel spelers zijn er op het veld tijdens een wedstrijd rolstoelbasketbal? (Beide ploegen samen opgeteld)",
             "Hoeveel kost de nieuwste kruk van VIGO?"
@@ -119,7 +123,9 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         val call = service.getExhibitor((applicationContext as testApplicationClass).group._id!!)
         call.enqueue(object : Callback<Exhibitor> {
             override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
-                currentExhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
+                currentExhibitor = response.body()!!
+                Log.d("currentExhibitor", Gson().toJson(response))
+                //currentExhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
                 setContentView(R.layout.activity_vragen_oplossen)
                 setFragment(Kaart.newInstance(), R.id.fragment)
             }
@@ -185,7 +191,10 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
     override fun setNextQuestion() {
         if (!firstQuestion)
             removeFragment(vraagIngevuld)
-        setFragment(VraagInvullenFoto.newInstance(), R.id.fragment)
+        if(currentExhibitor.question.type == QuestionType.TEXT)
+            setFragment(VraagInvullen.newInstance(), R.id.fragment)
+        else
+            setFragment(VraagInvullenFoto.newInstance(), R.id.fragment)
     }
 
     override fun determineNextMove() {
