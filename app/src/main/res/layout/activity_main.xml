@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:layout_width="388dp"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +37,12 @@
 
     <EditText
         android:id="@+id/txtInput"
+
         android:layout_width="327dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginStart="28dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/edittextlayout"
         android:backgroundTint="#FFF"
         android:fontFamily="@font/montserrat"
@@ -50,10 +51,10 @@
         android:inputType="text"
         android:maxLines="1"
         android:padding="10dp"
-        android:textSize="20sp"
         android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@color/Grijs"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

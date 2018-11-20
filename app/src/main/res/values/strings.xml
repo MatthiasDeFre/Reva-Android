@@ -21,10 +21,12 @@
     <string name="allesIngevuld">Alle vragen werden ingevuld.</string>
     <string name="klaar">Jullie zijn klaar!</string>
     <string name="groepsnaam">Groepsnaam:</string>
+    <string name="textboxgroepsnaam">De octopusesen</string>
     <string name="groepsleden">Groepsleden:</string>
+    <string name="textboxgroepsleden">Cédric, Jens, Jelle </string>
     <string name="antwoordVerzonden">Het antwoord werd goed verzonden. Ga nu naar het volgende standje.</string>
     <string name="antwoord">Antwoord</string>
-    <string name="groepscode">Groepscode</string>
+    <string name="groepscode">qsdfd</string>
     <string name="ok">OK</string>
     <string name="categorie">Categorie</string>
 </resources>
