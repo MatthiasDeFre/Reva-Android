@@ -50,7 +50,7 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
         fragmentTransaction.commit()
     }
 
-    override fun setCategories(categories: List<Category>) {
+    override fun setCategories(categories: List<String>) {
         //SET CATEGORIES
         val group = (applicationContext as testApplicationClass).group
         val f = File(cacheDir, "groupImage.png")
@@ -64,9 +64,13 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
         outputStream.close()
        // val f = File(this.getCacheDir(), "groupFoto")
         val filePart = MultipartBody.Part.createFormData("groupImage", f.name, RequestBody.create(MediaType.parse("image/*"), f))
+        var categoriesBody = ArrayList<RequestBody>()
+        categories.forEach {c ->
+            categoriesBody.add(RequestBody.create(MediaType.parse("text/plain"), c));
+        }
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
-        val call = service.registerGroup((application as testApplicationClass).group._id, filePart,group.description, group.name,ArrayList<Category>())
-        println(filePart)
+        val call = service.registerGroup((application as testApplicationClass).group._id, filePart,group.description, group.name,categoriesBody)
+
        call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
                // val group = Group(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)

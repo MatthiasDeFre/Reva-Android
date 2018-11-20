@@ -8,5 +8,5 @@ interface RegisterCallbacks {
     fun setNameAndDescription(name : String, description : String)
     fun setPhoto(photo : Bitmap, photoUri : Uri)
     fun getPhoto(imageUri : Uri) : Bitmap
-    fun setCategories(categories : List<Category>)
+    fun setCategories(categories : List<String>)
 }

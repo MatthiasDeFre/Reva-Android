@@ -20,9 +20,12 @@ interface Endpoint {
     @GET("/API/student/group/{code}")
     fun getGroup(@Path("code") code: String): Call<Group>
 
+    @GET("/API/student/categories")
+    fun getCategories(): Call<ArrayList<String>>
+
     @POST("/API/student/register/{group}")
     @Multipart
-    fun registerGroup(@Path("group") group: String, @Part groupImage: MultipartBody.Part, @Part("description") description: String?, @Part("name") name: String?, @Part("categories") categories: ArrayList<Category>): Call<Group>
+    fun registerGroup(@Path("group") group: String, @Part groupImage: MultipartBody.Part, @Part("description") description: String?, @Part("name") name: String?, @Part("categories") categories: ArrayList<RequestBody>): Call<Group>
 
     @POST("/API/student/exhibitor/{group}")
     fun getExhibitor(@Path("group") group: String): Call<Exhibitor>

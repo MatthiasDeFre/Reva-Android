@@ -1,7 +1,12 @@
 package com.example.beardwulf.reva
 
+import com.example.beardwulf.reva.domain.Coordinate
+import com.google.gson.GsonBuilder
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
+import com.google.gson.Gson
+
+
 
 
 class RetrofitClientInstance {
@@ -10,9 +15,13 @@ class RetrofitClientInstance {
    private val BASE_URL = "http://10.0.2.2:3000"
     fun getRetrofitInstance(): Retrofit? {
         if (retrofit == null) {
+            val gson = GsonBuilder()
+                    .registerTypeAdapter(Coordinate::class.java, GenericDeserializer<Coordinate>())
+                    .create()
             retrofit = retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(StringConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build()
         }
         return retrofit
