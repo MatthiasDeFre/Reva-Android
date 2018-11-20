@@ -2,6 +2,7 @@ package com.example.beardwulf.reva.fragments.vragenOplossen
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.example.beardwulf.reva.extensions.InputRegex
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +59,7 @@ class VraagInvullen : Fragment() {
     override fun onResume() {
         super.onResume()
         btnVulIn.setOnClickListener {
-            if (txtInput.text.toString().isNotEmpty()) {
+            if (InputRegex.controleerLettersCijfers(txtInput.text.toString())) {
 /*                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
                 val call = service.getExhibitor(MainActivity.group._id!!)
                 call.enqueue(object : Callback<Exhibitor> {
@@ -84,7 +85,7 @@ class VraagInvullen : Fragment() {
                 parent.setFragment(vraagIngevuld, R.id.fragment2)
                 parent.vraagIngevuld = vraagIngevuld
             } else {
-                Toast.makeText(this.context, "Je moet een antwoord invullen!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Enkel tekst invullen aub", Toast.LENGTH_SHORT).show()
             }
         }
     }
