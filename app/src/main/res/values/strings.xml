@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">REVA</string>
     <string name="welkomtekst">Welkom bij \nReva</string>
+    <string name="welkomtekstL">Welkom bij Reva</string>
     <string name="stap3">Laatste stap: selecteer 10 van jullie favoriete categorieën</string>
     <string name="maakfoto">Foto nemen</string>
     <string name="gaverder">Verder</string>

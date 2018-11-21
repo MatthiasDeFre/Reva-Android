@@ -22,7 +22,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,8 +44,6 @@
         <activity
             android:name=".activities.registreren.Registreren"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
-
             ></activity>
     </application>
 
