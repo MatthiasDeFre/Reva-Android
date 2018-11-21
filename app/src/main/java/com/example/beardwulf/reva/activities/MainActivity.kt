@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
             login()
         }
 
-        btnVulCodeIn.setOnClickListener {
-            txtInput.setText("qsdfd")
-        }
+//        btnVulCodeIn.setOnClickListener {
+  //          txtInput.setText("qsdfd")
+    //    }
     }
 
     fun login() {
