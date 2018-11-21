@@ -19,6 +19,7 @@ import com.example.beardwulf.reva.activities.MainActivity
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.domain.Group
+import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
 import retrofit2.Call
@@ -31,11 +32,11 @@ import retrofit2.Response
  */
 class VraagInvullen : Fragment() {
 
-    lateinit var parent: VragenOplossen
+    lateinit var parent: QuestionCallbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as VragenOplossen)
+        parent = (activity as QuestionCallbacks)
     }
 
     /**
@@ -45,19 +46,13 @@ class VraagInvullen : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
 
-        if (MainActivity.group.code == null) {
-            view.find<TextView>(R.id.textView2).setText(parent.questions[parent.questionNr])
-        } else {
-            view.find<TextView>(R.id.textView2).setText(parent.exhibitor.question!!.body)
-        }
-        view.find<TextView>(R.id.textView3).setText((parent.questionNr + 1).toString())
-        parent.questionNr++
-
         return view
     }
 
     override fun onResume() {
         super.onResume()
+        textView2.text = parent.currentExhibitor.question.body
+        textView3.text = (parent.currentExhibitor.question.counter).toString()
         btnVulIn.setOnClickListener {
             if (InputRegex.controleerLettersCijfers(txtInput.text.toString())) {
 /*                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
@@ -71,8 +66,8 @@ class VraagInvullen : Fragment() {
                         Log.d("lolzzzz", t.message)
                     }
                 })*/
-
-                parent.setFragment(Kaart.newInstance(), R.id.fragment)
+                 parent.setAnswer(txtInput.text.toString())
+              /*  parent.setFragment(Kaart.newInstance(), R.id.fragment)
                 parent.unfocusMap()
 
 /*                btnVulIn.isEnabled = false
@@ -82,8 +77,8 @@ class VraagInvullen : Fragment() {
                 txtInput.alpha = 0.4F*/
 
                 val vraagIngevuld = VraagIngevuld.newInstance()
-                parent.setFragment(vraagIngevuld, R.id.fragment2)
-                parent.vraagIngevuld = vraagIngevuld
+                parent.setFragment(vraagIngevuld, R.id.fragment2)*/
+               // parent.vraagIngevuld = vraagIngevuld
             } else {
                 Toast.makeText(this.context, "Enkel tekst invullen aub", Toast.LENGTH_SHORT).show()
             }

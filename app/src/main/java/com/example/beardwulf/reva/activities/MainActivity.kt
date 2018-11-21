@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
                 if (response.code() == 200) {
                     var body = response.body()
-                    group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
+                    var group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
                     var test = applicationContext as testApplicationClass
                     test.group = group;
                     Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
@@ -73,7 +73,4 @@ class MainActivity : AppCompatActivity() {
     }
     }
 
-    companion object {
-        lateinit var group: Group
-    }
 }

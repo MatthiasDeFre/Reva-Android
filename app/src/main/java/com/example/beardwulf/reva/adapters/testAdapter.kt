@@ -10,7 +10,7 @@ import com.example.beardwulf.reva.R
 import kotlinx.android.synthetic.main.category_row.view.*
 import org.jetbrains.anko.backgroundColor
 
-class testAdapter(private val cats : MutableList<Category>, private val onClickListener: View.OnClickListener, private val myDataset: ArrayList<Category>) :
+class testAdapter(private val cats : MutableList<String>, private val onClickListener: View.OnClickListener, private val myDataset: List<String>) :
         RecyclerView.Adapter<testAdapter.testAdapterViewHoder>() {
 
     // Provide a reference to the views for each data item
@@ -38,12 +38,12 @@ class testAdapter(private val cats : MutableList<Category>, private val onClickL
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.textView.txtCategoryName.text = myDataset[position].name;
+        holder.textView.txtCategoryName.text = myDataset[position];
 
         with(holder.itemView) {
 
             tag=myDataset[position]
-            if(cats.contains(tag as Category)) {
+            if(cats.contains(tag as String)) {
                 setBackgroundColor(resources.getColor(R.color.Groen))
             } else {
                 setBackgroundColor(resources.getColor(R.color.Transparant))

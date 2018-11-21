@@ -1,92 +1,88 @@
-package com.example.beardwulf.reva.fragments.registreren
+package com.example.beardwulf.reva.fragments.vragenOplossen
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
+import android.support.v4.content.FileProvider
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.ImageHelper
+
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.activities.registreren.Registreren
-import kotlinx.android.synthetic.main.fragment_register_photo.*
+import com.example.beardwulf.reva.RetrofitClientInstance
+import com.example.beardwulf.reva.activities.MainActivity
+import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
+import com.example.beardwulf.reva.domain.Exhibitor
+import com.example.beardwulf.reva.domain.Group
+import com.example.beardwulf.reva.interfaces.QuestionCallbacks
+import kotlinx.android.synthetic.main.fragment_vraag_invullen_foto.*
 import org.jetbrains.anko.find
-import android.os.StrictMode
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import com.example.beardwulf.reva.R.id.imageView
-import android.R.attr.data
-import android.content.ContentResolver
-import java.net.SocketOption
-import android.content.ContentValues
-import android.R.attr.thumbnail
-import android.os.Environment
-import android.support.v4.content.FileProvider
-import android.util.Log
-import com.example.beardwulf.reva.interfaces.RegisterCallbacks
-import java.io.IOException
 
 
-class RegisterPhoto : Fragment() {
+/**
+ * Fragment voor het tonen van een vraag en inlezen van een antwoord
+ */
+class VraagInvullenFoto : Fragment() {
 
-    //private val MY_CAMERA_PERMISSION_CODE = 100;
-    private val CAMERA_REQUEST = 1888;
-    var mCameraFileName = ""
-    lateinit var image: Uri
-    lateinit var values: ContentValues
-
-    lateinit var parent: RegisterCallbacks
-
+    lateinit var parent: QuestionCallbacks
     lateinit var photo : Bitmap
     lateinit var photoUri : Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
-        //view.find<ImageView>(R.id.photoViewer)
-//        photoViewer.setImageBitmap(Registreren.photo)
-        var conf = Bitmap.Config.ARGB_8888
-        photo = Bitmap.createBitmap(306, 306, conf)
-        parent = (activity as RegisterCallbacks)
-
-        return view
+        parent = (activity as QuestionCallbacks)
     }
 
     /**
-     * Aanmaken van de clicklisteners van de knoppen
-     * Als laatste wordt de imageview photoViewer opgevuld met het statische variable photo van de Regesteren activity
+     * Toont de vraag en een veld om een antwoord in te vullen.
+     * Indien er een antwoord wordt inguvuld, opent het bevestigings fragment
      */
-    override fun onResume() {
-        super.onResume()
-
-        cmdNeemFoto.setOnClickListener {
-            dispatchTakePictureIntent()
-           /* var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            val outFile = File(activity!!.cacheDir,"test.png")
-            outFile.createNewFile()
-            var uri = Uri.fromFile(outFile)
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
-
-        }
-        cmdVolgende.setOnClickListener {
-           // parent.setFragment(RegistreerGroep.newInstance())
-            parent.setPhoto(photo = photo, photoUri = photoUri);
-        }
-       photoViewer.setImageBitmap(photo)
-        //photoViewer.setImageURI(photoUri)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = (inflater.inflate(R.layout.fragment_vraag_invullen_foto, container, false))
+        var conf = Bitmap.Config.ARGB_8888
+        photo = Bitmap.createBitmap(306, 306, conf)
+        return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        textView2.text = parent.currentExhibitor.question.body
+        textView3.text = (parent.currentExhibitor.question.counter).toString()
+        cmdNeemFoto.setOnClickListener {
+            dispatchTakePictureIntent()
+            /* var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+             val outFile = File(activity!!.cacheDir,"test.png")
+             outFile.createNewFile()
+             var uri = Uri.fromFile(outFile)
+             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+             cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+             startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
+
+        }
+        btnVulIn.setOnClickListener {
+            // parent.setFragment(RegistreerGroep.newInstance())
+            parent.setAnswer(photo = photo);
+        }
+        photoViewer.setImageBitmap(photo)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         print("test")
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
@@ -101,7 +97,7 @@ class RegisterPhoto : Fragment() {
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
             photo = foto
             print(foto)
-            cmdVolgende.setEnabled(true);
+            btnVulIn.setEnabled(true);
             cmdNeemFoto.setText(getString(R.string.fotowijzigen))
         }
     }
@@ -149,8 +145,8 @@ class RegisterPhoto : Fragment() {
         }
     }
     companion object {
-        fun newInstance(): RegisterPhoto {
-            return RegisterPhoto()
+        fun newInstance(): VraagInvullenFoto {
+            return VraagInvullenFoto()
         }
     }
 }
