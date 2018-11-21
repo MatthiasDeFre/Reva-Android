@@ -21,6 +21,7 @@ import com.example.beardwulf.reva.activities.registreren.Registreren
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Category
 import com.example.beardwulf.reva.domain.Exhibitor
+import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.fragment_kaart.*
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import org.jetbrains.anko.find
@@ -29,13 +30,13 @@ import kotlin.math.exp
 
 class Kaart : Fragment() {
 
-    lateinit var parent: VragenOplossen
+    lateinit var parent: QuestionCallbacks
     val beaconSize = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as VragenOplossen)
+        parent = (activity as QuestionCallbacks)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,30 +47,29 @@ class Kaart : Fragment() {
     override fun onResume() {
         super.onResume()
         //showNextExhibitor(parent.exhibitor)
-        showNextExhibitor((parent.currentExhibitor()))
+        showNextExhibitor((parent.currentExhibitor))
         btnVraag.setOnClickListener {
-            if (parent.questionNr != 0)
-                parent.removeFragment(parent.vraagIngevuld)
-            parent.setFragment(VraagInvullen.newInstance(), R.id.fragment)
+           parent.setNextQuestion()
         }
-
-        if (parent.questionNr == parent.questions.size) {
+        if (parent.currentExhibitor.question.counter == parent.maxQuestion) {
             btnVraag.isEnabled = false
         }
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {
 
-        txtExhibitorName.setText((parent.questionNr +1).toString() + ". " + exhibitor.name)
+        txtExhibitorName.setText((exhibitor.question.counter).toString() + ". " + exhibitor.name)
         txtCategoryName.setText(exhibitor.category)
 
-        //var beacon = ImageView(parent)
+       // var beacon = ImageView()
         if(KaartConstraintLayout.childCount ==2) {
             KaartConstraintLayout.removeViewAt(1)
         }
-        var beacon = WebView(parent)
-        var xCo = exhibitor.coordinates!!.first
-        var yCo = exhibitor.coordinates!!.second
+        var beacon = WebView(context)
+        //var xCo = exhibitor.coordinates!!.first
+        //var yCo = exhibitor.coordinates!!.second
+        var xCo = 500
+        var yCo = 750
         //var xPosition = (imageKaart.drawable.intrinsicWidth  / 10 * xCo).toFloat()
         var xPosition = (imageKaart.layoutParams.width/20*xCo).toFloat()
         var yPosition = (imageKaart.drawable.intrinsicHeight/8 * yCo).toFloat()

@@ -14,12 +14,12 @@ class Exhibitor : Serializable {
     @SerializedName("category")
     var category: String?
     @SerializedName("coordinates")
-    var coordinates: Pair<Int, Int>?
+    var coordinates: Coordinate
     @SerializedName("question")
-    var question: Question?
+    var question: Question
 
 
-    constructor(_id: String, name: String?, visits: Number?, category: String?) {
+   /* constructor(_id: String, name: String?, visits: Number?, category: String?) {
         this._id = _id
         this.name = name
         this.visits = visits
@@ -35,9 +35,9 @@ class Exhibitor : Serializable {
         this.category = category
         this.coordinates = coordinates
         this.question = null
-    }
+    }*/
 
-    constructor(_id: String, name: String?, visits: Number?, category: String?, coordinates: Pair<Int, Int>?, question: Question?) {
+    constructor(_id: String, name: String?, visits: Number?, category: String?, coordinates: Coordinate, question: Question) {
         this._id = _id
         this.name = name
         this.visits = visits
