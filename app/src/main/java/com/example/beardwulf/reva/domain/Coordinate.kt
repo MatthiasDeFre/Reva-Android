@@ -1,4 +1,15 @@
 package com.example.beardwulf.reva.domain
 
-data class Coordinate(val xCo : Int, val yCo : Int) {
+import com.google.gson.annotations.SerializedName
+
+class Coordinate {
+   @SerializedName("xCo")
+    var xCo : Int
+    @SerializedName("yCo")
+    var yCo : Int
+
+    constructor(xCo : Int, yCo : Int) {
+        this.xCo = xCo
+        this.yCo = yCo
+    }
 }

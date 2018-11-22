@@ -16,7 +16,6 @@ class RetrofitClientInstance {
     fun getRetrofitInstance(): Retrofit? {
         if (retrofit == null) {
             val gson = GsonBuilder()
-                    .registerTypeAdapter(Coordinate::class.java, GenericDeserializer<Coordinate>())
                     .create()
             retrofit = retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)

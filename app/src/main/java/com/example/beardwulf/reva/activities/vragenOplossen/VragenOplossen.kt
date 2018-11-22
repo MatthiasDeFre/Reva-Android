@@ -1,11 +1,13 @@
 package com.example.beardwulf.reva.activities.vragenOplossen
 
+import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.util.Log
 import android.widget.TextView
 import com.example.beardwulf.reva.Endpoint
@@ -22,6 +24,7 @@ import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullenFoto
 import com.example.beardwulf.reva.interfaces.QuestionCallbacks
+import com.example.beardwulf.reva.viewModels.ExhibitorViewModel
 import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import okhttp3.MediaType
@@ -64,7 +67,9 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_vragen_oplossen)
         setNextExhibitor()
+        overridePendingTransition(0, 0);
        // makeExhibitors()
 
 /*        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
@@ -84,6 +89,9 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
     fun makeExhibitors() {
         exhibitors= ArrayList(2)
         /*var exhibitor2 = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
@@ -123,10 +131,11 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         val call = service.getExhibitor((applicationContext as testApplicationClass).group._id!!)
         call.enqueue(object : Callback<Exhibitor> {
             override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
+
                 currentExhibitor = response.body()!!
                 Log.d("currentExhibitor", Gson().toJson(response))
                 //currentExhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
-                setContentView(R.layout.activity_vragen_oplossen)
+
                 setFragment(Kaart.newInstance(), R.id.fragment)
             }
 
@@ -199,6 +208,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
 
     override fun determineNextMove() {
         if (currentExhibitor.question.counter + 1 < maxQuestion) {
+            removeFragment(vraagIngevuld)
             setNextExhibitor()
             //parent.removeFragment(this)
             focusMap()

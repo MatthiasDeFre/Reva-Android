@@ -65,11 +65,11 @@ class Kaart : Fragment() {
         if(KaartConstraintLayout.childCount ==2) {
             KaartConstraintLayout.removeViewAt(1)
         }
-        var beacon = WebView(context)
+        var beacon = WebView(activity)
         //var xCo = exhibitor.coordinates!!.first
         //var yCo = exhibitor.coordinates!!.second
-        var xCo = 500
-        var yCo = 750
+        var xCo = exhibitor.coordinates.xCo
+        var yCo = exhibitor.coordinates.yCo
         //var xPosition = (imageKaart.drawable.intrinsicWidth  / 10 * xCo).toFloat()
         var xPosition = (imageKaart.layoutParams.width/20*xCo).toFloat()
         var yPosition = (imageKaart.drawable.intrinsicHeight/8 * yCo).toFloat()
@@ -86,8 +86,8 @@ class Kaart : Fragment() {
         beacon.settings.useWideViewPort = true
         beacon.setBackgroundColor(Color.TRANSPARENT)
 
-        beacon.x = xPosition
-        beacon.y = yPosition
+        beacon.x = xCo.toFloat()
+        beacon.y = yCo.toFloat()
         KaartConstraintLayout.addView(beacon)
         beacon.layoutParams.width = beaconSize
         beacon.layoutParams.height = beaconSize

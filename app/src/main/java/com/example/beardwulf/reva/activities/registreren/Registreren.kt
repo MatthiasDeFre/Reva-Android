@@ -36,7 +36,7 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registreren)
-
+        overridePendingTransition(0, 0);
         var conf = Bitmap.Config.ARGB_8888
         photo = Bitmap.createBitmap(306, 306, conf)
         photoUri = Uri.EMPTY
