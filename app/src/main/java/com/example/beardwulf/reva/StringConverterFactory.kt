@@ -25,12 +25,10 @@ class StringConverterFactory : Converter.Factory() {
     }
 
     override fun requestBodyConverter(type: Type, parameterAnnotations: Array<Annotation>, methodAnnotations: Array<Annotation>, retrofit: Retrofit): Converter<*, RequestBody>? {
-        Log.d("test", type.toString())
         return if (String::class.java == type) {
             object : Converter<String, RequestBody> {
                 @Throws(IOException::class)
                 override fun convert(value: String): RequestBody {
-                    Log.d("test", value)
                     return RequestBody.create(MEDIA_TYPE, value)
                 }
             }
