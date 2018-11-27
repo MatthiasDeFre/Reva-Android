@@ -42,7 +42,7 @@ class RegistreerGroep : Fragment() {
                         parent.setNameAndDescription(name = txtGroepsnaam.text.toString(), description = txtGroepsLeden.text.toString())
                         //parent.setFragment(RegisterCategories.newInstance())
                 } else {
-                    //Toast.makeText(parent, "groepsnaam: enkel letters en cijfers aub", Toast.LENGTH_SHORT).show()
+                    txtGroepsnaam.setError("groepsnaam: enkel letters en cijfers aub");
                 }
             }
     }

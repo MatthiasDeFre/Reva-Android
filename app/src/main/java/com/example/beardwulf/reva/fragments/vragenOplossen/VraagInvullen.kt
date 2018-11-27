@@ -80,7 +80,7 @@ class VraagInvullen : Fragment() {
                 parent.setFragment(vraagIngevuld, R.id.fragment2)*/
                // parent.vraagIngevuld = vraagIngevuld
             } else {
-                Toast.makeText(this.context, "Enkel tekst invullen aub", Toast.LENGTH_SHORT).show()
+                txtInput.setError("Enkel tekst invullen aub");
             }
         }
     }
