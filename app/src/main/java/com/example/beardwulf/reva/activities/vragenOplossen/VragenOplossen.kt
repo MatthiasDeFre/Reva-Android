@@ -1,19 +1,15 @@
 package com.example.beardwulf.reva.activities.vragenOplossen
 
-import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.util.Log
-import android.widget.TextView
 import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.RetrofitClientInstance
-import com.example.beardwulf.reva.activities.MainActivity
 import com.example.beardwulf.reva.domain.Exhibitor
 import com.example.beardwulf.reva.domain.Group
 import com.example.beardwulf.reva.domain.QuestionType
@@ -24,13 +20,10 @@ import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullenFoto
 import com.example.beardwulf.reva.interfaces.QuestionCallbacks
-import com.example.beardwulf.reva.viewModels.ExhibitorViewModel
 import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
-import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.jetbrains.anko.find
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,8 +37,7 @@ import com.google.gson.Gson
 /**
  * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
  */
-class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
-
+class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallbacks, VraagInvullen.QuestionAnswerCallbacks, VraagInvullenFoto.QuestionAnswerPhotoCallbacks {
     var questionNr = 0
     override var maxQuestion = 5
     var questions = arrayOf(
@@ -164,9 +156,6 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         })
     }
 
-    override fun getPhoto(imageUri: Uri): Bitmap {
-        return MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-    }
     override fun setAnswer(photo: Bitmap) {
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val group = (applicationContext as testApplicationClass).group
@@ -197,7 +186,8 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
             }
         })
     }
-    override fun setNextQuestion() {
+
+    override fun goToNextQuestion() {
         if (!firstQuestion)
             removeFragment(vraagIngevuld)
         if(currentExhibitor.question.type == QuestionType.TEXT)

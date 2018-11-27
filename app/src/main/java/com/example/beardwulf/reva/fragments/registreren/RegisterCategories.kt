@@ -32,7 +32,7 @@ import retrofit2.Response
 
 class RegisterCategories : Fragment(){
 
-    lateinit var parent: RegisterCallbacks
+    lateinit var parent: RegisterCategoriesCallBacks
     var selectedCategories: MutableList<String> = ArrayList()
     val categories = arrayOf<String>("Hulpmiddelen ADL","Aangepaste kledij","Rolstoelen","Rolstoelen sport","Scooters","Loophulpmiddelen en rampen","Fietsen","Hulpmiddelen voor kinderen","Omgevingsbedineing, Domotica, Besturing","Aangepaste auto's","Tilhulpmiddelen","Huisliften","Vakantie, Reizen sport","Overheidsdiensten","Belangenverenigingen,Zelfhulpgroepen")
     private var amountOfCategories : Int = 10
@@ -44,14 +44,17 @@ class RegisterCategories : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_register_categories, container, false)
-        parent = (activity as Registreren)
+        parent = (activity as RegisterCategoriesCallBacks)
         return view
     }
     override fun onResume() {
         super.onResume()
 
         cmdNext.setOnClickListener {
-           parent.setCategories(selectedCategories)
+            var categoryList :MutableList<Category> = mutableListOf<Category>();
+            selectedCategories.forEach {c -> categoryList.add(Category(c))}
+            (activity!!.applicationContext as testApplicationClass).group.categories = categoryList;
+           parent.registerAndGoToMap()
         }
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getCategories()
@@ -140,6 +143,9 @@ class RegisterCategories : Fragment(){
             }
 
        }
+    }
+    interface RegisterCategoriesCallBacks {
+        fun registerAndGoToMap()
     }
     companion object {
         fun newInstance(): RegisterCategories {

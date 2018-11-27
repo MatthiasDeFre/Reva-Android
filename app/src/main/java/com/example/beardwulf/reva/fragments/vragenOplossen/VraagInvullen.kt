@@ -3,28 +3,14 @@ package com.example.beardwulf.reva.fragments.vragenOplossen
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.beardwulf.reva.extensions.InputRegex
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.example.beardwulf.reva.Endpoint
 
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.RetrofitClientInstance
-import com.example.beardwulf.reva.activities.MainActivity
-import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Exhibitor
-import com.example.beardwulf.reva.domain.Group
-import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
-import org.jetbrains.anko.find
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 /**
@@ -32,11 +18,11 @@ import retrofit2.Response
  */
 class VraagInvullen : Fragment() {
 
-    lateinit var parent: QuestionCallbacks
+    lateinit var parent: QuestionAnswerCallbacks
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as QuestionCallbacks)
+        parent = (activity as QuestionAnswerCallbacks)
     }
 
     /**
@@ -84,7 +70,11 @@ class VraagInvullen : Fragment() {
             }
         }
     }
-
+    interface QuestionAnswerCallbacks {
+        fun setAnswer(answer : String)
+        var currentExhibitor : Exhibitor
+        var maxQuestion : Int
+    }
     companion object {
         fun newInstance(): VraagInvullen {
             return VraagInvullen()
