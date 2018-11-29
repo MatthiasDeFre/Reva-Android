@@ -20,8 +20,9 @@ class Group : Serializable{
     var description: String?
     @SerializedName("answer")
     var answers: Objects?
-
-    constructor(_id: String, teacherId: Number?, name: String?, code: String?, imageString: String?, description: String?, answers: Objects?) {
+    @SerializedName("categories")
+    var categories : List<Category>
+    constructor(_id: String, teacherId: Number?, name: String?, code: String?, imageString: String?, description: String?, answers: Objects?, categories : List<Category>) {
         this._id = _id
         this.teacherId = teacherId
         this.name = name
@@ -29,5 +30,6 @@ class Group : Serializable{
         this.imageString = imageString
         this.description = description
         this.answers = answers
+        this.categories = categories
     }
 }

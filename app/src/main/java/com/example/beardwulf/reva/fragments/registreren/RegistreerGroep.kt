@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.activities.registreren.Registreren
+import com.example.beardwulf.reva.domain.testApplicationClass
 import com.example.beardwulf.reva.interfaces.RegisterCallbacks
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_registreer_groep.*
@@ -19,7 +20,7 @@ class RegistreerGroep : Fragment() {
      * Registreer de gegevens van de groep
      * groepsnaam, groepsleden
      */
-    lateinit var parent: RegisterCallbacks
+    lateinit var parent: RegisterGroupCallbacks
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +30,7 @@ class RegistreerGroep : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
-
-        parent = (activity as RegisterCallbacks)
-
+        parent = (activity as RegisterGroupCallbacks)
         return view
     }
 
@@ -39,14 +38,19 @@ class RegistreerGroep : Fragment() {
         super.onResume()
             cmdNaarCategorie.setOnClickListener {
                 if (InputRegex.controleerLettersCijfers(txtGroepsnaam.text.toString())) {
-                        parent.setNameAndDescription(name = txtGroepsnaam.text.toString(), description = txtGroepsLeden.text.toString())
+                    (activity!!.applicationContext as testApplicationClass).group.name = txtGroepsnaam.text.toString()
+                    (activity!!.applicationContext as testApplicationClass).group.description = txtGroepsLeden.text.toString()
+                    parent.goToCategories()
                         //parent.setFragment(RegisterCategories.newInstance())
                 } else {
                     txtGroepsnaam.setError("groepsnaam: enkel letters en cijfers aub");
                 }
             }
     }
+    interface RegisterGroupCallbacks {
+        fun goToCategories()
 
+    }
     companion object {
         fun newInstance(): RegistreerGroep {
             return RegistreerGroep()

@@ -30,13 +30,13 @@ import kotlin.math.exp
 
 class Kaart : Fragment() {
 
-    lateinit var parent: QuestionCallbacks
+    lateinit var parent: MapCallbacks
     val beaconSize = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as QuestionCallbacks)
+        parent = (activity as MapCallbacks)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +49,7 @@ class Kaart : Fragment() {
         //showNextExhibitor(parent.exhibitor)
         showNextExhibitor((parent.currentExhibitor))
         btnVraag.setOnClickListener {
-           parent.setNextQuestion()
+           parent.goToNextQuestion()
         }
         if (parent.currentExhibitor.question.counter == parent.maxQuestion) {
             btnVraag.isEnabled = false
@@ -92,7 +92,11 @@ class Kaart : Fragment() {
         beacon.layoutParams.width = beaconSize
         beacon.layoutParams.height = beaconSize
     }
-
+    interface MapCallbacks {
+        fun goToNextQuestion()
+        var currentExhibitor : Exhibitor
+        var maxQuestion : Int
+    }
     companion object {
         fun newInstance(): Kaart {
             return Kaart()

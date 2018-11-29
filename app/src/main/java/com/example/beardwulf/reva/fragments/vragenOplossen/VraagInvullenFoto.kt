@@ -43,12 +43,12 @@ import java.util.*
  */
 class VraagInvullenFoto : Fragment() {
 
-    lateinit var parent: QuestionCallbacks
+    lateinit var parent: QuestionAnswerPhotoCallbacks
     lateinit var photo : Bitmap
     lateinit var photoUri : Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as QuestionCallbacks)
+        parent = (activity as QuestionAnswerPhotoCallbacks)
     }
 
     /**
@@ -79,7 +79,7 @@ class VraagInvullenFoto : Fragment() {
         }
         btnVulIn.setOnClickListener {
             // parent.setFragment(RegistreerGroep.newInstance())
-            parent.setAnswer(photo = photo);
+            parent.setAnswer(photo);
         }
         photoViewer.setImageBitmap(photo)
     }
@@ -93,7 +93,7 @@ class VraagInvullenFoto : Fragment() {
             //var foto = data?.extras?.get("data") as Bitmap
             var foto : Bitmap
 
-            foto = parent.getPhoto(photoUri)
+            foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoUri)
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
             photo = foto
             print(foto)
@@ -143,6 +143,11 @@ class VraagInvullenFoto : Fragment() {
                 }
             }
         }
+    }
+    interface QuestionAnswerPhotoCallbacks {
+        fun setAnswer(answer : Bitmap)
+        var currentExhibitor : Exhibitor
+        var maxQuestion : Int
     }
     companion object {
         fun newInstance(): VraagInvullenFoto {
