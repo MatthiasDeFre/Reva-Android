@@ -119,6 +119,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         fragment.alpha = 1.0F
     }
     override fun setNextExhibitor() {
+        Log.d("NEXTE", "ANOTHER ONE")
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getExhibitor((applicationContext as testApplicationClass).group._id!!)
         call.enqueue(object : Callback<Exhibitor> {
