@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva.activities.registreren
 
+import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -18,6 +19,7 @@ import android.util.Log
 import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.RetrofitClientInstance
 import com.example.beardwulf.reva.domain.Group
+import com.example.beardwulf.reva.domain.PhotoViewModel
 import com.example.beardwulf.reva.domain.testApplicationClass
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -30,17 +32,12 @@ import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 
 class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCallBacks, RegisterPhoto.RegisterPhotoCallbacks, RegistreerGroep.RegisterGroupCallbacks {
-    private lateinit var photo: Bitmap
-    private lateinit var photoUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registreren)
         overridePendingTransition(0, 0);
         var conf = Bitmap.Config.ARGB_8888
-        photo = Bitmap.createBitmap(306, 306, conf)
-        photoUri = Uri.EMPTY
-
         setFragment(RegisterPhoto.newInstance())
     }
 
@@ -56,6 +53,7 @@ class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCa
         val f = File(cacheDir, "groupImage.png")
         val outputStream : FileOutputStream = FileOutputStream(f)
         val byteArrayOutputStream = ByteArrayOutputStream()
+        val photo = ViewModelProviders.of(this).get( PhotoViewModel::class.java).photo;
         photo.compress(Bitmap.CompressFormat.PNG, 30 /*ignored for PNG*/, byteArrayOutputStream);
         val bitmapdata = byteArrayOutputStream.toByteArray()
 
