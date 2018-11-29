@@ -55,12 +55,11 @@ class MainActivity : AppCompatActivity() {
                     group.name?.let {
                         startActivity(Intent(applicationContext, VragenOplossen::class.java))
                     } ?: run {
-                        Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(applicationContext, Registreren::class.java))
                     }
-
                 } else {
-                    Toast.makeText(this@MainActivity, "Code niet correct", Toast.LENGTH_SHORT).show()
+                    txtInput.setError("Code niet correct");
                 }
             }
 
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         }*/
         }else{
-        Toast.makeText(this@MainActivity, "Voer enkel cijfers en letters in aub", Toast.LENGTH_SHORT).show()
+        txtInput.setError("Voer enkel cijfers en letters in aub");
     }
     }
 

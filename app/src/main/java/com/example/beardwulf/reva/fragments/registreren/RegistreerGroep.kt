@@ -43,7 +43,7 @@ class RegistreerGroep : Fragment() {
                     parent.goToCategories()
                         //parent.setFragment(RegisterCategories.newInstance())
                 } else {
-                    //Toast.makeText(parent, "groepsnaam: enkel letters en cijfers aub", Toast.LENGTH_SHORT).show()
+                    txtGroepsnaam.setError("groepsnaam: enkel letters en cijfers aub");
                 }
             }
     }
