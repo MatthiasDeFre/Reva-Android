@@ -1,6 +1,7 @@
 package com.example.beardwulf.reva.fragments.registreren
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -62,6 +63,9 @@ class RegisterCategories : Fragment(){
             override fun onResponse(call: Call<ArrayList<String>>, response: Response<ArrayList<String>>) {
                 var categories = response.body()!!
                 amountOfCategories = categories.count() -categories.count() / 3
+                if(amountOfCategories > 10)
+                    amountOfCategories = 10
+                textView.text = String.format(resources.getString(R.string.stap3), amountOfCategories)
                 viewManager = LinearLayoutManager(this@RegisterCategories.context)
                 listView?.adapter = testAdapter(selectedCategories, onClicklistener(),response.body()!!)
 
