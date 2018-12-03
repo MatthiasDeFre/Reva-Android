@@ -60,7 +60,7 @@ class RegisterPhoto : Fragment() {
         var conf = Bitmap.Config.ARGB_8888
         photo = Bitmap.createBitmap(306, 306, conf)
         parent = (activity as RegisterPhotoCallbacks)
-        photoViewModel = ViewModelProviders.of(this).get( PhotoViewModel::class.java)
+        photoViewModel = ViewModelProviders.of(activity!!).get( PhotoViewModel::class.java)
 
         return view
     }

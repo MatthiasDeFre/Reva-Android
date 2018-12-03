@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva.fragments.vragenOplossen
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
@@ -7,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,7 @@ import com.example.beardwulf.reva.activities.registreren.Registreren
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Category
 import com.example.beardwulf.reva.domain.Exhibitor
+import com.example.beardwulf.reva.domain.ExhibitorViewModel
 import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.fragment_kaart.*
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
@@ -32,26 +35,33 @@ class Kaart : Fragment() {
 
     lateinit var parent: MapCallbacks
     val beaconSize = 100
+    lateinit var currentExhibitor: Exhibitor
+    lateinit var currentExhibitorViewModel: ExhibitorViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as MapCallbacks)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_kaart, container, false)
+        Log.d("MAP", "MAP START")
+        currentExhibitorViewModel = ViewModelProviders.of(activity!!).get( ExhibitorViewModel::class.java);
+        currentExhibitor = currentExhibitorViewModel.currentExhibitor
+        Log.d("MAP", currentExhibitor.name)
         return view
     }
 
     override fun onResume() {
         super.onResume()
         //showNextExhibitor(parent.exhibitor)
-        showNextExhibitor((parent.currentExhibitor))
+        showNextExhibitor(currentExhibitor)
         btnVraag.setOnClickListener {
            parent.goToNextQuestion()
         }
-        if (parent.currentExhibitor.question.counter == parent.maxQuestion) {
+        if (currentExhibitor.question.counter == parent.maxQuestion) {
             btnVraag.isEnabled = false
         }
     }
@@ -94,7 +104,6 @@ class Kaart : Fragment() {
     }
     interface MapCallbacks {
         fun goToNextQuestion()
-        var currentExhibitor : Exhibitor
         var maxQuestion : Int
     }
     companion object {

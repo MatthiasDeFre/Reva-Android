@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva.fragments.vragenOplossen
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.beardwulf.reva.extensions.InputRegex
@@ -10,6 +11,7 @@ import android.widget.Toast
 
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.domain.Exhibitor
+import com.example.beardwulf.reva.domain.ExhibitorViewModel
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 
 
@@ -19,7 +21,8 @@ import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 class VraagInvullen : Fragment() {
 
     lateinit var parent: QuestionAnswerCallbacks
-
+    lateinit var currentExhibitor: Exhibitor
+    lateinit var currentExhibitorViewModel: ExhibitorViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as QuestionAnswerCallbacks)
@@ -31,14 +34,15 @@ class VraagInvullen : Fragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
-
+        currentExhibitorViewModel = ViewModelProviders.of(activity!!).get( ExhibitorViewModel::class.java);
+        currentExhibitor = currentExhibitorViewModel.currentExhibitor
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        textView2.text = parent.currentExhibitor.question.body
-        textView3.text = (parent.currentExhibitor.question.counter).toString()
+        textView2.text = currentExhibitor.question.body
+        textView3.text = (currentExhibitor.question.counter).toString()
         btnVulIn.setOnClickListener {
             if (InputRegex.controleerLettersCijfers(txtInput.text.toString())) {
 /*                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
@@ -72,7 +76,7 @@ class VraagInvullen : Fragment() {
     }
     interface QuestionAnswerCallbacks {
         fun setAnswer(answer : String)
-        var currentExhibitor : Exhibitor
+
         var maxQuestion : Int
     }
     companion object {

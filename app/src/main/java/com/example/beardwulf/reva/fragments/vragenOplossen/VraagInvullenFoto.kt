@@ -1,6 +1,7 @@
 package com.example.beardwulf.reva.fragments.vragenOplossen
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -25,7 +26,9 @@ import com.example.beardwulf.reva.RetrofitClientInstance
 import com.example.beardwulf.reva.activities.MainActivity
 import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Exhibitor
+import com.example.beardwulf.reva.domain.ExhibitorViewModel
 import com.example.beardwulf.reva.domain.Group
+import com.example.beardwulf.reva.domain.PhotoViewModel
 import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.fragment_vraag_invullen_foto.*
 import org.jetbrains.anko.find
@@ -44,8 +47,9 @@ import java.util.*
 class VraagInvullenFoto : Fragment() {
 
     lateinit var parent: QuestionAnswerPhotoCallbacks
-    lateinit var photo : Bitmap
-    lateinit var photoUri : Uri
+    lateinit var photoViewModel: PhotoViewModel
+    lateinit var currentExhibitor: Exhibitor
+    lateinit var currentExhibitorViewModel: ExhibitorViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as QuestionAnswerPhotoCallbacks)
@@ -58,14 +62,17 @@ class VraagInvullenFoto : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen_foto, container, false))
         var conf = Bitmap.Config.ARGB_8888
-        photo = Bitmap.createBitmap(306, 306, conf)
+        photoViewModel = ViewModelProviders.of(activity!!).get( PhotoViewModel::class.java)
+        photoViewModel.photo = Bitmap.createBitmap(306, 306, conf)
+        currentExhibitorViewModel = ViewModelProviders.of(activity!!).get( ExhibitorViewModel::class.java);
+        currentExhibitor = currentExhibitorViewModel.currentExhibitor
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        textView2.text = parent.currentExhibitor.question.body
-        textView3.text = (parent.currentExhibitor.question.counter).toString()
+        textView2.text = currentExhibitor.question.body
+        textView3.text = (currentExhibitor.question.counter).toString()
         cmdNeemFoto.setOnClickListener {
             dispatchTakePictureIntent()
             /* var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -79,9 +86,9 @@ class VraagInvullenFoto : Fragment() {
         }
         btnVulIn.setOnClickListener {
             // parent.setFragment(RegistreerGroep.newInstance())
-            parent.setAnswer(photo);
+            parent.setAnswer(photoViewModel.photo);
         }
-        photoViewer.setImageBitmap(photo)
+        photoViewer.setImageBitmap(photoViewModel.photo)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         print("test")
@@ -93,9 +100,9 @@ class VraagInvullenFoto : Fragment() {
             //var foto = data?.extras?.get("data") as Bitmap
             var foto : Bitmap
 
-            foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoUri)
+            foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoViewModel.photoUri)
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
-            photo = foto
+            photoViewModel.photo = foto
             print(foto)
             btnVulIn.setEnabled(true);
             cmdNeemFoto.setText(getString(R.string.fotowijzigen))
@@ -137,7 +144,7 @@ class VraagInvullenFoto : Fragment() {
                             "com.example.beardwulf.fileprovider",
                             it
                     )
-                    this.photoUri = photoURI
+                    photoViewModel.photoUri = photoURI
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
                 }
@@ -146,7 +153,6 @@ class VraagInvullenFoto : Fragment() {
     }
     interface QuestionAnswerPhotoCallbacks {
         fun setAnswer(answer : Bitmap)
-        var currentExhibitor : Exhibitor
         var maxQuestion : Int
     }
     companion object {
