@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.example.beardwulf.reva.views.PinView
                 android:id="@+id/imageKaart"
                 android:layout_width="810dp"
                 android:layout_height="match_parent"
