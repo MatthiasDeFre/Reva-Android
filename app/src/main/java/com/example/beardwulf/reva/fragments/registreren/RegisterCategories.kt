@@ -1,6 +1,7 @@
 package com.example.beardwulf.reva.fragments.registreren
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -32,7 +33,7 @@ import retrofit2.Response
 
 class RegisterCategories : Fragment(){
 
-    lateinit var parent: RegisterCallbacks
+    lateinit var parent: RegisterCategoriesCallBacks
     var selectedCategories: MutableList<String> = ArrayList()
     val categories = arrayOf<String>("Hulpmiddelen ADL","Aangepaste kledij","Rolstoelen","Rolstoelen sport","Scooters","Loophulpmiddelen en rampen","Fietsen","Hulpmiddelen voor kinderen","Omgevingsbedineing, Domotica, Besturing","Aangepaste auto's","Tilhulpmiddelen","Huisliften","Vakantie, Reizen sport","Overheidsdiensten","Belangenverenigingen,Zelfhulpgroepen")
     private var amountOfCategories : Int = 10
@@ -44,14 +45,17 @@ class RegisterCategories : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_register_categories, container, false)
-        parent = (activity as Registreren)
+        parent = (activity as RegisterCategoriesCallBacks)
         return view
     }
     override fun onResume() {
         super.onResume()
 
         cmdNext.setOnClickListener {
-           parent.setCategories(selectedCategories)
+            var categoryList :MutableList<Category> = mutableListOf<Category>();
+            selectedCategories.forEach {c -> categoryList.add(Category(c))}
+            (activity!!.applicationContext as testApplicationClass).group.categories = categoryList;
+           parent.registerAndGoToMap()
         }
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getCategories()
@@ -59,6 +63,9 @@ class RegisterCategories : Fragment(){
             override fun onResponse(call: Call<ArrayList<String>>, response: Response<ArrayList<String>>) {
                 var categories = response.body()!!
                 amountOfCategories = categories.count() -categories.count() / 3
+                if(amountOfCategories > 10)
+                    amountOfCategories = 10
+                textView.text = String.format(resources.getString(R.string.stap3), amountOfCategories)
                 viewManager = LinearLayoutManager(this@RegisterCategories.context)
                 listView?.adapter = testAdapter(selectedCategories, onClicklistener(),response.body()!!)
 
@@ -140,6 +147,9 @@ class RegisterCategories : Fragment(){
             }
 
        }
+    }
+    interface RegisterCategoriesCallBacks {
+        fun registerAndGoToMap()
     }
     companion object {
         fun newInstance(): RegisterCategories {

@@ -2,6 +2,7 @@ package com.example.beardwulf.reva.activities.vragenOplossen
 
 import android.content.Context
 import android.content.res.Configuration
+import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -9,15 +10,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.widget.TextView
 import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.RetrofitClientInstance
-import com.example.beardwulf.reva.activities.MainActivity
-import com.example.beardwulf.reva.domain.Exhibitor
-import com.example.beardwulf.reva.domain.Group
-import com.example.beardwulf.reva.domain.QuestionType
-import com.example.beardwulf.reva.domain.testApplicationClass
+import com.example.beardwulf.reva.domain.*
 import com.example.beardwulf.reva.fragments.EindeSpel
 import com.example.beardwulf.reva.fragments.vragenOplossen.Kaart
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagIngevuld
@@ -25,11 +21,9 @@ import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullen
 import com.example.beardwulf.reva.fragments.vragenOplossen.VraagInvullenFoto
 import com.example.beardwulf.reva.interfaces.QuestionCallbacks
 import kotlinx.android.synthetic.main.activity_vragen_oplossen.*
-import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.jetbrains.anko.find
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,8 +45,7 @@ import kotlinx.android.synthetic.main.fragment_kaart.*
 /**
  * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
  */
-class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
-
+class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallbacks, VraagInvullen.QuestionAnswerCallbacks, VraagInvullenFoto.QuestionAnswerPhotoCallbacks {
     var questionNr = 0
     override var maxQuestion = 5
     var questions = arrayOf(
@@ -66,7 +59,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
     lateinit var eindeSpel: EindeSpel
 
     lateinit var exhibitors: ArrayList<Exhibitor>
-    override lateinit var currentExhibitor: Exhibitor
+    lateinit var currentExhibitor: ExhibitorViewModel
     override var firstQuestion : Boolean = true
 
     /**
@@ -74,10 +67,16 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_vragen_oplossen)
+       currentExhibitor = ViewModelProviders.of(this).get( ExhibitorViewModel::class.java);
         setNextExhibitor()
+        overridePendingTransition(0, 0);
        // makeExhibitors()
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
     fun makeExhibitors() {
         exhibitors= ArrayList(2)
         /*var exhibitor2 = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
@@ -113,11 +112,16 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         fragment.alpha = 1.0F
     }
     override fun setNextExhibitor() {
+        Log.d("NEXTE", "ANOTHER ONE")
+    if(currentExhibitor.isNew) {
+        Log.d("EXNEW", "NEW");
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getExhibitor((applicationContext as testApplicationClass).group._id!!)
         call.enqueue(object : Callback<Exhibitor> {
             override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
-                currentExhibitor = response.body()!!
+                Log.d("EXNEW", "REACHED")
+                currentExhibitor.currentExhibitor = response.body()!!
+                currentExhibitor.isNew = false
                 Log.d("currentExhibitor", Gson().toJson(response))
                 //currentExhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
                 setContentView(R.layout.activity_vragen_oplossen)
@@ -129,6 +133,10 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
                 Log.d("Error", t.message)
             }
         })
+    } else {
+        Log.d("EXNEW", "OLD");
+        setFragment(Kaart.newInstance(), R.id.fragment)
+    }
     }
 
     override fun setAnswer(answer: String) {
@@ -151,9 +159,6 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         })
     }
 
-    override fun getPhoto(imageUri: Uri): Bitmap {
-        return MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-    }
     override fun setAnswer(photo: Bitmap) {
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val group = (applicationContext as testApplicationClass).group
@@ -185,17 +190,20 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
             }
         })
     }
-    override fun setNextQuestion() {
+
+    override fun goToNextQuestion() {
         if (!firstQuestion)
             removeFragment(vraagIngevuld)
-        if(currentExhibitor.question.type == QuestionType.TEXT)
+        if(currentExhibitor.currentExhibitor.question.type == QuestionType.TEXT)
             setFragment(VraagInvullen.newInstance(), R.id.fragment)
         else
             setFragment(VraagInvullenFoto.newInstance(), R.id.fragment)
     }
 
     override fun determineNextMove() {
-        if (currentExhibitor.question.counter + 1 < maxQuestion) {
+        if (currentExhibitor.currentExhibitor.question.counter + 1 < maxQuestion) {
+            removeFragment(vraagIngevuld)
+            currentExhibitor.isNew = true
             setNextExhibitor()
             //parent.removeFragment(this)
             focusMap()

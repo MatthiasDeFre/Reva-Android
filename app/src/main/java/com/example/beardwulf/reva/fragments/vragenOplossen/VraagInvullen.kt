@@ -1,30 +1,18 @@
 package com.example.beardwulf.reva.fragments.vragenOplossen
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.example.beardwulf.reva.extensions.InputRegex
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.example.beardwulf.reva.Endpoint
 
 import com.example.beardwulf.reva.R
-import com.example.beardwulf.reva.RetrofitClientInstance
-import com.example.beardwulf.reva.activities.MainActivity
-import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Exhibitor
-import com.example.beardwulf.reva.domain.Group
-import com.example.beardwulf.reva.interfaces.QuestionCallbacks
+import com.example.beardwulf.reva.domain.ExhibitorViewModel
 import kotlinx.android.synthetic.main.fragment_vraag_invullen.*
-import org.jetbrains.anko.find
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 /**
@@ -32,11 +20,12 @@ import retrofit2.Response
  */
 class VraagInvullen : Fragment() {
 
-    lateinit var parent: QuestionCallbacks
-
+    lateinit var parent: QuestionAnswerCallbacks
+    lateinit var currentExhibitor: Exhibitor
+    lateinit var currentExhibitorViewModel: ExhibitorViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parent = (activity as QuestionCallbacks)
+        parent = (activity as QuestionAnswerCallbacks)
     }
 
     /**
@@ -45,14 +34,15 @@ class VraagInvullen : Fragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen, container, false))
-
+        currentExhibitorViewModel = ViewModelProviders.of(activity!!).get( ExhibitorViewModel::class.java);
+        currentExhibitor = currentExhibitorViewModel.currentExhibitor
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        textView2.text = parent.currentExhibitor.question.body
-        textView3.text = (parent.currentExhibitor.question.counter).toString()
+        textView2.text = currentExhibitor.question.body
+        textView3.text = (currentExhibitor.question.counter).toString()
         btnVulIn.setOnClickListener {
             if (InputRegex.controleerLettersCijfers(txtInput.text.toString())) {
 /*                val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
@@ -80,11 +70,15 @@ class VraagInvullen : Fragment() {
                 parent.setFragment(vraagIngevuld, R.id.fragment2)*/
                // parent.vraagIngevuld = vraagIngevuld
             } else {
-                Toast.makeText(this.context, "Enkel tekst invullen aub", Toast.LENGTH_SHORT).show()
+                txtInput.setError("Enkel tekst invullen aub");
             }
         }
     }
+    interface QuestionAnswerCallbacks {
+        fun setAnswer(answer : String)
 
+        var maxQuestion : Int
+    }
     companion object {
         fun newInstance(): VraagInvullen {
             return VraagInvullen()

@@ -26,9 +26,11 @@ import android.content.ContentResolver
 import java.net.SocketOption
 import android.content.ContentValues
 import android.R.attr.thumbnail
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Environment
 import android.support.v4.content.FileProvider
 import android.util.Log
+import com.example.beardwulf.reva.domain.PhotoViewModel
 import com.example.beardwulf.reva.interfaces.RegisterCallbacks
 import java.io.IOException
 
@@ -36,12 +38,13 @@ import java.io.IOException
 class RegisterPhoto : Fragment() {
 
     //private val MY_CAMERA_PERMISSION_CODE = 100;
+    private lateinit  var photoViewModel : PhotoViewModel
     private val CAMERA_REQUEST = 1888;
     var mCameraFileName = ""
     lateinit var image: Uri
     lateinit var values: ContentValues
 
-    lateinit var parent: RegisterCallbacks
+    lateinit var parent: RegisterPhotoCallbacks
 
     lateinit var photo : Bitmap
     lateinit var photoUri : Uri
@@ -56,7 +59,8 @@ class RegisterPhoto : Fragment() {
 //        photoViewer.setImageBitmap(Registreren.photo)
         var conf = Bitmap.Config.ARGB_8888
         photo = Bitmap.createBitmap(306, 306, conf)
-        parent = (activity as RegisterCallbacks)
+        parent = (activity as RegisterPhotoCallbacks)
+        photoViewModel = ViewModelProviders.of(activity!!).get( PhotoViewModel::class.java)
 
         return view
     }
@@ -81,7 +85,10 @@ class RegisterPhoto : Fragment() {
         }
         cmdVolgende.setOnClickListener {
            // parent.setFragment(RegistreerGroep.newInstance())
-            parent.setPhoto(photo = photo, photoUri = photoUri);
+            photoViewModel.photo = photo
+            photoViewModel.photoUri = photoUri
+            parent.goToGroupDetails()
+           // parent.setPhoto(photo = photo, photoUri = photoUri);
         }
        photoViewer.setImageBitmap(photo)
         //photoViewer.setImageURI(photoUri)
@@ -97,7 +104,7 @@ class RegisterPhoto : Fragment() {
             //var foto = data?.extras?.get("data") as Bitmap
             var foto : Bitmap
 
-            foto = parent.getPhoto(photoUri)
+            foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoUri)
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
             photo = foto
             print(foto)
@@ -147,6 +154,10 @@ class RegisterPhoto : Fragment() {
                 }
             }
         }
+    }
+    interface RegisterPhotoCallbacks {
+        fun goToGroupDetails()
+
     }
     companion object {
         fun newInstance(): RegisterPhoto {

@@ -1,5 +1,6 @@
 package com.example.beardwulf.reva.activities.registreren
 
+import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -18,6 +19,7 @@ import android.util.Log
 import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.RetrofitClientInstance
 import com.example.beardwulf.reva.domain.Group
+import com.example.beardwulf.reva.domain.PhotoViewModel
 import com.example.beardwulf.reva.domain.testApplicationClass
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -29,18 +31,13 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 
-class Registreren : AppCompatActivity(), RegisterCallbacks {
-    private lateinit var photo: Bitmap
-    private lateinit var photoUri: Uri
+class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCallBacks, RegisterPhoto.RegisterPhotoCallbacks, RegistreerGroep.RegisterGroupCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registreren)
-
+        overridePendingTransition(0, 0);
         var conf = Bitmap.Config.ARGB_8888
-        photo = Bitmap.createBitmap(306, 306, conf)
-        photoUri = Uri.EMPTY
-
         setFragment(RegisterPhoto.newInstance())
     }
 
@@ -50,12 +47,13 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
         fragmentTransaction.commit()
     }
 
-    override fun setCategories(categories: List<String>) {
+    override fun registerAndGoToMap() {
         //SET CATEGORIES
         val group = (applicationContext as testApplicationClass).group
         val f = File(cacheDir, "groupImage.png")
         val outputStream : FileOutputStream = FileOutputStream(f)
         val byteArrayOutputStream = ByteArrayOutputStream()
+        val photo = ViewModelProviders.of(this).get( PhotoViewModel::class.java).photo;
         photo.compress(Bitmap.CompressFormat.PNG, 30 /*ignored for PNG*/, byteArrayOutputStream);
         val bitmapdata = byteArrayOutputStream.toByteArray()
 
@@ -65,8 +63,8 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
        // val f = File(this.getCacheDir(), "groupFoto")
         val filePart = MultipartBody.Part.createFormData("groupImage", f.name, RequestBody.create(MediaType.parse("image/*"), f))
         var categoriesBody = ArrayList<RequestBody>()
-        categories.forEach {c ->
-            categoriesBody.add(RequestBody.create(MediaType.parse("text/plain"), c));
+        group.categories.forEach {c ->
+            categoriesBody.add(RequestBody.create(MediaType.parse("text/plain"), c.name));
         }
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.registerGroup((application as testApplicationClass).group._id, filePart,group.description, group.name,categoriesBody)
@@ -84,21 +82,13 @@ class Registreren : AppCompatActivity(), RegisterCallbacks {
 
 
     }
-    override fun setNameAndDescription(name: String, description: String) {
+    override fun goToCategories() {
        //SET IFNO
-        (applicationContext as testApplicationClass).group.name = name
-        (applicationContext as testApplicationClass).group.description = description
         setFragment(RegisterCategories.newInstance())
     }
-    override fun getPhoto(imageUri : Uri) : Bitmap {
-        print(imageUri)
-        return MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-    }
 
-    override fun setPhoto(photo: Bitmap, photoUri : Uri) {
-        //SET PHOTO OF GROUP
-        this.photoUri = photoUri
-        this.photo = photo
+    override fun goToGroupDetails() {
+        Log.d("GROUP", "GOTOGROUP")
         setFragment(RegistreerGroep.newInstance())
     }
 

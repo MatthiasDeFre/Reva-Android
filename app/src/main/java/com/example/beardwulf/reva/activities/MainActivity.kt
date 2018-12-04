@@ -10,6 +10,7 @@ import com.example.beardwulf.reva.Endpoint
 import com.example.beardwulf.reva.R
 import com.example.beardwulf.reva.RetrofitClientInstance
 import com.example.beardwulf.reva.activities.registreren.Registreren
+import com.example.beardwulf.reva.activities.vragenOplossen.VragenOplossen
 import com.example.beardwulf.reva.domain.Group
 import com.example.beardwulf.reva.domain.testApplicationClass
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         btnLogin.setOnClickListener {
             login()
         }
@@ -43,13 +43,19 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
                 if (response.code() == 200) {
                     var body = response.body()
-                    var group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
+
+                   // var group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
+                    var group = body!!
                     var test = applicationContext as testApplicationClass
                     test.group = group;
-                    Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(applicationContext, Registreren::class.java))
+                    group.name?.let {
+                        startActivity(Intent(applicationContext, VragenOplossen::class.java))
+                    } ?: run {
+                        //Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(applicationContext, Registreren::class.java))
+                    }
                 } else {
-                    Toast.makeText(this@MainActivity, "Code niet correct", Toast.LENGTH_SHORT).show()
+                    txtInput.setError("Code niet correct");
                 }
             }
 
@@ -65,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         }*/
         }else{
-        Toast.makeText(this@MainActivity, "Voer enkel cijfers en letters in aub", Toast.LENGTH_SHORT).show()
+        txtInput.setError("Voer enkel cijfers en letters in aub");
     }
     }
 
