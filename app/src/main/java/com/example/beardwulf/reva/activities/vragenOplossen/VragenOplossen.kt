@@ -217,8 +217,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
 
     fun showMap() {
         if (getSizeName(applicationContext) === "large" || getSizeName(applicationContext) === "xlarge") {
-            var orientation = applicationContext.getResources().getBoolean(R.bool.is_landscape)
-            if (orientation == true) {
+            if (determineOrientation(applicationContext) == true) {
                 setFragment(Kaart.newInstance(), R.id.fragment)
                 if(currentExhibitor.currentExhibitor.question.type == QuestionType.TEXT)
                     setFragment(VraagInvullen.newInstance(), R.id.fragment2)
@@ -245,6 +244,10 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
                 Configuration.SCREENLAYOUT_SIZE_XLARGE -> return "xlarge"
                 else -> return "undefined"
             }
+        }
+
+        public fun determineOrientation(context : Context) : Boolean {
+            return context.getResources().getBoolean(R.bool.is_landscape)
         }
     }
 }

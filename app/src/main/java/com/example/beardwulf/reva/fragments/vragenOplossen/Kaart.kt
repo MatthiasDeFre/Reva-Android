@@ -71,8 +71,7 @@ class Kaart : Fragment() {
         }
 
         if (VragenOplossen.getSizeName(activity!!.applicationContext) === "large" || VragenOplossen.getSizeName(activity!!.applicationContext) === "xlarge") {
-            var orientation = activity!!.applicationContext.getResources().getBoolean(R.bool.is_landscape)
-            if (orientation == true) {
+            if (VragenOplossen.determineOrientation(activity!!.applicationContext) == true) {
                 btnVraag.visibility = View.INVISIBLE
             }
         }
