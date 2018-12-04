@@ -76,22 +76,6 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         super.onCreate(savedInstanceState)
         setNextExhibitor()
        // makeExhibitors()
-
-/*        val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
-        val call = service.getExhibitor(MainActivity.group._id!!)
-        call.enqueue(object : Callback<Exhibitor> {
-            override fun onResponse(call: Call<Exhibitor>, response: Response<Exhibitor>) {
-                exhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
-
-                setContentView(R.layout.activity_vragen_oplossen)
-                setFragment(Kaart.newInstance(), R.id.fragment)
-            }
-
-            override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
-                Log.d("Error", t.message)
-            }
-        })*/
-
     }
 
     fun makeExhibitors() {
@@ -223,14 +207,15 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         questionNr--
     }
 
-
-
     fun showMap() {
         if (getSizeName(applicationContext) === "large" || getSizeName(applicationContext) === "xlarge") {
             var orientation = applicationContext.getResources().getBoolean(R.bool.is_landscape)
             if (orientation == true) {
                 setFragment(Kaart.newInstance(), R.id.fragment)
-                setFragment(VraagInvullen.newInstance(), R.id.fragment2)
+                if(currentExhibitor.question.type == QuestionType.TEXT)
+                    setFragment(VraagInvullen.newInstance(), R.id.fragment2)
+                else
+                    setFragment(VraagInvullenFoto.newInstance(), R.id.fragment2)
             } else {
                 setFragment(Kaart.newInstance(), R.id.fragment)
             }
