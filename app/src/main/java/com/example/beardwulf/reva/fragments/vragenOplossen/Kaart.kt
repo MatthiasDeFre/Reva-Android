@@ -56,23 +56,10 @@ class Kaart : Fragment() {
             btnVraag.isEnabled = false
         }
 
-        if (getSizeName(activity!!.applicationContext) === "large" || getSizeName(activity!!.applicationContext) === "xlarge") {
+        if (VragenOplossen.getSizeName(activity!!.applicationContext) === "large" || VragenOplossen.getSizeName(activity!!.applicationContext) === "xlarge") {
             btnVraag.visibility = View.INVISIBLE
         }
 
-    }
-
-    private fun getSizeName(context: Context): String {
-        var screenLayout = context.resources.configuration.screenLayout
-        screenLayout = screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
-
-        when (screenLayout) {
-            Configuration.SCREENLAYOUT_SIZE_SMALL -> return "small"
-            Configuration.SCREENLAYOUT_SIZE_NORMAL -> return "normal"
-            Configuration.SCREENLAYOUT_SIZE_LARGE -> return "large"
-            Configuration.SCREENLAYOUT_SIZE_XLARGE -> return "xlarge"
-            else -> return "undefined"
-        }
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {

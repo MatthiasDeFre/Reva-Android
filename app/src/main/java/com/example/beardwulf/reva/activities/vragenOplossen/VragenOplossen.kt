@@ -223,18 +223,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         questionNr--
     }
 
-    private fun getSizeName(context: Context): String {
-        var screenLayout = context.resources.configuration.screenLayout
-        screenLayout = screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
 
-        when (screenLayout) {
-            Configuration.SCREENLAYOUT_SIZE_SMALL -> return "small"
-            Configuration.SCREENLAYOUT_SIZE_NORMAL -> return "normal"
-            Configuration.SCREENLAYOUT_SIZE_LARGE -> return "large"
-            Configuration.SCREENLAYOUT_SIZE_XLARGE -> return "xlarge"
-            else -> return "undefined"
-        }
-    }
 
     fun showMap() {
         if (getSizeName(applicationContext) === "large" || getSizeName(applicationContext) === "xlarge") {
@@ -251,6 +240,19 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
     companion object {
         fun newInstance(): VragenOplossen {
             return newInstance()
+        }
+
+        public fun getSizeName(context: Context): String {
+            var screenLayout = context.resources.configuration.screenLayout
+            screenLayout = screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
+
+            when (screenLayout) {
+                Configuration.SCREENLAYOUT_SIZE_SMALL -> return "small"
+                Configuration.SCREENLAYOUT_SIZE_NORMAL -> return "normal"
+                Configuration.SCREENLAYOUT_SIZE_LARGE -> return "large"
+                Configuration.SCREENLAYOUT_SIZE_XLARGE -> return "xlarge"
+                else -> return "undefined"
+            }
         }
     }
 }
