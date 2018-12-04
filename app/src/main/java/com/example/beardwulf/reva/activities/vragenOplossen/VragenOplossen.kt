@@ -220,7 +220,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
             var orientation = applicationContext.getResources().getBoolean(R.bool.is_landscape)
             if (orientation == true) {
                 setFragment(Kaart.newInstance(), R.id.fragment)
-                if(currentExhibitor.question.type == QuestionType.TEXT)
+                if(currentExhibitor.currentExhibitor.question.type == QuestionType.TEXT)
                     setFragment(VraagInvullen.newInstance(), R.id.fragment2)
                 else
                     setFragment(VraagInvullenFoto.newInstance(), R.id.fragment2)
@@ -238,7 +238,6 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         public fun getSizeName(context: Context): String {
             var screenLayout = context.resources.configuration.screenLayout
             screenLayout = screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
-
             when (screenLayout) {
                 Configuration.SCREENLAYOUT_SIZE_SMALL -> return "small"
                 Configuration.SCREENLAYOUT_SIZE_NORMAL -> return "normal"

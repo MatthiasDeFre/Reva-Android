@@ -71,10 +71,12 @@ class Kaart : Fragment() {
         }
 
         if (VragenOplossen.getSizeName(activity!!.applicationContext) === "large" || VragenOplossen.getSizeName(activity!!.applicationContext) === "xlarge") {
-            btnVraag.visibility = View.INVISIBLE
+            var orientation = activity!!.applicationContext.getResources().getBoolean(R.bool.is_landscape)
+            if (orientation == true) {
+                btnVraag.visibility = View.INVISIBLE
+            }
         }
-
-    }
+        }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {
 
