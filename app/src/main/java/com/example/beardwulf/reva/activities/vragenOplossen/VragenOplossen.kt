@@ -1,5 +1,7 @@
 package com.example.beardwulf.reva.activities.vragenOplossen
 
+import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -35,8 +37,16 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import com.google.gson.Gson
-
-
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+import android.content.res.Configuration.ORIENTATION_SQUARE
+import android.view.Display
+import android.content.res.Configuration.SCREENLAYOUT_SIZE_LARGE
+import android.content.res.Configuration.SCREENLAYOUT_SIZE_MASK
+import android.view.View
+import android.view.View.*
+import android.widget.Button
+import kotlinx.android.synthetic.main.fragment_kaart.*
 
 /**
  * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
@@ -127,7 +137,8 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
                 Log.d("currentExhibitor", Gson().toJson(response))
                 //currentExhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
                 setContentView(R.layout.activity_vragen_oplossen)
-                setFragment(Kaart.newInstance(), R.id.fragment)
+                //setFragment(Kaart.newInstance(), R.id.fragment)
+                showMap()
             }
 
             override fun onFailure(call: Call<Exhibitor>, t: Throwable) {
@@ -141,7 +152,8 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         val call = service.postAnwser((applicationContext as testApplicationClass).group._id!!, answer)
         call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
-                setFragment(Kaart.newInstance(), R.id.fragment)
+               // setFragment(Kaart.newInstance(), R.id.fragment)
+                showMap()
                 unfocusMap()
                 val vraagIngevuld = VraagIngevuld.newInstance()
                 firstQuestion = false
@@ -175,7 +187,8 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
         val call = service.postAnwser((applicationContext as testApplicationClass).group._id!!, filePart)
         call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
-                setFragment(Kaart.newInstance(), R.id.fragment)
+                //setFragment(Kaart.newInstance(), R.id.fragment)
+                showMap()
                 unfocusMap()
                 val vraagIngevuld = VraagIngevuld.newInstance()
                 firstQuestion = false
@@ -208,6 +221,31 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks {
     }
     override fun decrementCounter() {
         questionNr--
+    }
+
+    private fun getSizeName(context: Context): String {
+        var screenLayout = context.resources.configuration.screenLayout
+        screenLayout = screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
+
+        when (screenLayout) {
+            Configuration.SCREENLAYOUT_SIZE_SMALL -> return "small"
+            Configuration.SCREENLAYOUT_SIZE_NORMAL -> return "normal"
+            Configuration.SCREENLAYOUT_SIZE_LARGE -> return "large"
+            Configuration.SCREENLAYOUT_SIZE_XLARGE -> return "xlarge"
+            else -> return "undefined"
+        }
+    }
+
+    fun showMap() {
+        if (getSizeName(applicationContext) === "large" || getSizeName(applicationContext) === "xlarge") {
+            var orientation = applicationContext.getResources().getBoolean(R.bool.is_landscape)
+            if (orientation == true) {
+                setFragment(Kaart.newInstance(), R.id.fragment)
+                setFragment(VraagInvullen.newInstance(), R.id.fragment2)
+            } else {
+                setFragment(Kaart.newInstance(), R.id.fragment)
+            }
+        }
     }
 
     companion object {
