@@ -2,6 +2,7 @@ package com.example.beardwulf.reva.fragments.vragenOplossen
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PointF
@@ -68,6 +69,11 @@ class Kaart : Fragment() {
         if (currentExhibitor.question.counter == parent.maxQuestion) {
             btnVraag.isEnabled = false
         }
+
+        if (VragenOplossen.getSizeName(activity!!.applicationContext) === "large" || VragenOplossen.getSizeName(activity!!.applicationContext) === "xlarge") {
+            btnVraag.visibility = View.INVISIBLE
+        }
+
     }
 
     fun showNextExhibitor(exhibitor: Exhibitor) {

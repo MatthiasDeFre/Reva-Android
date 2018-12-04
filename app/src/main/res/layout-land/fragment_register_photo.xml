@@ -31,23 +31,24 @@
 
     <ImageView
         android:id="@+id/photoViewer"
-        android:layout_width="500dp"
-        android:layout_height="190dp"
+        android:layout_width="436dp"
+        android:layout_height="157dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395"
+        app:layout_constraintVertical_bias="0.42"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/cmdNeemFoto"
-        android:layout_width="405dp"
-        android:layout_height="20dp"
+        android:layout_width="195dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="42dp"
         android:layout_marginStart="42dp"
@@ -65,8 +66,8 @@
 
     <Button
         android:id="@+id/cmdVolgende"
-        android:layout_width="405dp"
-        android:layout_height="22dp"
+        android:layout_width="195dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="42dp"
         android:layout_marginStart="42dp"
