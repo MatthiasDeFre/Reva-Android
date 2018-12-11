@@ -33,6 +33,12 @@ import java.io.FileOutputStream
 
 class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCallBacks, RegisterPhoto.RegisterPhotoCallbacks, RegistreerGroep.RegisterGroupCallbacks {
 
+    /**
+     * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
+     * In gevallen zoals oriëntatieveranderingen, de app afsluiten of een ander scenario dat leidt tot het opnieuw oproepen van onCreate(),
+     * kan de savedInstanceState bundel gebruikt worden om de vorige toestandsinformatie opnieuw te laden.
+     * Het fragment(RegisterPhoto) wordt geladen waar men een groepsfoto kan nemen adhv de setFragment methode.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registreren)
@@ -41,14 +47,20 @@ class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCa
         setFragment(RegisterPhoto.newInstance())
     }
 
+    /**
+     * Methode om het registreerLayout fragment met een ander fragment die wordt meegegeven te wisselen
+     */
     fun setFragment(fragment: Fragment) {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.registreerlayout, fragment)
         fragmentTransaction.commit()
     }
 
+    /**
+     * Methode die toelaat om de groep te registeren. Er wordt adhv retrofit een call gedaan naar de backend.
+     * Na het registeren van de groep succesvol is verlopen wordt men doorgestuurd naar de Kaart met exposanten
+     */
     override fun registerAndGoToMap() {
-        //SET CATEGORIES
         val group = (applicationContext as testApplicationClass).group
         val f = File(cacheDir, "groupImage.png")
         val outputStream : FileOutputStream = FileOutputStream(f)
@@ -60,7 +72,6 @@ class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCa
         outputStream.write(bitmapdata)
         outputStream.flush()
         outputStream.close()
-       // val f = File(this.getCacheDir(), "groupFoto")
         val filePart = MultipartBody.Part.createFormData("groupImage", f.name, RequestBody.create(MediaType.parse("image/*"), f))
         var categoriesBody = ArrayList<RequestBody>()
         group.categories.forEach {c ->
@@ -71,7 +82,6 @@ class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCa
 
        call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
-               // val group = Group(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
                 startActivity(Intent(applicationContext,VragenOplossen::class.java))
             }
 
@@ -79,28 +89,28 @@ class Registreren : AppCompatActivity(), RegisterCategories.RegisterCategoriesCa
                 Log.d("Error", t.message)
             }
         })
-
-
     }
+
+    /**
+     * Methode die de setFragment methode aanroept waardoor het registreerLayout fragment wordt verwisseld met met het RegisterCategories(registeren van
+     * de categorieën) fragment
+     */
     override fun goToCategories() {
-       //SET IFNO
+       //SET INFO
         setFragment(RegisterCategories.newInstance())
     }
 
+    /**
+     * Methode die de setFragment methode aanroept waardoor het registreerLayout fragment wordt verwisseld met met het RegistreerGroep(registeren van
+     * de groep) fragment
+     */
     override fun goToGroupDetails() {
-        Log.d("GROUP", "GOTOGROUP")
         setFragment(RegistreerGroep.newInstance())
     }
 
-
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
-
-        /**
-         * Variabele dat wordt gebruikt om de imageview voor de groepsfoto op te vullen
-         *
-         */
-
     }
-
-
 }

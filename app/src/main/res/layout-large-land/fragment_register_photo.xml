@@ -13,7 +13,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background1" />
+        app:srcCompat="@drawable/background1"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/txtStap2"
@@ -31,56 +32,59 @@
 
     <ImageView
         android:id="@+id/photoViewer"
-        android:layout_width="500dp"
-        android:layout_height="220dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="406dp"
+        android:layout_height="225dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395"
+        app:layout_constraintVertical_bias="0.425"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/cmdNeemFoto"
-        android:layout_width="405dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginStart="42dp"
+        android:layout_width="257dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="264dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/buttonlayoutlightblue"
         android:enabled="true"
         android:fontFamily="@font/montserrat"
+
         android:text="@string/maakfoto"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="16sp"
-
         app:layout_constraintBottom_toTopOf="@+id/cmdVolgende"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/cmdVolgende"
-        android:layout_width="405dp"
-        android:layout_height="50dp"
+        android:layout_width="257dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="264dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginStart="42dp"
         android:background="@drawable/buttonlayoutclassicblue"
         android:enabled="true"
         android:fontFamily="@font/montserrat"
+
         android:text="@string/gaverder"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="16sp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 

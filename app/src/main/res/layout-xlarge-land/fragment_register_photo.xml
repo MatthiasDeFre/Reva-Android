@@ -57,7 +57,7 @@
         android:text="@string/maakfoto"
         android:textAllCaps="false"
         android:textColor="#FFF"
-        android:textSize="16sp"
+        android:textSize="22sp"
 
         app:layout_constraintBottom_toTopOf="@+id/cmdVolgende"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:text="@string/gaverder"
         android:textAllCaps="false"
         android:textColor="#FFF"
-        android:textSize="16sp"
+        android:textSize="22sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

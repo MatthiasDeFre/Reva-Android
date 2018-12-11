@@ -18,25 +18,6 @@ class Exhibitor : Serializable {
     @SerializedName("question")
     var question: Question
 
-
-   /* constructor(_id: String, name: String?, visits: Number?, category: String?) {
-        this._id = _id
-        this.name = name
-        this.visits = visits
-        this.category = category
-        this.coordinates = Pair(0, 0)
-        this.question = null
-    }
-
-    constructor(_id: String, name: String?, visits: Number?, category: String?, coordinates: Pair<Int, Int>?) {
-        this._id = _id
-        this.name = name
-        this.visits = visits
-        this.category = category
-        this.coordinates = coordinates
-        this.question = null
-    }*/
-
     constructor(_id: String, name: String?, visits: Number?, category: String?, coordinates: Coordinate, question: Question) {
         this._id = _id
         this.name = name
