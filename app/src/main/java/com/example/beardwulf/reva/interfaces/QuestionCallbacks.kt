@@ -8,7 +8,6 @@ interface QuestionCallbacks {
     fun setNextExhibitor()
 
 
-    fun decrementCounter()
     fun determineNextMove()
     val firstQuestion : Boolean
 }

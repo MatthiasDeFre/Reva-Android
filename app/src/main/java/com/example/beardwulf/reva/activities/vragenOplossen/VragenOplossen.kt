@@ -46,6 +46,7 @@ import kotlinx.android.synthetic.main.fragment_kaart.*
  * Activity die het tonen van alle vragen en inlezen van alle antwoorden verzorgt
  */
 class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallbacks, VraagInvullen.QuestionAnswerCallbacks, VraagInvullenFoto.QuestionAnswerPhotoCallbacks {
+
     var questionNr = 0
     override var maxQuestion = 5
     var questions = arrayOf(
@@ -63,54 +64,77 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
     override var firstQuestion : Boolean = true
 
     /**
+     * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
+     * In gevallen zoals oriëntatieveranderingen, de app afsluiten of een ander scenario dat leidt tot het opnieuw oproepen van onCreate(),
+     * kan de savedInstanceState bundel gebruikt worden om de vorige toestandsinformatie opnieuw te laden.
      * Opent de fragment voor het tonen en beantwoorden van een vraag
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vragen_oplossen)
-       currentExhibitor = ViewModelProviders.of(this).get( ExhibitorViewModel::class.java);
+        currentExhibitor = ViewModelProviders.of(this).get( ExhibitorViewModel::class.java);
         setNextExhibitor()
         overridePendingTransition(0, 0);
-       // makeExhibitors()
     }
 
+    /**
+     * Bij doorgaan van de app nadat de onPause methode is opgeroepen wordt de onResume methode aangegroepen. Het is één van de methodes
+     * van de activity life cycle.
+     */
     override fun onResume() {
         super.onResume()
     }
+
+    /**
+     * Methode makeExhibitors creëert een lege arraylijst van exposanten
+     */
     fun makeExhibitors() {
         exhibitors= ArrayList(2)
-        /*var exhibitor2 = Exhibitor("Test", "Vigo",1, "Rolstoelen", Pair(10, 3))
-        var exhibitor1 = Exhibitor("Test", "Thuisbezorgwinkel Orona",2, "Rolstoelen Sport", Pair(5,3))
-        var exhibitor0 = Exhibitor("3","Test", 0, "Rolstoelen", Pair(5, 5))
-        exhibitors.add(exhibitor2)
-        exhibitors.add(exhibitor1)
-        exhibitors.add(exhibitor0)*/
-
     }
 
+    /**
+     * Methode setFragment krijgt een fragment mee en een int. Dit integer representeert het nummer van de vraag.
+     * Hierdoor kan men elke keer het huidige vraagfragment vervangen door het volgende.
+     */
     fun setFragment(fragment: Fragment, int: Int) {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(int, fragment)
         fragmentTransaction.commit()
     }
 
+    /**
+     * Methode removeFragment verwijdert het huidige framgment van de activity.
+     */
     fun removeFragment(fragment: Fragment) {
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.remove(fragment)
         fragmentTransaction.commit()
     }
 
+    /**
+     * Methode currentExhibitor geeft de huidige exposant terug
+     */
     fun currentExhibitor(): Exhibitor {
         return exhibitors[questionNr]
     }
 
+    /**
+     * Methode unFocusMap zorgt ervoor dat er kan uitgezoomd worden op de map
+     */
     fun unfocusMap() {
        fragment.alpha = 0.1F
     }
 
+    /**
+     * Methode unFocusMap zorgt ervoor dat er kan ingezoomd worden op de map
+     */
     fun focusMap(){
         fragment.alpha = 1.0F
     }
+
+    /**
+     * TODO
+     */
     override fun setNextExhibitor() {
         Log.d("NEXTE", "ANOTHER ONE")
     if(currentExhibitor.isNew) {
@@ -123,9 +147,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
                 currentExhibitor.currentExhibitor = response.body()!!
                 currentExhibitor.isNew = false
                 Log.d("currentExhibitor", Gson().toJson(response))
-                //currentExhibitor = Exhibitor(response.body()!!._id, response.body()!!.name, response.body()!!.visits, response.body()!!.category, response.body()!!.coordinates, response.body()!!.question)
                 setContentView(R.layout.activity_vragen_oplossen)
-                //setFragment(Kaart.newInstance(), R.id.fragment)
                 showMap()
             }
 
@@ -139,12 +161,14 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
     }
     }
 
+    /**
+     * TODO
+     */
     override fun setAnswer(answer: String) {
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.postAnwser((applicationContext as testApplicationClass).group._id!!, answer)
         call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
-               // setFragment(Kaart.newInstance(), R.id.fragment)
                 showMap()
                 unfocusMap()
                 val vraagIngevuld = VraagIngevuld.newInstance()
@@ -159,6 +183,9 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         })
     }
 
+    /**
+     * TODO
+     */
     override fun setAnswer(photo: Bitmap) {
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val group = (applicationContext as testApplicationClass).group
@@ -171,12 +198,10 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         outputStream.write(bitmapdata)
         outputStream.flush()
         outputStream.close()
-        // val f = File(this.getCacheDir(), "groupFoto")
         val filePart = MultipartBody.Part.createFormData("photo", f.name, RequestBody.create(MediaType.parse("image/*"), f))
         val call = service.postAnwser((applicationContext as testApplicationClass).group._id!!, filePart)
         call.enqueue(object : Callback<Group> {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
-                //setFragment(Kaart.newInstance(), R.id.fragment)
                 showMap()
                 unfocusMap()
                 val vraagIngevuld = VraagIngevuld.newInstance()
@@ -191,6 +216,10 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         })
     }
 
+    /**
+     * Methode goToNext Question verwijdert het fragment dat de vraag is ingevuld(tenzij bij eerste vraag) en set het fragment
+     * van de volgende vraag, dit kan een vraag zijn met enkel tekst of een vraag waar een foto moet genomen worden
+     */
     override fun goToNextQuestion() {
         if (!firstQuestion)
             removeFragment(vraagIngevuld)
@@ -200,21 +229,26 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
             setFragment(VraagInvullenFoto.newInstance(), R.id.fragment)
     }
 
+    /**
+     * TODO
+     */
     override fun determineNextMove() {
         if (currentExhibitor.currentExhibitor.question.counter + 1 < maxQuestion) {
             removeFragment(vraagIngevuld)
             currentExhibitor.isNew = true
             setNextExhibitor()
-            //parent.removeFragment(this)
             focusMap()
         } else {
             setFragment(EindeSpel.newInstance(), R.id.fragment2)
         }
     }
-    override fun decrementCounter() {
-        questionNr--
-    }
 
+
+    /**
+     * Methode showMap controleert de size van het device, bij large of xlarge controleert hij de oriëntatie.
+     * Indien dit portrait is plaatst hij het fragment van de kaart over heel het scherm.
+     * Indien dit landscape is plaatst hij jet vraagInvullen fragment naast het Kaart fragment
+     */
     fun showMap() {
         if (getSizeName(applicationContext) === "large" || getSizeName(applicationContext) === "xlarge") {
             if (determineOrientation(applicationContext) == true) {
@@ -229,11 +263,18 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         }
     }
 
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
         fun newInstance(): VragenOplossen {
             return newInstance()
         }
 
+        /**
+         * Methode getSizeName kijkt hoe groot het device is -> Small/Normal/Large en Xlarge
+         * en kan zo gebruikt worden om landscape mode te bepalen of portrait mode
+         */
         public fun getSizeName(context: Context): String {
             var screenLayout = context.resources.configuration.screenLayout
             screenLayout = screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
@@ -246,6 +287,10 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
             }
         }
 
+        /**
+         * Methode determineOrientation checkt de layouts.xml files in res/values-land en res/values-port.
+         * Hiermee weet hij in welke oriëntatie het device op dat moment gebruikt wordt
+         */
         public fun determineOrientation(context : Context) : Boolean {
             return context.getResources().getBoolean(R.bool.is_landscape)
         }
