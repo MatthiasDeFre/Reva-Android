@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_registreer_groep.*
 
 class RegistreerGroep : Fragment() {
+
     /**
      * Registreer de gegevens van de groep
      * groepsnaam, groepsleden
@@ -32,12 +33,21 @@ class RegistreerGroep : Fragment() {
 
     }
 
+    /**
+     * onCreateView wordt opgeroepen om de lay-out van het fragment "op te halen",
+     * d.w.z. dat de grafische initialisatie meestal hier plaatsvindt.
+     * Het wordt altijd aangeroepen na de onCreate methode.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_registreer_groep, container, false)
         parent = (activity as RegisterGroupCallbacks)
         return view
     }
 
+    /**
+     * Bij doorgaan van de app nadat de onPause methode is opgeroepen wordt de onResume methode aangegroepen.
+     * Het is één van de methodes van de activity life cycle.
+     */
     override fun onResume() {
         super.onResume()
             cmdNaarCategorie.setOnClickListener {
@@ -51,10 +61,18 @@ class RegistreerGroep : Fragment() {
                 }
             }
     }
+
+    /**
+     * TODO
+     */
     interface RegisterGroupCallbacks {
         fun goToCategories()
 
     }
+
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
         fun newInstance(): RegistreerGroep {
             return RegistreerGroep()

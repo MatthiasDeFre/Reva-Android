@@ -12,6 +12,9 @@ import java.lang.reflect.Type
 
 class StringConverterFactory : Converter.Factory() {
 
+    /**
+     * TODO
+     */
     override fun responseBodyConverter(type: Type, annotations: Array<Annotation>, retrofit: Retrofit): Converter<ResponseBody, *>? {
         return if (String::class.java == type) {
             object : Converter<ResponseBody, String> {
@@ -24,6 +27,9 @@ class StringConverterFactory : Converter.Factory() {
         } else null
     }
 
+    /**
+     * TODO
+     */
     override fun requestBodyConverter(type: Type, parameterAnnotations: Array<Annotation>, methodAnnotations: Array<Annotation>, retrofit: Retrofit): Converter<*, RequestBody>? {
         return if (String::class.java == type) {
             object : Converter<String, RequestBody> {
@@ -36,9 +42,11 @@ class StringConverterFactory : Converter.Factory() {
 
     }
 
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
         private val MEDIA_TYPE = MediaType.parse("text/plain")
-
         fun create(): StringConverterFactory {
             return StringConverterFactory()
         }

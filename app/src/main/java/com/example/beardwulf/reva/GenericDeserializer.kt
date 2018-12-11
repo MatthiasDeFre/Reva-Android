@@ -10,12 +10,13 @@ import java.lang.reflect.Type
 
 
 class GenericDeserializer<T> : JsonDeserializer<T> {
-    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): T {
-        // Get the "content" element from the parsed JSON
-        val content = json!!.asJsonObject.get("content")
 
-        // Deserialize it. You use a new instance of Gson to avoid infinite recursion
-        // to this deserializer
+    /**
+     * Get the "content" element from the parsed JSON
+     * Deserialize it. You use a new instance of Gson to avoid infinite recursion to this deserializer
+     */
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): T {
+        val content = json!!.asJsonObject.get("content")
         return Gson().fromJson<T>(content, typeOfT)
     }
 }

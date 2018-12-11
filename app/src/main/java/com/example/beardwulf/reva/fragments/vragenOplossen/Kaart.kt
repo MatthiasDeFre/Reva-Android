@@ -43,13 +43,21 @@ class Kaart : Fragment() {
     lateinit var currentExhibitor: Exhibitor
     lateinit var currentExhibitorViewModel: ExhibitorViewModel
 
-
+    /**
+     * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
+     * In gevallen zoals oriëntatieveranderingen, de app afsluiten of een ander scenario dat leidt tot het opnieuw oproepen van onCreate(),
+     * kan de savedInstanceState bundel gebruikt worden om de vorige toestandsinformatie opnieuw te laden.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as MapCallbacks)
-
     }
 
+    /**
+     * onCreateView wordt opgeroepen om de lay-out van het fragment "op te blazen"(inflate),
+     * d.w.z. dat de grafische initialisatie meestal hier plaatsvindt.
+     * Het wordt altijd aangeroepen na de onCreate methode.
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_kaart, container, false)
         Log.d("MAP", "MAP START")
@@ -59,9 +67,12 @@ class Kaart : Fragment() {
         return view
     }
 
+    /**
+     * Bij doorgaan van de app nadat de onPause methode is opgeroepen wordt de onResume methode aangegroepen.
+     * Het is één van de methodes van de activity life cycle.
+     */
     override fun onResume() {
         super.onResume()
-        //showNextExhibitor(parent.exhibitor)
         showNextExhibitor(currentExhibitor)
         btnVraag.setOnClickListener {
            parent.goToNextQuestion()
@@ -77,29 +88,36 @@ class Kaart : Fragment() {
         }
         }
 
+    /**
+     * Methode showNextExhibitor toont de volgende exposant op de map adhv een pinpooint,
+     * ook de naam en de categorie wordt getoond
+     */
     fun showNextExhibitor(exhibitor: Exhibitor) {
-
         txtExhibitorName.setText((exhibitor.question.counter).toString() + ". " + exhibitor.name)
         txtCategoryName.setText(exhibitor.category)
 
-       // var beacon = ImageView()
         if(KaartConstraintLayout.childCount ==2) {
             KaartConstraintLayout.removeViewAt(1)
         }
 
         var xCo = exhibitor.coordinates.xCo
         var yCo = exhibitor.coordinates.yCo
-        //var xPosition = (imageKaart.drawable.intrinsicWidth  / 10 * xCo).toFloat()
-      //  var xPosition = (imageKaart.layoutParams.width/20*xCo).toFloat()
-      //  var yPosition = (imageKaart.drawable.intrinsicHeight/8 * yCo).toFloat()
 
         imageKaart.setImage(ImageSource.asset("grondplan.jpg"))
         imageKaart.setPin(PointF(xCo.toFloat(), yCo.toFloat()))
     }
+
+    /**
+     * TODO
+     */
     interface MapCallbacks {
         fun goToNextQuestion()
         var maxQuestion : Int
     }
+
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
         fun newInstance(): Kaart {
             return Kaart()
