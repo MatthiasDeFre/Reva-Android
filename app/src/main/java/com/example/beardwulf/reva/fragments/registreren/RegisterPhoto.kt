@@ -37,31 +37,33 @@ import java.io.IOException
 
 class RegisterPhoto : Fragment() {
 
-    //private val MY_CAMERA_PERMISSION_CODE = 100;
     private lateinit  var photoViewModel : PhotoViewModel
     private val CAMERA_REQUEST = 1888;
     var mCameraFileName = ""
     lateinit var image: Uri
     lateinit var values: ContentValues
-
     lateinit var parent: RegisterPhotoCallbacks
-
     lateinit var photo : Bitmap
     lateinit var photoUri : Uri
+
+    /**
+     * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
+     * In gevallen zoals oriëntatieveranderingen, de app afsluiten of een ander scenario dat leidt tot het opnieuw oproepen van onCreate(),
+     * kan de savedInstanceState bundel gebruikt worden om de vorige toestandsinformatie opnieuw te laden.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+    /**
+     *
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
-        //view.find<ImageView>(R.id.photoViewer)
-//        photoViewer.setImageBitmap(Registreren.photo)
         var conf = Bitmap.Config.ARGB_8888
         photo = Bitmap.createBitmap(306, 306, conf)
         parent = (activity as RegisterPhotoCallbacks)
         photoViewModel = ViewModelProviders.of(activity!!).get( PhotoViewModel::class.java)
-
         return view
     }
 
@@ -74,24 +76,13 @@ class RegisterPhoto : Fragment() {
 
         cmdNeemFoto.setOnClickListener {
             dispatchTakePictureIntent()
-           /* var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            val outFile = File(activity!!.cacheDir,"test.png")
-            outFile.createNewFile()
-            var uri = Uri.fromFile(outFile)
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
-
         }
         cmdVolgende.setOnClickListener {
-           // parent.setFragment(RegistreerGroep.newInstance())
             photoViewModel.photo = photo
             photoViewModel.photoUri = photoUri
             parent.goToGroupDetails()
-           // parent.setPhoto(photo = photo, photoUri = photoUri);
         }
        photoViewer.setImageBitmap(photo)
-        //photoViewer.setImageURI(photoUri)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,7 +92,6 @@ class RegisterPhoto : Fragment() {
              * Bitmap uitpakken en in het statische fotovariabele steken,
              * hierna wordt de knop om naar het volgende scherm te gaan aangezet
              */
-            //var foto = data?.extras?.get("data") as Bitmap
             var foto : Bitmap
 
             foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoUri)
