@@ -157,7 +157,7 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
         })
     } else {
         Log.d("EXNEW", "OLD");
-        setFragment(Kaart.newInstance(), R.id.fragment)
+        showMap()
     }
     }
 
@@ -260,6 +260,8 @@ class VragenOplossen : AppCompatActivity(), QuestionCallbacks, Kaart.MapCallback
             } else {
                 setFragment(Kaart.newInstance(), R.id.fragment)
             }
+        } else {
+            setFragment(Kaart.newInstance(), R.id.fragment)
         }
     }
 
