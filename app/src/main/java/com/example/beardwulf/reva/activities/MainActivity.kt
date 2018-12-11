@@ -24,6 +24,12 @@ import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
+     * In gevallen zoals oriëntatieveranderingen, de app afsluiten of een ander scenario dat leidt tot het opnieuw oproepen van onCreate(),
+     * kan de savedInstanceState bundel gebruikt worden om de vorige toestandsinformatie opnieuw te laden.
+     * De activity_main layout wordt geladen en er wordt een "luisteraar" op de loginknop gezet
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,10 +38,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Methode login controleert de cijfers voor het inloggen op de applicatie en doet een call naar de databank adhv Retrofit om de
+     * code te controleren.
+     * Hierna start de activity VragenOplossen.
+     */
     fun login() {
-        //"qsdfd"
-        //"5be19cecdf933a07fe06120c"
-
     if(InputRegex.controleerLettersCijfers(txtInput.text.toString())) {
         val service = RetrofitClientInstance().getRetrofitInstance()!!.create(Endpoint::class.java!!)
         val call = service.getGroup(txtInput.text.toString())
@@ -43,15 +51,12 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Group>, response: Response<Group>) {
                 if (response.code() == 200) {
                     var body = response.body()
-
-                   // var group = Group(body!!._id, body!!.teacherId, body!!.name, body!!.code, body!!.imageString, body!!.description, body!!.answers)
                     var group = body!!
                     var test = applicationContext as testApplicationClass
                     test.group = group;
                     group.name?.let {
                         startActivity(Intent(applicationContext, VragenOplossen::class.java))
                     } ?: run {
-                        //Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(applicationContext, Registreren::class.java))
                     }
                 } else {
@@ -63,13 +68,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Error", t.message)
             }
         })
-        /*if (txtInput.text.toString().equals("1234")) {
-            group = Group("5be19cecdf933a07fe06120c", null, null, null, null, null, null)
-            Toast.makeText(this@MainActivity, "Welkom", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(applicationContext, Registreren::class.java))
-        } else {
-
-        }*/
         }else{
         txtInput.setError("Voer enkel cijfers en letters in aub");
     }
