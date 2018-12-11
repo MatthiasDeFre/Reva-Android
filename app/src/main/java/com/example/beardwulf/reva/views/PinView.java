@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.beardwulf.reva.R;
 
-
+//SOURCE davemorrissey sample project
 public class PinView extends SubsamplingScaleImageView {
 
     private final Paint paint = new Paint();
@@ -36,7 +36,7 @@ public class PinView extends SubsamplingScaleImageView {
 
     private void initialise() {
         float density = getResources().getDisplayMetrics().densityDpi;
-        pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.beacon);
+        pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
         float w = (density/420f) * pin.getWidth();
         float h = (density/420f) * pin.getHeight();
         pin = Bitmap.createScaledBitmap(pin, 100, 100, true);
