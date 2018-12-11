@@ -15,8 +15,6 @@ import android.graphics.PorterDuff.Mode
  * found on https://stackoverflow.com/questions/2459916/how-to-make-an-imageview-with-rounded-corners
  * implemented by Jens De Wulf
  */
-
-
 class ImageHelper {
     companion object {
         fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int): Bitmap {

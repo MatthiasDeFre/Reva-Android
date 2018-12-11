@@ -45,6 +45,8 @@ class RegisterPhoto : Fragment() {
     lateinit var parent: RegisterPhotoCallbacks
     lateinit var photo : Bitmap
     lateinit var photoUri : Uri
+    var mCurrentPhotoPath: String = ""
+    val REQUEST_TAKE_PHOTO = 1
 
     /**
      * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
@@ -56,7 +58,9 @@ class RegisterPhoto : Fragment() {
     }
 
     /**
-     *
+     * onCreateView wordt opgeroepen om de lay-out van het fragment "op te halen",
+     * d.w.z. dat de grafische initialisatie meestal hier plaatsvindt.
+     * Het wordt altijd aangeroepen na de onCreate methode.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_register_photo, container, false)
@@ -68,8 +72,10 @@ class RegisterPhoto : Fragment() {
     }
 
     /**
+     * Bij doorgaan van de app nadat de onPause methode is opgeroepen wordt de onResume methode aangegroepen.
+     * Het is één van de methodes van de activity life cycle.
      * Aanmaken van de clicklisteners van de knoppen
-     * Als laatste wordt de imageview photoViewer opgevuld met het statische variable photo van de Regesteren activity
+     * Als laatste wordt de imageview photoViewer opgevuld met het statische variable photo van de Registeren activity
      */
     override fun onResume() {
         super.onResume()
@@ -85,15 +91,14 @@ class RegisterPhoto : Fragment() {
        photoViewer.setImageBitmap(photo)
     }
 
+    /**
+     * Bitmap uitpakken en in het statische fotovariabele steken,
+     * hierna wordt de knop om naar het volgende scherm te gaan aangezet
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         print("test")
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-            /**
-             * Bitmap uitpakken en in het statische fotovariabele steken,
-             * hierna wordt de knop om naar het volgende scherm te gaan aangezet
-             */
             var foto : Bitmap
-
             foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoUri)
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
             photo = foto
@@ -102,8 +107,10 @@ class RegisterPhoto : Fragment() {
             cmdNeemFoto.setText(getString(R.string.fotowijzigen))
         }
     }
-    var mCurrentPhotoPath: String = ""
 
+    /**
+     * Methode createImageFile maakt en retourneert een image met een datum en een tijd
+     */
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
@@ -118,20 +125,18 @@ class RegisterPhoto : Fragment() {
             mCurrentPhotoPath = absolutePath
         }
     }
-    val REQUEST_TAKE_PHOTO = 1
+
+    /**
+     * Methode dispatchTakePictureIntent controleert of er een camera aanwezig is op het device en creëert de file waar image in moet.
+     */
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
             takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
-                // Create the File where the photo should go
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    // Error occurred while creating the File
-
                     null
                 }
-                // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                             activity!!,
@@ -145,10 +150,17 @@ class RegisterPhoto : Fragment() {
             }
         }
     }
+
+    /**
+     * TODO
+     */
     interface RegisterPhotoCallbacks {
         fun goToGroupDetails()
-
     }
+
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
         fun newInstance(): RegisterPhoto {
             return RegisterPhoto()

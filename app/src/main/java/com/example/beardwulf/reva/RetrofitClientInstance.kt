@@ -6,9 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import com.google.gson.Gson
 
-
-
-
+/**
+ * Connectie met de databank -> link.
+ * Via retrofit
+ */
 class RetrofitClientInstance {
     private var retrofit: Retrofit? = null
    // private val BASE_URL = "http://projecten3studserver08.westeurope.cloudapp.azure.com"

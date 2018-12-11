@@ -14,7 +14,9 @@ import retrofit2.http.POST
 import retrofit2.http.Multipart
 import kotlin.collections.ArrayList
 
-
+/**
+ * Interface om calls uit te voeren naar de databank
+ */
 interface Endpoint {
 
     @GET("/API/student/group/{code}")

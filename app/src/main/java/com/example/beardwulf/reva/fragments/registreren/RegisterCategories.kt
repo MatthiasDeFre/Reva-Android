@@ -39,7 +39,9 @@ class RegisterCategories : Fragment(){
     }
 
     /**
-     *
+     * onCreateView wordt opgeroepen om de lay-out van het fragment "op te blazen"(inflate),
+     * d.w.z. dat de grafische initialisatie meestal hier plaatsvindt.
+     * Het wordt altijd aangeroepen na de onCreate methode.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_register_categories, container, false)
@@ -48,7 +50,8 @@ class RegisterCategories : Fragment(){
     }
 
     /**
-     *
+     * Bij doorgaan van de app nadat de onPause methode is opgeroepen wordt de onResume methode aangegroepen.
+     * Het is één van de methodes van de activity life cycle.
      */
     override fun onResume() {
         super.onResume()
@@ -70,11 +73,9 @@ class RegisterCategories : Fragment(){
                 textView.text = String.format(resources.getString(R.string.stap3), amountOfCategories)
                 viewManager = LinearLayoutManager(this@RegisterCategories.context)
                 listView?.adapter = testAdapter(selectedCategories, onClicklistener(),response.body()!!)
-
                 listView?.layoutManager = viewManager
                 txtAantalGeselecteerd.text = selectedCategories.size.toString() + "/" + amountOfCategories + " " + getString(R.string.geselecteerd)
             }
-
             override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
                 Log.d("Error", t.message)
             }
@@ -83,9 +84,8 @@ class RegisterCategories : Fragment(){
 
 
     /**
-     *
+     * Methode makeCategoryItems vult de ArrayList items op met alle categorieën
      */
-    //Opvullen van de listview met alle categorieën
     private fun makeCategoryItems(): ArrayList<Category> {
         var items = ArrayList<Category>()
 
@@ -98,7 +98,7 @@ class RegisterCategories : Fragment(){
     }
 
     /**
-     *
+     * TODO
      */
     private fun onClicklistener() : View.OnClickListener {
     val onClickListener : View.OnClickListener;
@@ -126,14 +126,14 @@ class RegisterCategories : Fragment(){
     }
 
     /**
-     *
+     * TODO
      */
     interface RegisterCategoriesCallBacks {
         fun registerAndGoToMap()
     }
 
     /**
-     *
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
      */
     companion object {
         fun newInstance(): RegisterCategories {

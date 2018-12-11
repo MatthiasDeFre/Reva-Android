@@ -11,6 +11,9 @@ import android.util.AttributeSet;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.beardwulf.reva.R;
 
+/**
+ * Klasse voor het creëeren van de pin op de map
+ */
 //SOURCE davemorrissey sample project
 public class PinView extends SubsamplingScaleImageView {
 
@@ -36,7 +39,7 @@ public class PinView extends SubsamplingScaleImageView {
 
     private void initialise() {
         float density = getResources().getDisplayMetrics().densityDpi;
-        pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.pushpin_blue);
+        pin = BitmapFactory.decodeResource(this.getResources(), R.drawable.beacon);
         float w = (density/420f) * pin.getWidth();
         float h = (density/420f) * pin.getHeight();
         pin = Bitmap.createScaledBitmap(pin, 100, 100, true);

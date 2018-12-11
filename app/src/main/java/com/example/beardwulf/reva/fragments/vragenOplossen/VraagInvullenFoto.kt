@@ -50,6 +50,14 @@ class VraagInvullenFoto : Fragment() {
     lateinit var photoViewModel: PhotoViewModel
     lateinit var currentExhibitor: Exhibitor
     lateinit var currentExhibitorViewModel: ExhibitorViewModel
+    var mCurrentPhotoPath: String = ""
+    val REQUEST_TAKE_PHOTO = 1
+
+    /**
+     * Deze methode wordt gebruikt om informatie over de staat van uw activiteit op te slaan en te herstellen.
+     * In gevallen zoals oriëntatieveranderingen, de app afsluiten of een ander scenario dat leidt tot het opnieuw oproepen van onCreate(),
+     * kan de savedInstanceState bundel gebruikt worden om de vorige toestandsinformatie opnieuw te laden.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parent = (activity as QuestionAnswerPhotoCallbacks)
@@ -58,6 +66,9 @@ class VraagInvullenFoto : Fragment() {
     /**
      * Toont de vraag en een veld om een antwoord in te vullen.
      * Indien er een antwoord wordt inguvuld, opent het bevestigings fragment
+     * onCreateView wordt opgeroepen om de lay-out van het fragment "op te blazen"(inflate),
+     * d.w.z. dat de grafische initialisatie meestal hier plaatsvindt.
+     * Het wordt altijd aangeroepen na de onCreate methode.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = (inflater.inflate(R.layout.fragment_vraag_invullen_foto, container, false))
@@ -69,37 +80,31 @@ class VraagInvullenFoto : Fragment() {
         return view
     }
 
+    /**
+     * Bij doorgaan van de app nadat de onPause methode is opgeroepen wordt de onResume methode aangegroepen.
+     * Het is één van de methodes van de activity life cycle.
+     */
     override fun onResume() {
         super.onResume()
         textView2.text = currentExhibitor.question.body
         textView3.text = (currentExhibitor.question.counter).toString()
         cmdNeemFoto.setOnClickListener {
             dispatchTakePictureIntent()
-            /* var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-             val outFile = File(activity!!.cacheDir,"test.png")
-             outFile.createNewFile()
-             var uri = Uri.fromFile(outFile)
-             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-             cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-             startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
 
         }
         btnVulIn.setOnClickListener {
-            // parent.setFragment(RegistreerGroep.newInstance())
             parent.setAnswer(photoViewModel.photo);
         }
         photoViewer.setImageBitmap(photoViewModel.photo)
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        print("test")
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-            /**
-             * Bitmap uitpakken en in het statische fotovariabele steken,
-             * hierna wordt de knop om naar het volgende scherm te gaan aangezet
-             */
-            //var foto = data?.extras?.get("data") as Bitmap
-            var foto : Bitmap
 
+    /**
+     * Bitmap uitpakken en in het statische fotovariabele steken,
+     * hierna wordt de knop om naar het volgende scherm te gaan aangezet
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+            var foto : Bitmap
             foto = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, photoViewModel.photoUri)
             foto = ImageHelper.getRoundedCornerBitmap(foto, foto.width / 2)
             photoViewModel.photo = foto
@@ -108,8 +113,10 @@ class VraagInvullenFoto : Fragment() {
             cmdNeemFoto.setText(getString(R.string.fotowijzigen))
         }
     }
-    var mCurrentPhotoPath: String = ""
 
+    /**
+     * Methode createImageFile maakt en retourneert een image met een datum en een tijd
+     */
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
@@ -124,20 +131,18 @@ class VraagInvullenFoto : Fragment() {
             mCurrentPhotoPath = absolutePath
         }
     }
-    val REQUEST_TAKE_PHOTO = 1
+
+    /**
+     * Methode dispatchTakePictureIntent controleert of er een camera aanwezig is op het device en creëert de file waar image in moet.
+     */
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
             takePictureIntent.resolveActivity(activity!!.packageManager)?.also {
-                // Create the File where the photo should go
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    // Error occurred while creating the File
-
                     null
                 }
-                // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                             activity!!,
@@ -151,10 +156,18 @@ class VraagInvullenFoto : Fragment() {
             }
         }
     }
+
+    /**
+     * TODO
+     */
     interface QuestionAnswerPhotoCallbacks {
         fun setAnswer(answer : Bitmap)
         var maxQuestion : Int
     }
+
+    /**
+     * Dit object is een singleton-object dat met de naam van de klasse genoemd kan worden. Elke methode in dit object kan gebruikt worden in andere klassen.
+     */
     companion object {
         fun newInstance(): VraagInvullenFoto {
             return VraagInvullenFoto()
